@@ -13,10 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// If the user is logged, show the admin pages
+Route::middleware('auth')
+->name('admin.')
+->namespace('Admin')
+->prefix('admin')
+->group(function() {
+    Route::get('/', 'HomeController@index')->name('home');
+    // Route::resource('dishes', 'DishController');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
