@@ -12,4 +12,7 @@ class Restaurant extends Model
         'slug',
         'cover'
     ];
+    public function types() {
+        return $this->belongsToMany('App\Type');
+    }
 }
