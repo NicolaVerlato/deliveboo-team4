@@ -7,9 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Crea il tuo piatto</h1>
+    <h1>Modifica il tuo piatto</h1>
 
-    <form action="{{ route('admin.dishes.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('admin.dishes.update', ['dish' => $dish->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

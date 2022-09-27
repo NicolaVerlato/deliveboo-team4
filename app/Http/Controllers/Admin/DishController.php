@@ -79,7 +79,12 @@ class DishController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.dishes.edit');
+        $dish = Dish::findOrFail($id);
+
+        $data = [
+            'dish' => $dish
+        ];
+        return view('admin.dishes.edit', $data);
     }
 
     /**
@@ -91,7 +96,13 @@ class DishController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $form_data = $request->all();
+
+        $dish_to_update = Dish::findOrFail($id);
+
+        $dish_to_update->update($form_data);
+
+        return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id]);
     }
 
     /**
@@ -102,6 +113,14 @@ class DishController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dish_to_destroy = Dish::findOrFail($id);
+
+        if($dish_to_destroy->cover) {
+            Storage::delete($dish_to_destroy->cover);
+        }
+
+        $dish_to_destroy->delete();
+
+        return redirect()->route('admin.dishes.index');
     }
 }

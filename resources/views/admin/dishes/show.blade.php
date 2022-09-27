@@ -23,6 +23,14 @@
         <div>
             {{ $dishes->is_visible }}
         </div>
+
+        <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn btn-primary">Modifica</a>
+        <form action="{{ route('admin.dishes.destroy', ['dish' => $dishes->id]) }}" method="post">
+            @csrf
+            @method('DELETE')
+
+            <input type="submit" class="btn btn-danger" value="Elimina" onClick="">
+        </form>
     </div>
 </body>
 </html>
