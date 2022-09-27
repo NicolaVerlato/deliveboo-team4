@@ -56,13 +56,15 @@
                                 Restaurants list
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('admin.restaurants.create') }}">
-                                <i class="ms_icon fa-solid fa-square-plus"></i>
-                                Add a new restaurants
-                            </a>
-                        </li>
+                        
+                        @if (!isset($restaurant))
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ route('admin.restaurants.create') }}">
+                                    <i class="ms_icon fa-solid fa-square-plus"></i>
+                                    Add a new restaurants
+                                </a>
+                            </li>
+                        @endif
                     </ul>
 
                 </div>

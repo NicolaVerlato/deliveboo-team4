@@ -6,19 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function index() {
 
         $user = Auth::user();
-        // $restaurant = Restaurant::findOrFail($user->id);
+        $now = Carbon::now();
+        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
 
-        // $data = [
-        //     'user' => $user,
-        //     'restaurant' => $restaurant,
-        // ];
+        $data = [
+            'user' => $user,
+            'now' => $now,
+            'restaurant' => $restaurant
+        ];
 
-        return view('admin.home', compact('user'));
+        return view('admin.home', $data);
     }
 }
