@@ -21,7 +21,12 @@
         </div>
 
         <div>
-            {{ $dishes->is_visible }}
+            Visibile nel sito: 
+            @if ($dishes->is_visible)
+                Si
+            @else
+                No
+            @endif
         </div>
 
         <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn btn-primary">Modifica</a>

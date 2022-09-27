@@ -9,6 +9,16 @@
 <body>
     <h1>Modifica il tuo piatto</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('admin.dishes.update', ['dish' => $dish->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -20,7 +30,7 @@
 
         <div class="mb-3">
             <label for="cover" class="form-label">Immagine:</label>
-            <input type="text" class="form-control" id="cover" name="cover" value="{{ old('cover', $dish->cover) }}">
+            <input type="file" class="form-control" id="cover" name="cover" value="{{ old('cover', $dish->cover) }}">
         </div>
 
         <div class="mb-3">
@@ -33,8 +43,14 @@
             <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $dish->price) }}">
         </div>
 
+        {{-- {{dd($dish)}} --}}
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="is_visible">
+
+            {{-- {{ dd(old('is_visible')) }} --}}
+
+            <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible">
+            {{-- {{ (old('is_visible') == 1) ? 'checked' : '' }}> --}}
+
             <label class="form-check-label" for="is_visible">Presente nel menu</label>
         </div>
 

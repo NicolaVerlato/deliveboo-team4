@@ -43,10 +43,14 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->getValidationRules());
         $form_data = $request->all();
-        dd($form_data);
 
         $new_dish = new Dish();
+        // dd($form_data);
+        // if($form_data['is_visible'] == 'on'){
+        //     $new_dish->is_visible == 1;
+        // };
 
         $new_dish->fill($form_data);
         $new_dish->save();
@@ -97,6 +101,7 @@ class DishController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->getValidationRules());
         $form_data = $request->all();
 
         $dish_to_update = Dish::findOrFail($id);
@@ -123,5 +128,15 @@ class DishController extends Controller
         $dish_to_destroy->delete();
 
         return redirect()->route('admin.dishes.index');
+    }
+
+    protected function getValidationRules(){
+        return [
+            'name' => 'required|max:255',
+            'description' => 'required|max:60000',
+            'price' => 'required|numeric|min:0',
+            'is_visible' => 'required',
+            'cover' => 'nullable|max:1024'
+        ];
     }
 }
