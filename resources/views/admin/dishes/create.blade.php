@@ -19,7 +19,7 @@
 
         <div class="mb-3">
             <label for="cover" class="form-label">Immagine:</label>
-            <input type="text" class="form-control" id="cover" name="cover">
+            <input type="file" class="form-control" id="cover" name="cover">
         </div>
 
         <div class="mb-3">
@@ -34,7 +34,13 @@
 
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="is_visible">
-            <label class="form-check-label" for="is_visible">Presente nel menu</label>
+
+            <label class="form-check-label" for="is_visible" 
+                @if ()
+                
+                @endif>
+                Presente nel menu
+            </label>
         </div>
 
         <input type="submit" class="btn btn-primary" value="Salva">
