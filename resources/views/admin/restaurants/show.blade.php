@@ -10,6 +10,7 @@
         <div class="card-body">
             <h1 class="card-title">{{$restaurant->name}}</h1>
             <p class="card-text">Indirizzo: {{$restaurant['address']}}</p>
+            <p>{{ $restaurant->created_at->diffForHumans($now) }}</p>
             <p>
                 @if (count($restaurant->types->toArray()))
                     <strong>Tags:</strong>
@@ -20,13 +21,13 @@
                 Nessun tag
                 @endif
             </p>
-            {{-- <form action="{{ route('admin.restaurant.destroy', ['restaurant' => $restaurant->id]) }}" method="POST">
+            <p >Creato il: {{ $restaurant->created_at->format('j/m/Y') }} alle {{ $restaurant->created_at->format('G:i:s') }}</p>
+            <form action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
         
                 <input type="submit" value="Cancella Post" class="btn btn-danger mt-2">
-            </form> --}}
-            <p >Creato il: {{ $restaurant->created_at->format('j/m/Y') }} alle {{ $restaurant->created_at->format('G:i:s') }}</p>
+            </form>
             {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
         </div>
     </div>

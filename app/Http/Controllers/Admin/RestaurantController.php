@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Type;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class RestaurantController extends Controller
 {
@@ -21,9 +22,11 @@ class RestaurantController extends Controller
     {
         $user = Auth::user();
         $restaurants = Restaurant::where('user_id', '=', $user->id)->get();
+        $now = Carbon::now();
 
         $data = [
-            'restaurants' => $restaurants
+            'restaurants' => $restaurants,
+            'now' => $now
         ];
 
         return view('admin.restaurants.index', $data);
@@ -83,9 +86,11 @@ class RestaurantController extends Controller
     public function show($id)
     {
         $restaurant = Restaurant::findOrFail($id);
+        $now = Carbon::now();
 
         $data = [
             'restaurant' => $restaurant,
+            'now' => $now
         ];
 
         return view('admin.restaurants.show', $data);
@@ -122,17 +127,17 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        // $restaurant_to_delete = Restaurant::findOrFail($id);
+        $restaurant_to_delete = Restaurant::findOrFail($id);
 
-        // if($restaurant_to_delete->cover) {
-        //     Storage::delete($restaurant_to_delete->cover);
-        // }
+        if($restaurant_to_delete->cover) {
+            Storage::delete($restaurant_to_delete->cover);
+        }
 
-        // $restaurant_to_delete->types()->sync([]);
+        $restaurant_to_delete->types()->sync([]);
 
-        // $restaurant_to_delete->delete();
+        $restaurant_to_delete->delete();
 
-        // return redirect()->route('admin.restaurants.index');
+        return redirect()->route('admin.restaurants.index');
     }
 
     protected function getSlugFromTitle($title) {

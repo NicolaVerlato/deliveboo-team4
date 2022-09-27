@@ -15,7 +15,7 @@
                             <h2 class="title_list mt-3">{{ $restaurant->name }}</h2>
                             <p class="card-text">Indirizzo: {{  $restaurant->address }}</p>
                             <p>Slug: {{ $restaurant->slug }}</p>
-                            <p>Creato il: {{ $restaurant->created_at->format('j/m/Y') }} alle {{ $restaurant->created_at->format('G:i:s') }}</p>
+                            <p>{{ $restaurant->created_at->diffForHumans($now) }}</p>
                             <div class="d-flex justify-content-end">
                                 <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
                                     class="btn btn-primary">
