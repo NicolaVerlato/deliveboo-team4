@@ -43,7 +43,7 @@
         </div>
 
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="is_visible">
+            <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible" value="1">
 
             <label class="form-check-label" for="is_visible">Presente nel menu</label>
         </div>

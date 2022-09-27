@@ -48,9 +48,11 @@ class DishController extends Controller
 
         $new_dish = new Dish();
         // dd($form_data);
-        // if($form_data['is_visible'] == 'on'){
-        //     $new_dish->is_visible == 1;
-        // };
+        if(isset($form_data['is_visible'])){
+            $new_dish->is_visible = 1;
+        } else{
+            $new_dish->is_visible = 0;
+        }
 
         $new_dish->fill($form_data);
         $new_dish->save();
@@ -135,7 +137,7 @@ class DishController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:60000',
             'price' => 'required|numeric|min:0',
-            'is_visible' => 'required',
+            // 'is_visible' => 'required',
             'cover' => 'nullable|max:1024'
         ];
     }
