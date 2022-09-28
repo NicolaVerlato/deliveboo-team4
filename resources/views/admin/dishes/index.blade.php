@@ -20,8 +20,8 @@
                 
                             <div class="ms_button_card align-items-end d-flex">
                                 <div>
-                                    <a href="{{ route('admin.dishes.show', ['dish' => $dish->id]) }}" class="btn btn-primary">Dettagli</a>
-                                    <a href="{{ route('admin.dishes.edit', ['dish' => $dish->id]) }}" class="btn btn-primary">Modifica</a>
+                                    <a href="{{ route('admin.dishes.show', ['dish' => $dish->id]) }}" class="btn ms-btn">Dettagli</a>
+                                    <a href="{{ route('admin.dishes.edit', ['dish' => $dish->id]) }}" class="btn ms-btn">Modifica</a>
                                 </div>
                             </div>
                             </div>
