@@ -27,14 +27,13 @@
             <div>
                 <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn btn-primary mb-2 mt-2">Modifica</a>
             </div>
-
-            {{-- delete da aggiungere se vogliamo --}}
-            {{-- <form action="{{ route('admin.dishes.destroy', ['dish' => $dishes->id]) }}" method="post">
+            
+            <form action="{{ route('admin.dishes.destroy', ['dish' => $dishes->id]) }}" method="post">
                 @csrf
                 @method('DELETE')
 
                 <input type="submit" class="btn btn-danger" value="Elimina" onClick="">
-            </form> --}}
+            </form>
         </div>
     </div>
 @endsection

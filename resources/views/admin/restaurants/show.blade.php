@@ -22,13 +22,13 @@
                 @endif
             </p>
             <p >Creato il: {{ $restaurant->created_at->format('j/m/Y') }} alle {{ $restaurant->created_at->format('G:i:s') }}</p>
-            <form action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}" method="POST">
+            {{-- delete da aggiungere se vogliamo --}}
+            {{-- <form action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
         
                 <input type="submit" value="Cancella Ristorante" class="btn btn-danger mt-2">
-            </form>
-            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+            </form> --}}
         </div>
     </div>
 @endsection
