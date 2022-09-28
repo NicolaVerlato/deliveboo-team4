@@ -132,17 +132,17 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        $restaurant_to_delete = Restaurant::findOrFail($id);
+        // $restaurant_to_delete = Restaurant::findOrFail($id);
 
-        if($restaurant_to_delete->cover) {
-            Storage::delete($restaurant_to_delete->cover);
-        }
+        // if($restaurant_to_delete->cover) {
+        //     Storage::delete($restaurant_to_delete->cover);
+        // }
 
-        $restaurant_to_delete->types()->sync([]);
+        // $restaurant_to_delete->types()->sync([]);
 
-        $restaurant_to_delete->delete();
+        // $restaurant_to_delete->delete();
 
-        return redirect()->route('admin.restaurants.index');
+        // return redirect()->route('admin.restaurants.index');
     }
 
     protected function getSlugFromTitle($title) {
