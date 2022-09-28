@@ -132,6 +132,7 @@
                                     @error('iva') is-invalid @enderror" 
                                     name="iva" 
                                     required
+                                    value="{{ old('iva') }}"
                                 >
 
                                 @error('iva')

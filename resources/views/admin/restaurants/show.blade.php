@@ -26,7 +26,7 @@
                 @csrf
                 @method('DELETE')
         
-                <input type="submit" value="Cancella Post" class="btn btn-danger mt-2">
+                <input type="submit" value="Cancella Ristorante" class="btn btn-danger mt-2">
             </form>
             {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
         </div>
