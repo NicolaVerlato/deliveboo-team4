@@ -18,8 +18,8 @@
                             <h5 class="card-title">{{ $dish->name }}</h5>
                             <p class="card-text">{{ $dish->description }}</p>
                 
-                            <a href="{{ route('admin.dishes.show', ['dish' => $dish->id]) }}" class="btn btn-primary">Dettagli</a>
-                            <a href="{{ route('admin.dishes.edit', ['dish' => $dish->id]) }}" class="btn btn-primary">Modifica</a>
+                            <a href="{{ route('admin.dishes.show', ['dish' => $dish->id]) }}" class="btn ms-btn">Dettagli</a>
+                            <a href="{{ route('admin.dishes.edit', ['dish' => $dish->id]) }}" class="btn ms-btn">Modifica</a>
                             </div>
                         </div>
                         {{-- fine card dish --}}
@@ -32,7 +32,7 @@
             @else
                 <div>
                     <h3>Non hai ancora nessun piatto.</h3>
-                    <a href="{{ route('admin.dishes.create') }}" class="mt-2 btn btn-primary">Clicca qui per aggiugerne uno!</a>  
+                    <a href="{{ route('admin.dishes.create') }}" class="mt-2 btn ms-btn">Clicca qui per aggiugerne uno!</a>  
                 </div>
             @endif
         </div>
