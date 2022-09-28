@@ -25,6 +25,14 @@
         <div class="mb-3">
             <label for="cover" class="form-label">Immagine:</label>
             <input type="file" id="cover" name="cover" value="{{ old('cover', $dish->cover) }}">
+            @if ($dish->cover)
+                <div>
+                    <div>
+                        Immagine presente:
+                    </div>
+                    <img class="w-50 m-3" src="{{ asset('storage/' . $dish->cover) }}" alt="{{ $dish->title }}">
+                </div>
+            @endif
         </div>
 
         <div class="mb-3">

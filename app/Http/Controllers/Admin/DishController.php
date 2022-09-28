@@ -58,6 +58,11 @@ class DishController extends Controller
         $request->validate($this->getValidationRules());
         $form_data = $request->all();
 
+        if(isset($form_data['cover'])) {
+            $img_path = Storage::put('dishes-covers', $form_data['cover']);
+            $form_data['cover'] = $img_path;
+        }
+
         $user = Auth::user();
         // $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         $restaurant = Restaurant::findOrFail($user->id);
@@ -131,6 +136,15 @@ class DishController extends Controller
         $form_data = $request->all();
 
         $dish_to_update = Dish::findOrFail($id);
+
+        if(isset($form_data['cover'])){
+            if($dish_to_update->cover){
+                Storage::delete($dish_to_update->cover);
+            }
+
+            $img_path = Storage::put('cover', $form_data['cover']);
+            $form_data['cover'] = $img_path;
+        }
 
         $dish_to_update->update($form_data);
 
