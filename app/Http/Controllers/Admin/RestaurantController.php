@@ -23,10 +23,12 @@ class RestaurantController extends Controller
         $user = Auth::user();
         $restaurants = Restaurant::where('user_id', '=', $user->id)->get();
         $now = Carbon::now();
+        $restaurantLink = Restaurant::find($user->id);
 
         $data = [
             'restaurants' => $restaurants,
-            'now' => $now
+            'now' => $now,
+            'restaurantLink' => $restaurantLink
         ];
 
         return view('admin.restaurants.index', $data);
@@ -87,10 +89,12 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         $now = Carbon::now();
+        $restaurantLink = Restaurant::find($user->id);
 
         $data = [
             'restaurant' => $restaurant,
-            'now' => $now
+            'now' => $now,
+            'restaurantLink' => $restaurantLink
         ];
 
         return view('admin.restaurants.show', $data);
