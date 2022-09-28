@@ -33,7 +33,7 @@
             @else
                 <div>
                     <h3>Non hai ancora nessun piatto.</h3>
-                    <a href="{{ route('admin.dishes.create') }}" class="mt-2 btn btn-primary">Clicca qui per aggiugerne uno!</a>  
+                    <a href="{{ route('admin.dishes.create') }}" class="mt-2 btn ms-btn">Clicca qui per aggiugerne uno!</a>  
                 </div>
             @endif
         </div>
