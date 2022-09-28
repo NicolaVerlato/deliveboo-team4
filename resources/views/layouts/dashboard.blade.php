@@ -65,6 +65,20 @@
                                 </a>
                             </li>
                         @endif
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('admin.dishes.index') }}">
+                                <i class="ms_icon fa-solid fa-utensils"></i>
+                                Dish list
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('admin.dishes.create') }}">
+                                <i class="ms_icon fa-solid fa-utensils"></i>
+                                Add new dish
+                            </a>
+                        </li>
                     </ul>
 
                 </div>
