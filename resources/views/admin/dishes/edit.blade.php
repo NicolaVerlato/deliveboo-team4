@@ -46,7 +46,7 @@
         </div>
 
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible" value="1"
+            <input type="checkbox" class="form-check-input" value="1" id="is_visible" name="is_visible" 
             {{ (old('is_visible', $dish->is_visible) == 1) ? 'checked' : '' }}>
 
             <label class="form-check-label" for="is_visible">Presente nel menu</label>

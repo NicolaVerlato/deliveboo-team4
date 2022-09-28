@@ -20,8 +20,8 @@ class DishController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
-        $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
-        $dishes = Dish::paginate(6);
+        // $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
+        $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
 
         $data = [
             'dishes' => $dishes,
@@ -146,6 +146,11 @@ class DishController extends Controller
             $form_data['cover'] = $img_path;
         }
 
+        if(isset($form_data['is_visible'])){
+            $dish_to_update->is_visible = 1;
+        } else {
+            $dish_to_update->is_visible = 0;
+        }
         $dish_to_update->update($form_data);
 
         return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id]);
