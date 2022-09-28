@@ -23,9 +23,9 @@
         <div>
             Visibile nel sito: 
             @if ($dishes->is_visible)
-                Si
+                si
             @else
-                No
+                no
             @endif
         </div>
 

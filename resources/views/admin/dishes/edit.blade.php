@@ -43,13 +43,9 @@
             <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $dish->price) }}">
         </div>
 
-        {{-- {{dd($dish)}} --}}
         <div class="mb-3 form-check">
-
-            {{-- {{ dd(old('is_visible')) }} --}}
-
-            <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible">
-            {{-- {{ (old('is_visible') == 1) ? 'checked' : '' }}> --}}
+            <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible" value="1"
+            {{ (old('is_visible', $dish->is_visible) == 1) ? 'checked' : '' }}>
 
             <label class="form-check-label" for="is_visible">Presente nel menu</label>
         </div>

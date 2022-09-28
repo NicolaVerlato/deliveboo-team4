@@ -47,7 +47,7 @@ class DishController extends Controller
         $form_data = $request->all();
 
         $new_dish = new Dish();
-        // dd($form_data);
+        
         if(isset($form_data['is_visible'])){
             $new_dish->is_visible = 1;
         } else{
