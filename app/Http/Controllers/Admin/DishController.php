@@ -22,10 +22,12 @@ class DishController extends Controller
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         // $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
         $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
+        $restaurantLink = Restaurant::find($user->id);
 
         $data = [
             'dishes' => $dishes,
-            'restaurant' => $restaurant
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
         ];
 
         return view('admin.dishes.index', $data);
@@ -40,9 +42,11 @@ class DishController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurantLink = Restaurant::find($user->id);
 
         $data = [
-            'restaurant' => $restaurant
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
         ];
         return view('admin.dishes.create', $data);
     }
@@ -94,10 +98,12 @@ class DishController extends Controller
         $dishes = Dish::findOrFail($id);
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
         $data = [
             'dishes' => $dishes,
-            'restaurant' => $restaurant
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
         ];
        
         return view('admin.dishes.show', $data);
