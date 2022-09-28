@@ -1,17 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div>
-        <h1>{{ $dishes->name }}</h1>
+    <div class="container">
+        <h1 class="mb-3">{{ $dishes->name }}</h1>
 
         @if ($dishes->cover)
-            <img class="w-50" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
+            <img class="w-30" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
         @endif
 
-        <p>{{ $dishes->description }}</p>
+        <p class="mt-3">{{ $dishes->description }}</p>
 
         <div>
-            {{ $dishes->price }} &euro;
+            Prezzo: {{ $dishes->price }} &euro;
         </div>
 
         <div>
@@ -23,7 +23,7 @@
             @endif
         </div>
 
-        <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn btn-primary mb-3 mt-2">Modifica</a>
+        <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn btn-primary mb-2 mt-2">Modifica</a>
         <form action="{{ route('admin.dishes.destroy', ['dish' => $dishes->id]) }}" method="post">
             @csrf
             @method('DELETE')

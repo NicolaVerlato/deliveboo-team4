@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1>I tuoi piatti</h1>
-
     <div class="container">
+        <h1 class="mb-3">I tuoi piatti</h1>
+
         <div class="row row-cols-3">
             @foreach ($dishes as $dish)
                 <div class="col">
