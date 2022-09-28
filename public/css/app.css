@@ -10932,3 +10932,51 @@ a.text-dark:focus {
   }
 }
 
+.ms_icon {
+  font-size: 18px;
+  margin-left: 3px;
+}
+
+.left_menu {
+  height: calc(100vh - 40px);
+  box-shadow: 12px 11px 17px 0px rgba(0, 0, 0, 0.9);
+}
+
+img {
+  height: 190px;
+}
+
+.card_ms {
+  transform: scale(150%);
+  margin-left: 33vw;
+  margin-top: 150px;
+  border-radius: 20px;
+  background-color: lightsalmon;
+}
+
+.ms_title {
+  font-size: 25px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  color: orangered;
+}
+
+.card-img-top {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.title_list {
+  font-size: 30px;
+}
+
+.ms_card_header {
+  background-color: lightsalmon;
+  font-size: 20px;
+}
+
+.ms_form {
+  display: block;
+}
+

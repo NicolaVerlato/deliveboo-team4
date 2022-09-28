@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- FontAwesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-md-nowrap p-0">
@@ -37,9 +40,9 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar py-4">
+            <nav class="left_menu col-md-2 d-none d-md-block bg-light sidebar py-4">
                 <div class="sidebar-sticky">
-                    {{-- <ul class="nav flex-column">
+                    <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.home') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -48,19 +51,21 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('admin.posts.index') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                Dishes list
+                            <a class="nav-link active" href="{{ route('admin.restaurants.index') }}">
+                                <i class="ms_icon fa-solid fa-utensils"></i>
+                                Restaurants list
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('admin.posts.create') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                Add a new dish
-                            </a>
-                        </li>
-                    </ul> --}}
+                        
+                        @if (!isset($restaurant))
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ route('admin.restaurants.create') }}">
+                                    <i class="ms_icon fa-solid fa-square-plus"></i>
+                                    Add a new restaurants
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
 
                 </div>
             </nav>
