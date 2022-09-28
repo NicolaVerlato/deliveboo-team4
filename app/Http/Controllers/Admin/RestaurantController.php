@@ -89,6 +89,7 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         $now = Carbon::now();
+        $user = Auth::user();
         $restaurantLink = Restaurant::find($user->id);
 
         $data = [

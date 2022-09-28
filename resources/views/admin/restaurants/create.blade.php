@@ -21,7 +21,7 @@
                     @endif
 
                     <div class="form-group">
-                    <label for="name">Nome ristorante</label>
+                    <label for="name"><span>*</span> Nome ristorante</label>
                     <input type="text" class="form-control" id="name" placeholder="Nome" name="name" value="{{ old('name') }}">
                     </div>
 
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="address">Indirizzo Ristorante</label>
+                        <label for="address"><span>*</span> Indirizzo Ristorante</label>
                         <input type="text" class="form-control" id="address" placeholder="Indirizzo" name="address" value="{{ old('address') }}">
                     </div>
 
@@ -53,7 +53,11 @@
                         <input class="ms_form" type="file" id="cover" name="cover">
                     </div>
 
-                    <button type="submit" class="btn d-block mt-5 btn-primary">Submit</button>
+                    <div class="mb-2">
+                        <i>Tutti i campi contrassegnati con <span>*</span> sono obbligatori</i>
+                    </div>
+
+                    <button type="submit" class="btn d-block mt-2 btn-primary">Submit</button>
                 </form>
 
         </div>

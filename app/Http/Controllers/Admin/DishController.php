@@ -20,10 +20,11 @@ class DishController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        // $restaurant = Restaurant::findOrFail($user->id);
         // $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
         $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
         $restaurantLink = Restaurant::find($user->id);
-
+        // dd($dishes);
         $data = [
             'dishes' => $dishes,
             'restaurant' => $restaurant,

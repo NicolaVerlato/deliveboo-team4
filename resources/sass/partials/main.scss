@@ -1,12 +1,20 @@
+//Common 
+body {
+    color: $secondary_color;
+}  
+
+.header_brand {
+    background-color: $brand_color;
+}
 .ms_icon {
     font-size: 18px;
     margin-left: 3px;
 }
 .left_menu {
     height: calc(100vh - 40px);
-    // border-right: 1px solid black;
     -webkit-box-shadow: 12px 11px 17px 0px rgba(0,0,0,0.9); 
     box-shadow: 12px 11px 17px 0px rgba(0,0,0,0.9);
+    background-color: $secondary_color;
 }
 img {
     height: 190px;
@@ -16,14 +24,14 @@ img {
     margin-left: 33vw;
     margin-top: 150px;
     border-radius: 20px;
-    background-color: lightsalmon;
+    background-color: $brand_color;
 }
 .ms_title {
     font-size: 25px;
     text-transform: uppercase;
     text-align: center;
     font-weight: 700;
-    color: orangered;
+    color: $secondary_color;
 }
 .card-img-top {
     border-top-left-radius: 20px;
@@ -33,9 +41,17 @@ img {
     font-size: 30px;
 }
 .ms_card_header {
-    background-color: lightsalmon;
+    background-color: $brand_color;
     font-size: 20px;
 }
 .ms_form {
     display: block;
 }
+
+nav {
+    a {
+        color: $brand_color;
+    }
+}
+
+
