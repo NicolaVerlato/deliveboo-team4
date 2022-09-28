@@ -11,7 +11,7 @@ body {
     margin-left: 3px;
 }
 .left_menu {
-    height: calc(100vh - 40px);
+    min-height: calc(100vh - 40px);
     -webkit-box-shadow: 12px 11px 17px 0px rgba(0,0,0,0.9); 
     box-shadow: 12px 11px 17px 0px rgba(0,0,0,0.9);
     background-color: $secondary_color;
@@ -53,5 +53,31 @@ nav {
         color: $brand_color;
     }
 }
-
-
+.card_hei {
+    min-height: 260px;
+}
+.ms_button_card {
+    height: 70%;
+    .ms-btn {
+        background-color: $brand_color;
+    }
+    .ms-btn:hover {
+        background-color: $secondary_color;
+    }
+}
+.pagination {
+    width: auto;
+    justify-content: center;
+}
+.border_radius20 {
+    border-radius: 20px;
+}
+.img_ms {
+    width: auto;
+    height: 85%;
+}
+.ms_description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

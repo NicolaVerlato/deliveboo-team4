@@ -8,6 +8,7 @@ use App\Dish;
 use Illuminate\Support\Facades\Storage;
 use App\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DishController extends Controller
 {
@@ -24,7 +25,7 @@ class DishController extends Controller
         // $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
         $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
         $restaurantLink = Restaurant::find($user->id);
-        // dd($dishes);
+
         $data = [
             'dishes' => $dishes,
             'restaurant' => $restaurant,
@@ -122,10 +123,12 @@ class DishController extends Controller
         $dish = Dish::findOrFail($id);
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
     
         $data = [
             'dish' => $dish,
-            'restaurant' => $restaurant
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
         ];
         return view('admin.dishes.edit', $data);
     }
@@ -187,7 +190,7 @@ class DishController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:60000',
             'price' => 'required|numeric|min:0',
-            'cover' => 'nullable|max:1024'
+            'cover' => 'nullable|max:500000'
         ];
     }
 }

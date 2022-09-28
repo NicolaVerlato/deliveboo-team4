@@ -10946,7 +10946,7 @@ body {
 }
 
 .left_menu {
-  height: calc(100vh - 40px);
+  min-height: calc(100vh - 40px);
   box-shadow: 12px 11px 17px 0px rgba(0, 0, 0, 0.9);
   background-color: #2f4858;
 }
@@ -10991,5 +10991,41 @@ img {
 
 nav a {
   color: #fea543;
+}
+
+.card_hei {
+  min-height: 260px;
+}
+
+.ms_button_card {
+  height: 70%;
+}
+
+.ms_button_card .ms-btn {
+  background-color: #fea543;
+}
+
+.ms_button_card .ms-btn:hover {
+  background-color: #2f4858;
+}
+
+.pagination {
+  width: auto;
+  justify-content: center;
+}
+
+.border_radius20 {
+  border-radius: 20px;
+}
+
+.img_ms {
+  width: auto;
+  height: 85%;
+}
+
+.ms_description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
