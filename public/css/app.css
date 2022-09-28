@@ -10932,6 +10932,14 @@ a.text-dark:focus {
   }
 }
 
+body {
+  color: #2f4858;
+}
+
+.header_brand {
+  background-color: #fea543;
+}
+
 .ms_icon {
   font-size: 18px;
   margin-left: 3px;
@@ -10940,6 +10948,7 @@ a.text-dark:focus {
 .left_menu {
   height: calc(100vh - 40px);
   box-shadow: 12px 11px 17px 0px rgba(0, 0, 0, 0.9);
+  background-color: #2f4858;
 }
 
 img {
@@ -10951,7 +10960,7 @@ img {
   margin-left: 33vw;
   margin-top: 150px;
   border-radius: 20px;
-  background-color: lightsalmon;
+  background-color: #fea543;
 }
 
 .ms_title {
@@ -10959,7 +10968,7 @@ img {
   text-transform: uppercase;
   text-align: center;
   font-weight: 700;
-  color: orangered;
+  color: #2f4858;
 }
 
 .card-img-top {
@@ -10972,11 +10981,15 @@ img {
 }
 
 .ms_card_header {
-  background-color: lightsalmon;
+  background-color: #fea543;
   font-size: 20px;
 }
 
 .ms_form {
   display: block;
+}
+
+nav a {
+  color: #fea543;
 }
 
