@@ -142,7 +142,7 @@ class DishController extends Controller
                 Storage::delete($dish_to_update->cover);
             }
 
-            $img_path = Storage::put('cover', $form_data['cover']);
+            $img_path = Storage::put('dishes-covers', $form_data['cover']);
             $form_data['cover'] = $img_path;
         }
 
