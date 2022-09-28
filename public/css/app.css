@@ -11029,3 +11029,8 @@ nav a {
   text-overflow: ellipsis;
 }
 
+.ms_btn {
+  padding: 0.375rem 0.75rem;
+  background-color: #fea543;
+}
+

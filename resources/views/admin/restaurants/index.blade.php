@@ -18,7 +18,7 @@
                             <p>{{ $restaurant->created_at->diffForHumans($now) }}</p>
                             <div class="d-flex justify-content-end">
                                 <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
-                                    class="btn btn-primary">
+                                    class="btn ms_btn">
                                     Dettagli ristorante
                                 </a>
                             </div>

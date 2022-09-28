@@ -47,7 +47,7 @@
                 <i>Tutti i campi contrassegnati con <span>*</span> sono obbligatori</i>
             </div>
 
-            <input type="submit" class="btn ms-btn" value="Salva">
+            <input type="submit" class="btn ms_btn" value="Salva">
         </form>
     </div>
 @endsection

@@ -26,7 +26,7 @@
                 </div>
 
                 <div>
-                    <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn btn-primary mb-2 mt-2">Modifica</a>
+                    <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn ms_btn mb-2 mt-2">Modifica</a>
                 </div>
                 
                 <form action="{{ route('admin.dishes.destroy', ['dish' => $dishes->id]) }}" method="post">
