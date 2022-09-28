@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-md-nowrap p-0">
+    <nav class="navbar navbar-expand-md navbar-dark flex-md-nowrap p-0 header_brand">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Deliveboo</a>
         <ul class="navbar-nav px-3 ml-auto">
             <li class="nav-item">
@@ -40,7 +40,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <nav class="left_menu col-md-2 d-none d-md-block bg-light sidebar py-4">
+            <nav class="left_menu col-md-2 d-none d-md-block sidebar py-4">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
