@@ -1,21 +1,34 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1>I tuoi piatti</h1>
+    <div class="container">
+        <h1 class="mb-3">I tuoi piatti</h1>
 
-    @foreach ($dishes as $dish)
-
-        {{-- inizio card dish --}}
-        <div class="card">
-            {{-- <img src="..." class="card-img-top" alt="..."> --}}
-            <div class="card-body">
-            <h5 class="card-title">{{ $dish->name }}</h5>
-            <p class="card-text">{{ $dish->description }}</p>
-            <a href="{{ route('admin.dishes.show', ['dish' => $dish->id]) }}" class="btn btn-primary">Dettagli</a>
-            </div>
+        <div class="row row-cols-3">
+            @foreach ($dishes as $dish)
+                <div class="col">
+                    {{-- inizio card dish --}}
+                    <div class="card mb-4">
+                        @if ($dish->cover)
+                            <img src="{{ asset('storage/' . $dish->cover) }}" class="card-img-top" alt="{{ $dish->name }}">
+                        @endif
+                        
+                        <div class="card-body">
+                        <h5 class="card-title">{{ $dish->name }}</h5>
+                        <p class="card-text">{{ $dish->description }}</p>
+            
+                        <a href="{{ route('admin.dishes.show', ['dish' => $dish->id]) }}" class="btn btn-primary">Dettagli</a>
+                        <a href="{{ route('admin.dishes.edit', ['dish' => $dish->id]) }}" class="btn btn-primary">Modifica</a>
+                        </div>
+                    </div>
+                    {{-- fine card dish --}}
+                </div>
+            @endforeach
         </div>
-        {{-- fine card dish --}}
-        
-    @endforeach
+        <div class="mt-2">
+            {{ $dishes->links() }}
+        </div>
+    </div>
+   
 @endsection
     

@@ -14,12 +14,12 @@ class HomeController extends Controller
 
         $user = Auth::user();
         $now = Carbon::now();
-        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->first();
 
         $data = [
             'user' => $user,
             'now' => $now,
-            'restaurant' => $restaurant
+            'restaurantLink' => $restaurantLink
         ];
 
         return view('admin.home', $data);

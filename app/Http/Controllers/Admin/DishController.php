@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Dish;
 use Illuminate\Support\Facades\Storage;
+use App\Restaurant;
+use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
@@ -16,10 +18,16 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
+        $user = Auth::user();
+        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        // $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
+        $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
+        $restaurantLink = Restaurant::find($user->id);
 
         $data = [
-            'dishes' => $dishes
+            'dishes' => $dishes,
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
         ];
 
         return view('admin.dishes.index', $data);
@@ -32,7 +40,15 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('admin.dishes.create');
+        $user = Auth::user();
+        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurantLink = Restaurant::find($user->id);
+
+        $data = [
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
+        ];
+        return view('admin.dishes.create', $data);
     }
 
     /**
@@ -46,8 +62,18 @@ class DishController extends Controller
         $request->validate($this->getValidationRules());
         $form_data = $request->all();
 
+        if(isset($form_data['cover'])) {
+            $img_path = Storage::put('dishes-covers', $form_data['cover']);
+            $form_data['cover'] = $img_path;
+        }
+
+        $user = Auth::user();
+        // $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurant = Restaurant::findOrFail($user->id);
+        // dd($restaurant->id);
+
         $new_dish = new Dish();
-        
+
         if(isset($form_data['is_visible'])){
             $new_dish->is_visible = 1;
         } else{
@@ -55,6 +81,7 @@ class DishController extends Controller
         }
 
         $new_dish->fill($form_data);
+        $new_dish->restaurant_id = $restaurant->id;
         $new_dish->save();
 
         return redirect()->route('admin.dishes.show', ['dish' => $new_dish->id]);
@@ -69,9 +96,14 @@ class DishController extends Controller
     public function show($id)
     {
         $dishes = Dish::findOrFail($id);
+        $user = Auth::user();
+        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
         $data = [
-            'dishes' => $dishes
+            'dishes' => $dishes,
+            'restaurant' => $restaurant,
+            'restaurantLink' => $restaurantLink
         ];
        
         return view('admin.dishes.show', $data);
@@ -87,9 +119,12 @@ class DishController extends Controller
     public function edit($id)
     {
         $dish = Dish::findOrFail($id);
-
+        $user = Auth::user();
+        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+    
         $data = [
-            'dish' => $dish
+            'dish' => $dish,
+            'restaurant' => $restaurant
         ];
         return view('admin.dishes.edit', $data);
     }
@@ -108,6 +143,20 @@ class DishController extends Controller
 
         $dish_to_update = Dish::findOrFail($id);
 
+        if(isset($form_data['cover'])){
+            if($dish_to_update->cover){
+                Storage::delete($dish_to_update->cover);
+            }
+
+            $img_path = Storage::put('dishes-covers', $form_data['cover']);
+            $form_data['cover'] = $img_path;
+        }
+
+        if(isset($form_data['is_visible'])){
+            $dish_to_update->is_visible = 1;
+        } else {
+            $dish_to_update->is_visible = 0;
+        }
         $dish_to_update->update($form_data);
 
         return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id]);
@@ -137,7 +186,6 @@ class DishController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:60000',
             'price' => 'required|numeric|min:0',
-            // 'is_visible' => 'required',
             'cover' => 'nullable|max:1024'
         ];
     }
