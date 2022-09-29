@@ -76,5 +76,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/back.js') }}"></script>
 </body>
 </html>

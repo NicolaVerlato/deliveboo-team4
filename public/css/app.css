@@ -11038,3 +11038,65 @@ img {
   background-color: #fea543;
 }
 
+.circle {
+  margin-top: 30px;
+  display: block;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  background: #180612;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.8s ease-out;
+}
+
+.circle:after {
+  content: "";
+  display: block;
+  background: #332735 url(https://cloud-areapd.pd.infn.it/dashboard/static/dashboard/img/keypair-green.svg) no-repeat;
+  width: 99px;
+  height: 99px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-position: center;
+  background-size: 120px;
+}
+
+.circle:before {
+  content: "";
+  border-radius: 50%;
+  display: block;
+  width: 107px;
+  height: 107px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: #2f4858;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZlMDY1MyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjMzJSIgc3RvcC1jb2xvcj0iI2NiOWQ2OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUyJSIgc3RvcC1jb2xvcj0iI2RjOWQ4YiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjcxJSIgc3RvcC1jb2xvcj0iI2ZmYTFiMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjA2MDgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: linear-gradient(to right, #2f4858 0%, #cb9d69 33%, #dc9d8b 52%, #ffa1b3 71%, #fea543 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#6e0653", endColorstr="#ff0608",GradientType=1 );
+  animation: spin 10s linear 0s infinite both;
+}
+
+.circle:hover {
+  transform: scale(1.05);
+}
+
+.circle:hover:before {
+  animation: spinHover 0.8s ease-out 0s 1 both;
+}
+
+@keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinHover {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

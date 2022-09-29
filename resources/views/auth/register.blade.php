@@ -15,7 +15,7 @@
 
                         {{-- Name section  --}}
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right"> {{'Name'}} </label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Name'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -44,25 +44,18 @@
                                 <input 
                                     id="lastname" 
                                     type="text" 
-                                    class="form-control 
-                                    @error('name') is-invalid @enderror" 
+                                    class="form-control"
                                     name="lastname" 
                                     value="{{ old('lastname') }}" 
-                                    required autocomplete="lastname" 
+                                    autocomplete="lastname" 
                                     autofocus
                                 >
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 
                         {{-- Email section  --}}
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"> {{'E-Mail Address'}} </label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'E-Mail Address'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -85,7 +78,7 @@
 
                         {{-- Password section  --}}
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"> {{'Password'}} </label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Password'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -107,7 +100,7 @@
 
                         {{-- Confirm password section  --}}                        
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"> {{'Confirm Password'}} </label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Confirm Password'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -115,14 +108,17 @@
                                     type="password" 
                                     class="form-control" 
                                     name="password_confirmation" 
-                                    required autocomplete="new-password"
+                                    required autocomplete="new-password"               
                                 >
-                            </div>
+                            </div> 
                         </div>
+
+                        {{-- messaggio di password errata --}}
+                        <div id="user-message" style="text-align:center;margin-bottom:10px;color:red"></div>
 
                         {{-- Partita iva section  --}}
                         <div class="form-group row">
-                            <label for="iva" class="col-md-4 col-form-label text-md-right"> {{'Partita IVA'}} </label>
+                            <label for="iva" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Partita IVA'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -141,6 +137,10 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <i>Tutti i campi contrassegnati con <span>*</span> sono obbligatori</i>
                         </div>
 
                         <div class="form-group row mb-0">
