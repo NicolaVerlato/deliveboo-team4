@@ -28,15 +28,18 @@ window.Vue = require('vue');
  */
  window.axios = require('axios');
  window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
- import router from './router.js';
  import App from "./App.vue";
- import back from './back.js';
+ import router from './router.js';
+//  import back from './back.js';
 
 const app = new Vue({
     el: '#root',
     render: h => h(App),
     router,
-    back
-});
+    // back
+    // data() {
+    //     return {
 
-export default router;
+    //     }
+    // }
+});

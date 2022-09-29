@@ -76,6 +76,6 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('js/back.js') }}"></script>
+    <script src="{{ asset('js/back.js') }}" defer></script>
 </body>
 </html>
