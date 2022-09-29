@@ -122,15 +122,31 @@ class DishController extends Controller
     {
         $dish = Dish::findOrFail($id);
         $user = Auth::user();
-        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
+        $restaurant = Restaurant::findOrFail($user->id);
         $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
-    
-        $data = [
-            'dish' => $dish,
-            'restaurant' => $restaurant,
-            'restaurantLink' => $restaurantLink
-        ];
-        return view('admin.dishes.edit', $data);
+
+        if($dish->restaurant_id == $restaurant->id) {
+
+            $dish = Dish::findOrFail($id);
+            
+            $data = [
+                'dish' => $dish,
+                'restaurant' => $restaurant,
+                'restaurantLink' => $restaurantLink
+            ];
+
+            return view('admin.dishes.edit', $data);
+        } else {
+            $dish = Dish::findOrFail(null);
+
+            $data = [
+                'dish' => $dish,
+                'restaurant' => $restaurant,
+                'restaurantLink' => $restaurantLink
+            ];
+
+            return view('admin.dishes.edit', $data);
+        }
     }
 
     /**
