@@ -12,7 +12,10 @@
 
             @if ($dishes->cover)
                 <img class="card-img-top img_ms" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
+            @else
+                <img src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
             @endif
+            
             <div class="p-3">
                 <h1 class="card-title">{{ $dishes->name }}</h1>
 

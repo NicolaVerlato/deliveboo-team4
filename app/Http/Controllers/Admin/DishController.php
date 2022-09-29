@@ -82,19 +82,23 @@ class DishController extends Controller
         // passo in form data la richiesta
         $form_data = $request->all();
 
-        // se in formdata è presente un'immagine
-        if(isset($form_data['cover'])) {
-            // la carico nel DB
-            $img_path = Storage::put('dishes-covers', $form_data['cover']);
-            $form_data['cover'] = $img_path;
-        }
-
         // prendo dati utente loggato
         $user = Auth::user();
         // prendo il ristorante dell'utente loggato
         $restaurant = Restaurant::findOrFail($user->id);
 
         $new_dish = new Dish();
+
+        // se in formdata è presente un'immagine
+        if(isset($form_data['cover'])) {
+            // la carico nel DB
+            $img_path = Storage::put('dishes-covers', $form_data['cover']);
+            $form_data['cover'] = $img_path;
+        }
+        // } else{
+        //     $img_path = asset('storage/' . 'default-image.jpeg');
+        //     $new_dish->cover = $img_path;
+        // }
 
         // se in formdata la abbiamo is_visible
         if(isset($form_data['is_visible'])){
