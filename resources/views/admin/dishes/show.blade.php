@@ -33,7 +33,7 @@
                     @csrf
                     @method('DELETE')
 
-                    <input type="submit" class="btn btn-danger" value="Elimina" onClick="">
+                    <input type="submit" class="btn btn-danger" value="Elimina" onClick="return confirm('Confermi di voler cancellare il piatto')">
                 </form>
             </div>
         </div>

@@ -17,9 +17,10 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+        $page_data = $request->all();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         // $restaurant = Restaurant::findOrFail($user->id);
         // $dishes = Dish::where('restaurant_id', '=', $user->id)->get();
@@ -89,7 +90,7 @@ class DishController extends Controller
         $new_dish->restaurant_id = $restaurant->id;
         $new_dish->save();
 
-        return redirect()->route('admin.dishes.show', ['dish' => $new_dish->id]);
+        return redirect()->route('admin.dishes.show', ['dish' => $new_dish->id, 'saved' => 'yes']);
     }
 
     /**
