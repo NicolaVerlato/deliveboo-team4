@@ -17,22 +17,24 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // dati utente loggato
         $user = Auth::user();
-        // prendo il ristorante dell'utente loggato comparando la FK
+        $page_data = $request->all();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         // prendo i piatti dell'utente loggato comparando sempre la FK
         $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
         // variabile per controllare se l'account ha già un ristorante
         $restaurantLink = Restaurant::find($user->id);
 
+        $deleted = isset($page_data['deleted']) ? $page_data['deleted'] : null;
+
         $data = [
             'dishes' => $dishes,
             'restaurant' => $restaurant,
-            // passo questo dato in ogni crud perchè serve alla dashboard
-            'restaurantLink' => $restaurantLink
+            'restaurantLink' => $restaurantLink,
+            'deleted' => $deleted
         ];
 
         return view('admin.dishes.index', $data);
@@ -108,7 +110,7 @@ class DishController extends Controller
         $new_dish->restaurant_id = $restaurant->id;
         $new_dish->save();
 
-        return redirect()->route('admin.dishes.show', ['dish' => $new_dish->id]);
+        return redirect()->route('admin.dishes.show', ['dish' => $new_dish->id, 'saved' => 'yes']);
     }
 
     /**
@@ -117,10 +119,12 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $dishes = Dish::findOrFail($id);
         $user = Auth::user();
+        $page_data = $request->all();
+        $saved = isset($page_data['saved']) ? $page_data['saved'] : null;
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         // variabile per controllare se l'account ha già un ristorante nella dashboard
         $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
@@ -128,7 +132,8 @@ class DishController extends Controller
         $data = [
             'dishes' => $dishes,
             'restaurant' => $restaurant,
-            'restaurantLink' => $restaurantLink
+            'restaurantLink' => $restaurantLink,
+            'saved' =>$saved
         ];
        
         return view('admin.dishes.show', $data);
@@ -216,8 +221,7 @@ class DishController extends Controller
         // aggiorno il post
         $dish_to_update->update($form_data);
 
-        // faccio il return del post appena aggiornato
-        return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id]);
+        return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id, 'saved' => 'yes']);
     }
 
     /**
@@ -240,7 +244,7 @@ class DishController extends Controller
         // cancello il piatto
         $dish_to_destroy->delete();
 
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index', ['deleted' => 'yes']);
     }
 
     // regole di validazione
@@ -249,7 +253,7 @@ class DishController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:60000',
             'price' => 'required|numeric|min:0',
-            'cover' => 'nullable|max:500000'
+            'cover' => 'nullable|image|mimes:jpeg,jpg,bmp,png'
         ];
     }
 }
