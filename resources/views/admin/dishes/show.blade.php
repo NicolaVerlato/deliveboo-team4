@@ -3,7 +3,13 @@
 @section('content')
     <div class="container">
         <div class="card border_radius20">
-                        
+            
+            @if ($saved === 'yes')
+                <div class="alert alert-success" role="alert">
+                    Piatto salvato con successo
+                </div>
+            @endif
+
             @if ($dishes->cover)
                 <img class="card-img-top img_ms" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
             @endif

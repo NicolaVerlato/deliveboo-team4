@@ -99,17 +99,20 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $dishes = Dish::findOrFail($id);
         $user = Auth::user();
+        $page_data = $request->all();
+        $saved = isset($page_data['saved']) ? $page_data['saved'] : null;
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
         $data = [
             'dishes' => $dishes,
             'restaurant' => $restaurant,
-            'restaurantLink' => $restaurantLink
+            'restaurantLink' => $restaurantLink,
+            'saved' =>$saved
         ];
        
         return view('admin.dishes.show', $data);
@@ -183,7 +186,7 @@ class DishController extends Controller
         }
         $dish_to_update->update($form_data);
 
-        return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id]);
+        return redirect()->route('admin.dishes.show', ['dish' => $dish_to_update->id, 'saved' => 'yes']);
     }
 
     /**
@@ -210,7 +213,7 @@ class DishController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:60000',
             'price' => 'required|numeric|min:0',
-            'cover' => 'nullable|max:500000'
+            'cover' => 'nullable|image|mimes:jpeg,jpg,bmp,png'
         ];
     }
 }
