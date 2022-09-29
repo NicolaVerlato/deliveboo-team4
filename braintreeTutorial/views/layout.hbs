@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- includes the Braintree JS client SDK -->
+    <script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"></script>
+    <!-- includes jQuery -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+
+    <h1>Deliveboo</h1>
+
+    <div id="dropin-wrapper">
+      <div id="checkout-message"></div>
+      <div id="dropin-container"></div>
+      <button id="submit-button">Submit payment</button>
+    </div>
+
+    <script>
+      var button = document.querySelector('#submit-button');
+
+      braintree.dropin.create({
+        // Insert your tokenization key here
+        authorization: 'sandbox_zjcktz8p_wkm3qxg9ks6mtzhc',
+        container: '#dropin-container'
+      }, function (createErr, instance) {
+        button.addEventListener('click', function () {
+          instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+            // When the user clicks on the 'Submit payment' button this code will send the
+            // encrypted payment information in a variable called a payment method nonce
+            $.ajax({
+              type: 'POST',
+              url: '/checkout',
+              data: {'paymentMethodNonce': payload.nonce}
+            }).done(function(result) {
+              // Tear down the Drop-in UI
+              instance.teardown(function (teardownErr) {
+                if (teardownErr) {
+                  console.error('Could not tear down Drop-in UI!');
+                } else {
+                  console.info('Drop-in UI has been torn down!');
+                  // Remove the 'Submit payment' button
+                  $('#submit-button').remove();
+                }
+              });
+
+              if (result.success) {
+                $('#checkout-message').html('<h2>Pagamento effettuato con successo!</h2><p>Il tuo ordine verrà elaborato il prima possibile.</p><h4><a href="http://127.0.0.1:8000/">Clicca qui per tornare alla home</a></h4>');
+              } else {
+                console.log(result);
+                $('#checkout-message').html('<h2>Qualcosa è andato storto, ritenta il pagamento!</h2><a href="http://localhost:3000/"> Clicca qui per inserire nuovi dati di pagamento </a><a href="http://127.0.0.1:8000/">Clicca qui per tornare alla home</a>');
+              }
+            });
+          });
+        });
+      });
+    </script>
+
+  </body>
+
+</html>
