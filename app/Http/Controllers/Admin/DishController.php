@@ -137,15 +137,13 @@ class DishController extends Controller
 
             return view('admin.dishes.edit', $data);
         } else {
-            $dish = Dish::findOrFail(null);
 
             $data = [
-                'dish' => $dish,
                 'restaurant' => $restaurant,
                 'restaurantLink' => $restaurantLink
             ];
 
-            return view('admin.dishes.edit', $data);
+            return view('admin.dishes.error', $data);
         }
     }
 
