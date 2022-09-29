@@ -114,6 +114,7 @@ confirmPassword.addEventListener('click', function () {
   changePassword.value = '';
 });
 
+
 /***/ }),
 
 /***/ 1:
@@ -124,6 +125,7 @@ confirmPassword.addEventListener('click', function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
 
 
 /***/ })
