@@ -49354,6 +49354,8 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_router_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _back_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./back.js */ "./resources/js/back.js");
+/* harmony import */ var _back_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_back_js__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49382,14 +49384,46 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+
 var app = new Vue({
   el: '#root',
   render: function render(h) {
     return h(App);
   },
-  router: _router_js__WEBPACK_IMPORTED_MODULE_0___default.a
+  router: _router_js__WEBPACK_IMPORTED_MODULE_0___default.a,
+  back: _back_js__WEBPACK_IMPORTED_MODULE_1___default.a
 });
 /* harmony default export */ __webpack_exports__["default"] = (_router_js__WEBPACK_IMPORTED_MODULE_0___default.a);
+
+/***/ }),
+
+/***/ "./resources/js/back.js":
+/*!******************************!*\
+  !*** ./resources/js/back.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var userMessage = document.getElementById('user-message');
+var confirmPassword = document.getElementById('password-confirm'); // funzione per far uscire un messaggio nel caso in cui la password
+// e la sua conferma siano diverse tra loro
+
+confirmPassword.addEventListener('focusout', function () {
+  var password = document.getElementById('password').value;
+  var confirm = document.getElementById('password-confirm').value;
+
+  if (password != confirm) {
+    userMessage.innerHTML = '<i>**Password di conferma errata**</i>';
+    confirm = '';
+  }
+
+  return userMessage;
+}); // funzione che svuota il campo 'conferma password' e toglie il messaggio
+
+confirmPassword.addEventListener('click', function () {
+  userMessage.innerHTML = '';
+  changePassword.value = '';
+});
 
 /***/ }),
 
@@ -49467,8 +49501,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
