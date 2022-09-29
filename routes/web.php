@@ -25,10 +25,8 @@ Route::middleware('auth')
     Route::resource('dishes', 'DishController');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-
+Route::get('{any?}', function () {
+    return view('guest.home');
+})->where('any', '.*');
