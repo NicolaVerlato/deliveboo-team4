@@ -18,6 +18,8 @@
                         <div class="card border_radius20 card_hei mb-4">
                             @if ($dish->cover)
                                 <img src="{{ asset('storage/' . $dish->cover) }}" class="card-img-top" alt="{{ $dish->name }}">
+                            @else
+                                <img src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
                             @endif
                             
                             <div class="card-body">
