@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container">
+
+        @if ($deleted === 'yes')
+        <div class="alert alert-success" role="alert">
+            Piatto eliminato con successo
+        </div>
+        @endif
+        
         <h1 class="mb-3">I tuoi piatti</h1>
 
         <div class="row row-cols-3">

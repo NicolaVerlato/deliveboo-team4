@@ -26,10 +26,13 @@ class DishController extends Controller
         $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
         $restaurantLink = Restaurant::find($user->id);
 
+        $deleted = isset($page_data['deleted']) ? $page_data['deleted'] : null;
+
         $data = [
             'dishes' => $dishes,
             'restaurant' => $restaurant,
-            'restaurantLink' => $restaurantLink
+            'restaurantLink' => $restaurantLink,
+            'deleted' => $deleted
         ];
 
         return view('admin.dishes.index', $data);
@@ -198,7 +201,7 @@ class DishController extends Controller
 
         $dish_to_destroy->delete();
 
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index', ['deleted' => 'yes']);
     }
 
     protected function getValidationRules(){
