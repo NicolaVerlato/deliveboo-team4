@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header header_brand">{{ __('Dashboard') }}</div>
+                <div class="card-header brand_color">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))

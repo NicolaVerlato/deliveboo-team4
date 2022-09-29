@@ -23,14 +23,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark flex-md-nowrap p-0 header_brand">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Deliveboo</a>
+    <nav class="navbar navbar-expand-md navbar-dark flex-md-nowrap p-2 brand_color">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
+        </a>
         <ul class="navbar-nav px-3 ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
-                    Logout
+                    <strong>Logout</strong>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
@@ -45,15 +46,15 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.home') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa-solid fa-house big_icon"></i>
                                 Dashboard
                             </a>
                         </li>
                         @if (!isset($restaurantLink))
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.restaurants.create') }}">
-                                    <i class="ms_icon fa-solid fa-square-plus"></i>
-                                    Add a new restaurants
+                                    <i class="fa-solid fa-square-plus big_icon"></i>
+                                    Crea ristorante
                                 </a>
                             </li>
                         @endif
@@ -61,8 +62,8 @@
                         @if (isset($restaurantLink))
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.restaurants.index') }}">
-                                    <i class="ms_icon fa-solid fa-utensils"></i>
-                                    Restaurants list
+                                    <i class="fa-solid fa-utensils big_icon"></i>
+                                    Il mio ristorante
                                 </a>
                             </li>
                         @endif
@@ -70,8 +71,8 @@
                         @if (isset($restaurantLink))
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.dishes.index') }}">
-                                    <i class="ms_icon fa-solid fa-utensils"></i>
-                                    Dish list
+                                    <i class="fa-solid fa-bowl-food big_icon"></i>
+                                    Lista piatti
                                 </a>
                             </li>
                         @endif
@@ -79,8 +80,8 @@
                         @if (isset($restaurantLink))
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.dishes.create') }}">
-                                    <i class="ms_icon fa-solid fa-utensils"></i>
-                                    Add new dish
+                                    <i class="fa-solid fa-circle-plus big_icon"></i>
+                                    Aggiungi piatto
                                 </a>
                             </li>
                         @endif

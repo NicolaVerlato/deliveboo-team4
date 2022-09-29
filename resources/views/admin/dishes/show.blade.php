@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="card border_radius20">
+        <div class="card card_ms" style="width: 20rem;">
                         
             @if ($dishes->cover)
                 <img class="card-img-top img_ms" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
