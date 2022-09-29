@@ -26,18 +26,17 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-import router from './router.js';
-import App from "./App.vue";
-
+ window.axios = require('axios');
+ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+ import router from './router.js';
+ import App from "./App.vue";
+ import back from './back.js';
 
 const app = new Vue({
     el: '#root',
     render: h => h(App),
-    router
+    router,
+    back
 });
 
 export default router;

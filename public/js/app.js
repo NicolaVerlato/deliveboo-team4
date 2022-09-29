@@ -53555,7 +53555,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
-/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_router_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _back_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./back.js */ "./resources/js/back.js");
+/* harmony import */ var _back_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_back_js__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -53590,9 +53592,40 @@ var app = new Vue({
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
   },
-  router: _router_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+  router: _router_js__WEBPACK_IMPORTED_MODULE_0___default.a,
+  back: _back_js__WEBPACK_IMPORTED_MODULE_1___default.a
 });
-/* harmony default export */ __webpack_exports__["default"] = (_router_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (_router_js__WEBPACK_IMPORTED_MODULE_0___default.a);
+
+/***/ }),
+
+/***/ "./resources/js/back.js":
+/*!******************************!*\
+  !*** ./resources/js/back.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var userMessage = document.getElementById('user-message');
+var confirmPassword = document.getElementById('password-confirm'); // funzione per far uscire un messaggio nel caso in cui la password
+// e la sua conferma siano diverse tra loro
+
+confirmPassword.addEventListener('focusout', function () {
+  var password = document.getElementById('password').value;
+  var confirm = document.getElementById('password-confirm').value;
+
+  if (password != confirm) {
+    userMessage.innerHTML = '<i>**Password di conferma errata**</i>';
+    confirm = '';
+  }
+
+  return userMessage;
+}); // funzione che svuota il campo 'conferma password' e toglie il messaggio
+
+confirmPassword.addEventListener('click', function () {
+  userMessage.innerHTML = '';
+  changePassword.value = '';
+});
 
 /***/ }),
 
