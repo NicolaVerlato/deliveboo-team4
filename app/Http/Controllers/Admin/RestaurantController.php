@@ -48,15 +48,17 @@ class RestaurantController extends Controller
         // prendo dati utente loggato
         $user = Auth::user();
         // variabile per controllare se l'account ha già un ristorante
-        $restaurantLink = Restaurant::find($user->id);
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
         // dd($restaurantLink);
-        if($restaurantLink !== null) {
-            return view('admin.restaurants.errors.create_error', compact('restaurantLink'));
-        } else {
+        // dd(!empty($restaurantLink));
+        if (count($restaurantLink) == 0 ) {
             // prendo tutti i possibili tipi di ristorante e li passo alla view
             $types = Type::all();
             return view('admin.restaurants.create', compact('types'));
-        }
+        } else {
+            return view('admin.restaurants.errors.create_error', compact('restaurantLink'));
+        } 
+        
 
     }
 
