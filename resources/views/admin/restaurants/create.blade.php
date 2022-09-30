@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="mt-5 mb-5">
-                    <h3>Tipo ristorante</h3>
+                    <h3><span>*</span> Tipo ristorante</h3>
                     @foreach ($types as $type)
                         <div class="form-check">
                         <input class="form-check-input" 

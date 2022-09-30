@@ -6,6 +6,8 @@
     <div class="card card_ms" style="width: 18rem;">
         @if ($restaurant['cover'])
             <img class="card-img-top" src="{{ asset('storage/' . $restaurant->cover) }}" alt="{{$restaurant['title']}}">
+        @else
+            <img class="card-img-top" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
         @endif
         <div class="card-body">
             <h1 class="card-title">{{$restaurant->name}}</h1>

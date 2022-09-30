@@ -7,7 +7,7 @@
             @if ($dishes->cover)
                 <img class="card-img-top img_ms" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
             @else
-                <img src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
+                <img class="card-img-top" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
             @endif
             
             <div class="p-3">
@@ -29,7 +29,7 @@
                 </div>
 
                 <div>
-                    <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn ms_btn mb-2 mt-2">Modifica</a>
+                    <a href="{{ route('admin.dishes.edit', ['dish' => $dishes->id]) }}" class="btn ms_btn_dark mb-2 mt-2">Modifica</a>
                 </div>
                 
                 <form action="{{ route('admin.dishes.destroy', ['dish' => $dishes->id]) }}" method="post">
