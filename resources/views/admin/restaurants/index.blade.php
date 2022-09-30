@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Lista Ristoranti</h2>
+    <h2>Il mio ristorante</h2>
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach ($restaurants as $restaurant)
