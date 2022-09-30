@@ -1971,15 +1971,14 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", [_c("header", [_c("nav", {
-    staticClass: "navbar navbar-expand-lg navbar-dark bg-primary"
+    staticClass: "navbar navbar-expand-lg",
+    staticStyle: {
+      "background-color": "#fea543",
+      color: "white"
+    }
   }, [_c("div", {
     staticClass: "container-fluid"
-  }, [_c("a", {
-    staticClass: "navbar-brand",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v(" Deliveboo ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
       id: "navbarNavAltMarkup"
@@ -2000,6 +1999,17 @@ var render = function render() {
 };
 
 var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("h2", {
+    staticClass: "navbar-brand col-sm-3 col-md-2 mr-0"
+  }, [_c("strong", [_vm._v("Deliveb"), _c("i", {
+    staticClass: "fa-solid fa-cookie-bite"
+  }), _c("i", {
+    staticClass: "fa-solid fa-cookie-bite"
+  })])]);
+}, function () {
   var _vm = this,
       _c = _vm._self._c;
 
@@ -2046,7 +2056,7 @@ var staticRenderFns = [function () {
 
   return _c("div", [_c("h2", [_vm._v("This is the checkout page")]), _vm._v(" "), _c("a", {
     attrs: {
-      href: "http://localhost:3000/"
+      href: "http://127.0.0.1:8000/orders/create"
     }
   }, [_vm._v(" Completa pagamento ")])]);
 }];
@@ -53837,8 +53847,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
