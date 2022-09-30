@@ -200,7 +200,7 @@ class RestaurantController extends Controller
         return [
             'name' => 'required|max:100',
             'address' => 'required|max:255',
-            'types' => 'nullable|exists:types,id',
+            'types' => 'required|exists:types,id',
             'cover' => 'nullable|file|max:500000'
         ];
     }

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             
-            <h1>Crea post</h1>
+            <h1>Crea il tuo ristorante</h1>
                 <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
@@ -26,21 +26,24 @@
                     </div>
 
                     <div class="mt-5 mb-5">
-                    <h3>Tipo ristorante</h3>
-                    @foreach ($types as $type)
-                        <div class="form-check">
-                        <input class="form-check-input" 
-                        type="checkbox" 
-                        value="{{ $type->id }}" 
-                        id="type-{{ $type->id }}" 
-                        name="types[]"
-                        {{ in_array($type->id, old('type', [])) ? 'checked' : '' }}
-                        >
-                        <label class="form-check-label" for="type-{{ $type->id }}">
-                            {{$type->name}}
-                        </label>
+                        <div class="mb-2">
+                            <span><span>*</span> Tipo ristorante</span>
+                            <span><i>( selezionare almeno una categoria )</i></span>
                         </div>
-                    @endforeach
+                        @foreach ($types as $type)
+                            <div class="form-check">
+                            <input class="form-check-input" 
+                            type="checkbox" 
+                            value="{{ $type->id }}" 
+                            id="type-{{ $type->id }}" 
+                            name="types[]"
+                            {{ in_array($type->id, old('type', [])) ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="type-{{ $type->id }}">
+                                {{$type->name}}
+                            </label>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="mb-3">

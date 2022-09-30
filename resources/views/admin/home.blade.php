@@ -13,13 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h2>Ciao {{$user->name}}</h2>
-                    @if ($user->lastname)
-                        <p>
-                            {{$user->lastname}}
-                        </p>
-                    @endif
+                    <h2>
+                        Ciao {{$user->name}}
 
+                        @if ($user->lastname)
+                            {{$user->lastname}}
+                        @endif
+                    </h2>
+                    
                     <h4>Mail: {{ $user->email }}</h4>
                     <p>La tua partita iva è: {{ $user->iva }}</p>
                     <p>Created {{ $user->created_at->diffForHumans($now) }}</p>
