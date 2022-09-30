@@ -1984,18 +1984,29 @@ var render = function render() {
       id: "navbarNavAltMarkup"
     }
   }, [_c("div", {
-    staticClass: "navbar-nav"
-  }, _vm._l(_vm.links, function (link, index) {
+    staticClass: "navbar-nav align-center"
+  }, [_vm._l(_vm.links, function (link, index) {
     return _c("router-link", {
       key: index,
       staticClass: "header-links",
+      staticStyle: {
+        "font-size": "20px"
+      },
       attrs: {
         to: link.name
       }
     }, [_vm._v(" " + _vm._s(link.label) + " \n                        ")]);
-  }), 1)])])])]), _vm._v(" "), _c("main", [_c("div", {
-    staticClass: "container mt-4"
-  }, [_c("router-view")], 1)])]);
+  }), _vm._v(" "), _c("a", {
+    staticClass: "header-links",
+    staticStyle: {
+      color: "white",
+      "font-size": "20px",
+      "margin-left": "15px"
+    },
+    attrs: {
+      href: "http://127.0.0.1:8000/login"
+    }
+  }, [_vm._v(" Sezione ristoranti ")])], 2)])])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _vm._m(2)]);
 };
 
 var staticRenderFns = [function () {
@@ -2003,7 +2014,10 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("h2", {
-    staticClass: "navbar-brand col-sm-3 col-md-2 mr-0"
+    staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
+    staticStyle: {
+      "font-size": "35px"
+    }
   }, [_c("strong", [_vm._v("Deliveb"), _c("i", {
     staticClass: "fa-solid fa-cookie-bite"
   }), _c("i", {
@@ -2026,6 +2040,23 @@ var staticRenderFns = [function () {
   }, [_c("span", {
     staticClass: "navbar-toggler-icon"
   })]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("footer", {
+    staticStyle: {
+      height: "300px",
+      "background-color": "#2f4858",
+      color: "white"
+    }
+  }, [_c("h4", {
+    staticStyle: {
+      "font-size": "30px",
+      padding: "80px 0",
+      "text-align": "center"
+    }
+  }, [_vm._v(" Qui footer con link vari ")])]);
 }];
 render._withStripped = true;
 
@@ -2054,7 +2085,13 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h2", [_vm._v("This is the checkout page")]), _vm._v(" "), _c("a", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("a", {
+    staticStyle: {
+      color: "white",
+      "font-size": "30px"
+    },
     attrs: {
       href: "http://127.0.0.1:8000/orders/create"
     }
@@ -2080,14 +2117,95 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", [_c("div", {
+    staticClass: "position-relative"
+  }, [_c("div", {
+    staticClass: "bg-image rounded-7 shadow-5",
+    staticStyle: {
+      "background-image": "url(https://images.squarespace-cdn.com/content/v1/545a3cf1e4b0ca6b8bdbc10d/1554056503984-4B3GJELSQ8CJZY161BZ9/Food_Photographer_Dubai03.jpg?format=2500w)",
+      height: "400px",
+      "background-size": "cover",
+      "background-position": "center"
+    }
+  }, [_c("svg", {
+    staticStyle: {
+      opacity: "1",
+      width: "100%",
+      height: "150px",
+      fill: "#fea543",
+      transform: "rotateY(0deg)"
+    },
+    attrs: {
+      "data-name": "Layer 1",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 1200 120",
+      preserveAspectRatio: "none"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+    }
+  })])])]), _vm._v(" "), _c("div", {
+    staticStyle: {
+      "background-color": "white"
+    }
+  }, [_c("p", {
+    staticStyle: {
+      padding: "100px 0",
+      "text-align": "center",
+      "font-size": "40px"
+    }
+  }, [_vm._v("\n            Qui sezione bianca bla bla assaggia piatti della tua zona\n        ")]), _vm._v(" "), _c("svg", {
+    staticStyle: {
+      opacity: "1",
+      width: "100%",
+      height: "80px",
+      fill: "rgb(254, 165, 67)",
+      transform: "rotateX(179deg)"
+    },
+    attrs: {
+      "data-name": "Layer 1",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 1200 120",
+      preserveAspectRatio: "none"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+    }
+  })])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)]);
 };
 
 var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h2", [_vm._v("This is the homepage")])]);
+  return _c("div", {
+    staticStyle: {
+      color: "white"
+    }
+  }, [_c("p", {
+    staticStyle: {
+      padding: "100px 0",
+      "text-align": "center",
+      "font-size": "40px"
+    }
+  }, [_vm._v("\n            Altra sezione bla bla servizi deliveboo\n        ")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticStyle: {
+      color: "white"
+    }
+  }, [_c("p", {
+    staticStyle: {
+      padding: "100px 0",
+      "text-align": "center",
+      "font-size": "40px"
+    }
+  }, [_vm._v("\n            Altra sezione bla bla servizi deliveboo\n        ")])]);
 }];
 render._withStripped = true;
 
