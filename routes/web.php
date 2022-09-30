@@ -27,6 +27,8 @@ Route::middleware('auth')
 
 Auth::routes();
 
+Route::resource('/orders', 'OrderController');
+
 Route::get('{any?}', function () {
     return view('guest.home');
 })->where('any', '.*');
