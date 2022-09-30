@@ -2,9 +2,11 @@
 
     <div>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav class="navbar navbar-expand-lg" style="background-color: #fea543; color: white;">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#"> Deliveboo </a>
+                    <h2 class="navbar-brand col-sm-3 col-md-2 mr-0">
+                        <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
+                    </h2>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
