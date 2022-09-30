@@ -53588,19 +53588,13 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
- //  import back from './back.js';
 
 var app = new Vue({
   el: '#root',
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   },
-  router: _router_js__WEBPACK_IMPORTED_MODULE_1__["default"] // back
-  // data() {
-  //     return {
-  //     }
-  // }
-
+  router: _router_js__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 
 /***/ }),
