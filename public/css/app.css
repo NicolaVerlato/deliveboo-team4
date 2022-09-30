@@ -11011,11 +11011,27 @@ img {
 
 .ms_button_card .ms-btn:hover {
   background-color: #2f4858;
+  color: white;
 }
 
 .pagination {
   width: auto;
   justify-content: center;
+}
+
+.pagination .page-item .page-link {
+  color: #2f4858;
+}
+
+.pagination .page-item.active .page-link {
+  z-index: 3;
+  color: #2f4858;
+  background-color: #fea543;
+  border-color: #fea543;
+}
+
+.pagination .page-item.active .page-link .page-link {
+  color: #2f4858;
 }
 
 .border_radius20 {
@@ -11036,6 +11052,17 @@ img {
 .ms_btn {
   padding: 0.375rem 0.75rem;
   background-color: #fea543;
+}
+
+.ms_btn_dark {
+  padding: 0.375rem 0.75rem;
+  background-color: #2f4858;
+  color: white;
+}
+
+.ms_btn_dark:hover {
+  color: white;
+  background-color: #2f4838;
 }
 
 .circle {

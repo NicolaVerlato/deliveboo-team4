@@ -7,7 +7,7 @@
         @if ($restaurant['cover'])
             <img class="card-img-top" src="{{ asset('storage/' . $restaurant->cover) }}" alt="{{$restaurant['title']}}">
         @else
-            <img src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
+            <img class="card-img-top" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
         @endif
         <div class="card-body">
             <h1 class="card-title">{{$restaurant->name}}</h1>
