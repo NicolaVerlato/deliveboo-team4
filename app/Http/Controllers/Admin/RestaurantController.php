@@ -45,10 +45,19 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // prendo tutti i possibili tipi di ristorante e li passo alla view
-        $types = Type::all();
+        // prendo dati utente loggato
+        $user = Auth::user();
+        // variabile per controllare se l'account ha già un ristorante
+        $restaurantLink = Restaurant::find($user->id);
+        // dd($restaurantLink);
+        if($restaurantLink !== null) {
+            // prendo tutti i possibili tipi di ristorante e li passo alla view
+            return view('admin.restaurants.errors.create_error', compact('restaurantLink'));
+        } else {
+            $types = Type::all();
+            return view('admin.restaurants.create', compact('types'));
+        }
 
-        return view('admin.restaurants.create', compact('types'));
     }
 
     /**
