@@ -19,7 +19,7 @@
                             @if ($dish->cover)
                                 <img src="{{ asset('storage/' . $dish->cover) }}" class="card-img-top" alt="{{ $dish->name }}">
                             @else
-                                <img src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
+                                <img class="card-img-top" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
                             @endif
                             
                             <div class="card-body">
@@ -39,9 +39,9 @@
                 @endforeach
                 
             @else
-                <div>
-                    <h3>Non hai ancora nessun piatto.</h3>
-                    <a href="{{ route('admin.dishes.create') }}" class="mt-2 btn ms-btn">Clicca qui per aggiugerne uno!</a>  
+                <div class="ml-3">
+                    <h4>Non hai ancora nessun piatto.</h4>
+                    <a href="{{ route('admin.dishes.create') }}" class="mt-2 btn ms_btn">Clicca qui per aggiugerne uno!</a>  
                 </div>
             @endif
         </div>

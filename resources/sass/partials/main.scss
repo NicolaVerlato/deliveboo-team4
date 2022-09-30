@@ -68,11 +68,25 @@ img {
     }
     .ms-btn:hover {
         background-color: $secondary_color;
+        color: white;
     }
 }
 .pagination {
     width: auto;
     justify-content: center;
+    .page-item .page-link{
+      color: $secondary_color;
+    }
+    .page-item.active .page-link{
+      z-index: 3;
+      color: $secondary_color;
+      background-color: $brand_color;
+      border-color: $brand_color;
+
+      .page-link{
+        color: $secondary_color;
+      }
+    }
 }
 .border_radius20 {
     border-radius: 20px;
@@ -89,6 +103,15 @@ img {
 .ms_btn {
     padding: 0.375rem 0.75rem;
     background-color: $brand_color;
+}
+.ms_btn_dark{
+    padding: 0.375rem 0.75rem;
+    background-color: $secondary_color;
+    color: white;
+    &:hover{
+      color: white;
+      background-color: #2f4838;
+    }
 }
 .circle {
     margin-top: 30px;
