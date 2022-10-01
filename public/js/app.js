@@ -2061,7 +2061,6 @@ var render = function render() {
         to: link.name
       }
     }, [_vm._v(" " + _vm._s(link.label) + " \n                        ")]);
-<<<<<<< HEAD
   }), _vm._v(" "), _c("a", {
     staticClass: "header-links",
     staticStyle: {
@@ -2072,12 +2071,7 @@ var render = function render() {
     attrs: {
       href: "http://127.0.0.1:8000/login"
     }
-  }, [_vm._v(" Sezione ristoranti ")])], 2)])])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _vm._m(2)]);
-=======
-  }), 1)])])])]), _vm._v(" "), _c("main", [_c("div", {
-    staticClass: "container mt-4"
-  }, [_c("router-view")], 1), _vm._v(" "), _c("Types"), _vm._v(" "), _c("Restaurants")], 1)]);
->>>>>>> correzioni
+  }, [_vm._v(" Sezione ristoranti ")])], 2)])])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1), _vm._v(" "), _c("Types"), _vm._v(" "), _c("Restaurants")], 1), _vm._v(" "), _vm._m(2)]);
 };
 
 var staticRenderFns = [function () {
@@ -53881,13 +53875,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< HEAD
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
-=======
-/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
-/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
->>>>>>> correzioni
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -53916,24 +53905,14 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-<<<<<<< HEAD
-=======
- //import back from './back.js';
->>>>>>> correzioni
 
 var app = new Vue({
   el: '#root',
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   },
-<<<<<<< HEAD
   router: _router_js__WEBPACK_IMPORTED_MODULE_1__["default"]
-=======
-  router: _router_js__WEBPACK_IMPORTED_MODULE_0__["default"] //back
-
->>>>>>> correzioni
 });
-/* harmony default export */ __webpack_exports__["default"] = (_router_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -54366,8 +54345,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
