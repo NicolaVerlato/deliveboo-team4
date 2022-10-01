@@ -39,16 +39,12 @@
                 </svg>
         </div>
 
-        <div style="color: white;">
-            <p style="padding: 100px 0; text-align: center; font-size: 40px;">
-                Altra sezione bla bla servizi deliveboo
-            </p>
+        <div style="color: white; padding-top: 50px;">
+            <Types/>
         </div>
 
-        <div style="color: white;">
-            <p style="padding: 100px 0; text-align: center; font-size: 40px;">
-                Altra sezione bla bla servizi deliveboo
-            </p>
+        <div class="container" style="padding-bottom: 50px;">
+            <Restaurants/>            
         </div>
     </div>
 
@@ -56,8 +52,17 @@
 
 <script>
 
+    import Types from '../components/Types.vue'; 
+    import Restaurants from '../components/Restaurants.vue';
+    import Dishes from '../components/Dishes.vue';
+
     export default {
-        name: "HomePage"
+        name: "HomePage",
+        components: {
+            Restaurants,
+            Types,
+            Dishes
+        },
     }
 
 </script>

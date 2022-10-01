@@ -1,10 +1,12 @@
 <template>
-    <section>
-        <h2>Lista dei ristoranti</h2>
+    <section class="mt-4">
+        <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
+            Lista dei ristoranti
+        </h2>
 
         <div class="row row-cols-4">
             <!--Single restaurant-->
-            <div v-for="restaurant in restaurants" :key="restaurant.id" class="col">
+            <div v-for="restaurant in restaurants" :key="restaurant.id" class="col mr-4">
                 <div class="card" style="width: 18rem;">
                     <div v-if="restaurant.cover">
                         <img 
