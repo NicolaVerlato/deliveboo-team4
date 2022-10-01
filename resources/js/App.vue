@@ -13,7 +13,7 @@
                             
                             <router-link 
                                 class="header-links"
-                                v-for="link, index in links" 
+                                v-for="(link, index) in links" 
                                 :key="index" 
                                 :to="link.name"> {{link.label}} 
                             </router-link>
@@ -28,15 +28,25 @@
             <div class="container mt-4">
                 <router-view></router-view>
             </div>
+            <Types />
+            <Restaurants />
         </main>
     </div>
 
 </template>
 
 <script>
+import Restaurants from './components/Restaurants.vue';
+import Dishes from './components/Dishes.vue';
+import Types from './components/Types.vue';
 
     export default {
         name: "App",
+        components: {
+            Restaurants,
+            Dishes,
+            Types
+        },
         data() {
             return {
                 links: [

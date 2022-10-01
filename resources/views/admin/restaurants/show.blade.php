@@ -3,7 +3,7 @@
 @section('content')
 
     <h2 class="ms_title">Il mio ristorante</h2>
-    <div class="card card_ms" style="width: 18rem;">
+    <div class="card card_ms brand_color" style="width: 18rem;">
         @if ($restaurant['cover'])
             <img class="card-img-top" src="{{ asset('storage/' . $restaurant->cover) }}" alt="{{$restaurant['title']}}">
         @endif
