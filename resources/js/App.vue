@@ -7,23 +7,16 @@
                     <h2 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 35px;">
                         <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
                     </h2>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav align-center">
-                            
-                            <router-link 
-                                style="font-size: 20px;"
-                                class="header-links"
-                                v-for="(link, index) in links" 
-                                :key="index" 
-                                :to="link.name"> {{link.label}} 
-                            </router-link>
-
-                            <a class="header-links" style="color: white; font-size: 20px; margin-left: 15px;" href="http://127.0.0.1:8000/login"> Sezione ristoranti </a>
-                        </div>
-
+             
+                    <div class="navbar-nav align-center">
+                        
+                        <router-link 
+                            style="font-size: 20px;"
+                            class="header-links"
+                            v-for="(link, index) in links" 
+                            :key="index" 
+                            :to="link.name"> {{link.label}} 
+                        </router-link>
                     </div>
                 </div>
             </nav>
@@ -33,44 +26,37 @@
             <div>
                 <router-view></router-view>
             </div>
-            <Types />
-            <Restaurants />
         </main>
 
-        <footer style="height: 300px; background-color: #2f4858; color: white">
-            <h4 style="font-size: 30px; padding: 80px 0; text-align: center;"> Qui footer con link vari </h4>
+        <footer style="background-color: #2f4858; color: white">
+            <Footer/>
         </footer>
     </div>
 
 </template>
 
 <script>
-import Restaurants from './components/Restaurants.vue';
-import Dishes from './components/Dishes.vue';
-import Types from './components/Types.vue';
+import Footer from './components/Footer.vue';
 
     export default {
-        name: "App",
-        components: {
-            Restaurants,
-            Dishes,
-            Types
-        },
-        data() {
-            return {
-                links: [
-                    {
-                        name: '/',
-                        label: 'Home'
-                    },
-                    {
-                        name: 'carrello',
-                        label: 'Carrello'
-                    },
-                ]
-            }
-        },
-    }
+    name: "App",
+    components: {Footer},
+    data() {
+        return {
+            links: [
+                {
+                    name: "/",
+                    label: "Home"
+                },
+                {
+                    name: "carrello",
+                    label: "Carrello"
+                },
+            ]
+        };
+    },
+    components: { Footer }
+}
 </script>
 
 <style lang="scss">
