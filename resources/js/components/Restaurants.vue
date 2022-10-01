@@ -14,7 +14,15 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{restaurant.name}}</h5>
-                        <!--<p>{{restaurant.type_id}}</p>-->
+                        <div v-for="item in restauranttype" :key="item.id">
+                          <div v-if="restaurant.id == item.restaurant_id">
+                            <div v-for="type in types" :key="type.id">
+                               <div v-if="item.type_id == type.id">
+                                {{type.name}}
+                               </div>
+                            </div>
+                          </div>
+                        </div>
                         <p class="card-text">Indirizzo: {{restaurant.address}}</p>
                         <a href="#" class="btn btn-primary">Dettagli</a>
                     </div>
@@ -30,13 +38,23 @@ export default {
     name: 'Restaurants',
     data() {
         return {
-            restaurants: []
+            restaurants: [],
+            restauranttype: [],
+            types: []
         };
     },
     mounted() {
         axios.get('/api/restaurants')
         .then((response) => {
                this.restaurants = response.data.results;
+        });
+        axios.get('/api/restauranttype')
+        .then((response) => {
+               this.restauranttype = response.data.results;
+        });
+        axios.get('/api/types')
+        .then((response) => {
+               this.types = response.data.results;
         });
     }
 }
