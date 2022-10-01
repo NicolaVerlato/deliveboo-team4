@@ -16,7 +16,7 @@
                             <router-link 
                                 style="font-size: 20px;"
                                 class="header-links"
-                                v-for="link, index in links" 
+                                v-for="(link, index) in links" 
                                 :key="index" 
                                 :to="link.name"> {{link.label}} 
                             </router-link>
@@ -33,6 +33,8 @@
             <div>
                 <router-view></router-view>
             </div>
+            <Types />
+            <Restaurants />
         </main>
 
         <footer style="height: 300px; background-color: #2f4858; color: white">
@@ -43,9 +45,17 @@
 </template>
 
 <script>
+import Restaurants from './components/Restaurants.vue';
+import Dishes from './components/Dishes.vue';
+import Types from './components/Types.vue';
 
     export default {
         name: "App",
+        components: {
+            Restaurants,
+            Dishes,
+            Types
+        },
         data() {
             return {
                 links: [
