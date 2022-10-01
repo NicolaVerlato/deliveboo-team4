@@ -40,11 +40,11 @@
         </div>
 
         <div style="color: white; padding-top: 50px;">
-            <Types/>
+            <Types @filterType="setFilter"/>
         </div>
 
         <div class="container" style="padding-bottom: 50px;">
-            <Restaurants/>            
+            <Restaurants :filter="test"/>            
         </div>
     </div>
 
@@ -63,6 +63,21 @@
             Types,
             Dishes
         },
+        data() {
+            return {
+                test: {}
+            }
+        },
+        methods: {
+            setFilter(value) {
+                console.log(value)
+                if (value.length > 0) {
+                    this.test = this.$set(this.test, value, {value: value});
+                } else {
+                    this.test = {}
+                }
+            }
+        }
     }
 
 </script>

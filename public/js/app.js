@@ -1960,12 +1960,23 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurants',
+  props: {
+    filter: Object
+  },
   data: function data() {
     return {
       restaurants: [],
       restauranttype: [],
-      types: []
+      types: [],
+      userFilter: {}
     };
+  },
+  watch: {
+    immediate: true,
+    deep: true,
+    filter: function filter(newValue) {
+      this.userFilter = newValue;
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -1997,8 +2008,26 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Types',
   data: function data() {
     return {
-      types: []
+      types: [],
+      filter: []
     };
+  },
+  methods: {
+    filterRestaurant: function filterRestaurant(e) {
+      if (e.target.checked) {
+        this.filter.push(e.target.value);
+        this.$emit('filterType', this.filter);
+      } else {
+        for (var i = 0; i < this.filter.length; i++) {
+          if (this.filter[i] == e.target.value) {
+            var filterIndex = this.filter.indexOf(e.target.value);
+            this.filter.splice(filterIndex, 1);
+          }
+        }
+
+        this.$emit('filterType', this.filter);
+      }
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -2047,6 +2076,24 @@ __webpack_require__.r(__webpack_exports__);
     Restaurants: _components_Restaurants_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Types: _components_Types_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Dishes: _components_Dishes_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      test: {}
+    };
+  },
+  methods: {
+    setFilter: function setFilter(value) {
+      console.log(value);
+
+      if (value.length > 0) {
+        this.test = this.$set(this.test, value, {
+          value: value
+        });
+      } else {
+        this.test = {};
+      }
+    }
   }
 });
 
@@ -2278,7 +2325,7 @@ var render = function render() {
       "font-size": "30px",
       "margin-bottom": "40px"
     }
-  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), Object.keys(_vm.filter).length == 0 ? _c("div", [_c("div", {
     staticClass: "row row-cols-4"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -2299,13 +2346,13 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
-    }, [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+    }, [_vm._v("\n                            " + _vm._s(restaurant.name) + "\n                        ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
         key: item.id
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
-        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                            " + _vm._s(singleType.name) + "\n                           ")]) : _vm._e()]);
+        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                " + _vm._s(singleType.name) + "\n                            ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
     }), _vm._v(" "), _c("p", {
       staticClass: "card-text"
@@ -2315,7 +2362,43 @@ var render = function render() {
         href: "#"
       }
     }, [_vm._v("Dettagli")])], 2)])]);
-  }), 0)]);
+  }), 0)]) : _c("div", [_c("div", {
+    staticClass: "row row-cols-4"
+  }, _vm._l(_vm.restaurants, function (restaurant) {
+    return _c("div", {
+      key: restaurant.id,
+      staticClass: "col mr-4"
+    }, _vm._l(_vm.restauranttype, function (restaurantType) {
+      return _c("div", {
+        key: restaurantType.id
+      }, [restaurant.id == restaurantType.restaurant_id ? _c("div", _vm._l(_vm.userFilter, function (filter) {
+        return _c("div", {
+          key: filter.id
+        }, _vm._l(filter, function (singleFilter) {
+          return _c("div", {
+            key: singleFilter.id
+          }, [singleFilter == restaurantType.type_id ? _c("div", _vm._l(_vm.types, function (singleType) {
+            return _c("div", {
+              key: singleType.id
+            }, [singleType.id == restaurantType.type_id ? _c("div", [_c("div", {
+              staticClass: "card",
+              staticStyle: {
+                width: "18rem"
+              }
+            }, [_c("h5", {
+              staticClass: "card-title"
+            }, [_vm._v("\n                                                    " + _vm._s(restaurant.name) + "\n                                                ")]), _vm._v(" "), _c("h1", [_vm._v("ciaoi")]), _vm._v(" "), restaurant.cover ? _c("div", [_c("img", {
+              staticClass: "card-img-top",
+              attrs: {
+                src: "storage/" + restaurant.cover,
+                alt: restaurant.title
+              }
+            })]) : _vm._e(), _vm._v(" "), _c("h5", [_vm._v("\n                                                        " + _vm._s(singleType.name) + "\n                                                    ")])])]) : _vm._e()]);
+          }), 0) : _vm._e()]);
+        }), 0);
+      }), 0) : _vm._e()]);
+    }), 0);
+  }), 0)])]);
 };
 
 var staticRenderFns = [];
@@ -2350,9 +2433,9 @@ var render = function render() {
       "font-size": "30px",
       "margin-bottom": "20px"
     }
-  }, [_vm._v("Tipologie ristoranti")]), _vm._v(" "), _vm._l(_vm.types, function (type) {
+  }, [_vm._v("Tipologie ristoranti")]), _vm._v(" "), _vm._l(_vm.types, function (restaurantType) {
     return _c("div", {
-      key: type.id,
+      key: restaurantType.id,
       staticClass: "form-check form-check-inline",
       staticStyle: {
         color: "white"
@@ -2360,17 +2443,24 @@ var render = function render() {
     }, [_c("input", {
       staticClass: "form-check-input",
       attrs: {
-        type: "radio",
-        name: "inlineRadioOptions",
-        id: "inlineRadio1",
-        value: "option1"
+        type: "checkbox",
+        name: restaurantType.name,
+        id: "id-" + restaurantType.id
+      },
+      domProps: {
+        value: restaurantType.id
+      },
+      on: {
+        change: function change($event) {
+          return _vm.filterRestaurant($event);
+        }
       }
     }), _vm._v(" "), _c("label", {
       staticClass: "form-check-label",
       attrs: {
-        "for": "inlineRadio1"
+        "for": "id-" + restaurantType.id
       }
-    }, [_vm._v(_vm._s(type.name))])]);
+    }, [_vm._v("\n                " + _vm._s(restaurantType.name) + "\n            ")])]);
   })], 2);
 };
 
@@ -2495,12 +2585,20 @@ var render = function render() {
       color: "white",
       "padding-top": "50px"
     }
-  }, [_c("Types")], 1), _vm._v(" "), _c("div", {
+  }, [_c("Types", {
+    on: {
+      filterType: _vm.setFilter
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "container",
     staticStyle: {
       "padding-bottom": "50px"
     }
-  }, [_c("Restaurants")], 1)]);
+  }, [_c("Restaurants", {
+    attrs: {
+      filter: _vm.test
+    }
+  })], 1)]);
 };
 
 var staticRenderFns = [];
@@ -54589,8 +54687,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
