@@ -16,9 +16,9 @@
                         <h5 class="card-title">{{restaurant.name}}</h5>
                         <div v-for="item in restauranttype" :key="item.id">
                           <div v-if="restaurant.id == item.restaurant_id">
-                            <div v-for="type in types" :key="type.id">
-                               <div v-if="item.type_id == type.id">
-                                {{type.name}}
+                            <div v-for="singleType in types" :key="singleType.id">
+                               <div v-if="item.type_id == singleType.id">
+                                {{singleType.name}}
                                </div>
                             </div>
                           </div>
