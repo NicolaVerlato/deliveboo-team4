@@ -123,7 +123,7 @@ confirmPassword.addEventListener('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
 
 
 /***/ })

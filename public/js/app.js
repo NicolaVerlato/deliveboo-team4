@@ -1962,7 +1962,9 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Restaurants',
   data: function data() {
     return {
-      restaurants: []
+      restaurants: [],
+      restauranttype: [],
+      types: []
     };
   },
   mounted: function mounted() {
@@ -1970,6 +1972,12 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/api/restaurants').then(function (response) {
       _this.restaurants = response.data.results;
+    });
+    axios.get('/api/restauranttype').then(function (response) {
+      _this.restauranttype = response.data.results;
+    });
+    axios.get('/api/types').then(function (response) {
+      _this.types = response.data.results;
     });
   }
 });
@@ -2291,14 +2299,22 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
-    }, [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("p", {
+    }, [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+      return _c("div", {
+        key: item.id
+      }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
+        return _c("div", {
+          key: singleType.id
+        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                            " + _vm._s(singleType.name) + "\n                           ")]) : _vm._e()]);
+      }), 0) : _vm._e()]);
+    }), _vm._v(" "), _c("p", {
       staticClass: "card-text"
     }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("a", {
       staticClass: "btn btn-primary",
       attrs: {
         href: "#"
       }
-    }, [_vm._v("Dettagli")])])])]);
+    }, [_vm._v("Dettagli")])], 2)])]);
   }), 0)]);
 };
 
@@ -54573,8 +54589,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
