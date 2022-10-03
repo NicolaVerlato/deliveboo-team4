@@ -81,73 +81,45 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/back.js":
-/*!******************************!*\
-  !*** ./resources/js/back.js ***!
-  \******************************/
+/***/ "./resources/js/create.js":
+/*!********************************!*\
+  !*** ./resources/js/create.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+var btnCreate = document.getElementById('btn-create');
 var userMessage = document.getElementById('user-message');
-var passwordMessage = document.getElementById('password-message');
-var iva = document.getElementById('iva');
-var ivaMessage = document.getElementById('iva-message');
-var password = document.getElementById('password');
-var confirmPassword = document.getElementById('password-confirm');
-var btn = document.getElementById('btn');
-btn.disabled = false; // funzione per far uscire un messaggio nel caso in cui la password
-// sia più corta di 8 caratteri
+btnCreate.addEventListener('click', function () {
+  for (var i = 1; i <= 5; i++) {
+    var type = 'type-';
+    var typeId = type += [i];
+    DOMType = document.getElementById(typeId);
+    DOMType += 'checked'; // if(DOMType){
+    //     userMessage.innerHTML = ''
+    // } else{
+    //     userMessage.innerHTML = 'Selezionare almeno una categoria'
+    // }
 
-password.addEventListener('focusout', function () {
-  if (password.value.length < 8) {
-    passwordMessage.innerHTML = '<i>**La password deve essere di almeno 8 caratteri**</i>';
-    btn.disabled = true;
-  }
-}); // funzione che toglie il messaggio **La password deve essere di almeno 8 caratteri**
-
-password.addEventListener('click', function () {
-  passwordMessage.innerHTML = '';
-}); // funzione per far uscire un messaggio nel caso in cui la password
-// e la sua conferma siano diverse tra loro
-
-confirmPassword.addEventListener('focusout', function () {
-  var confirm = document.getElementById('password-confirm').value;
-
-  if (password.value != confirm) {
-    userMessage.innerHTML = '<i>**Password di conferma errata**</i>';
-    btn.disabled = true;
-  }
-
-  return userMessage;
-}); // funzione che svuota il campo 'conferma password' e toglie il messaggio
-
-confirmPassword.addEventListener('click', function () {
-  userMessage.innerHTML = '';
-  confirmPassword.value = '';
-}); // funzione per far uscire un messaggio nel caso in cui l'iva
-// sia minore di 11 caratteri
-
-iva.addEventListener('focusout', function () {
-  if (iva.value.length < 11) {
-    ivaMessage.innerHTML = '<i>**La partita iva deve essere di 11 caratteri**</i>';
+    console.log(DOMType);
   }
 });
 
 /***/ }),
 
-/***/ 1:
-/*!************************************!*\
-  !*** multi ./resources/js/back.js ***!
-  \************************************/
+/***/ 2:
+/*!**************************************!*\
+  !*** multi ./resources/js/create.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/create.js */"./resources/js/create.js");
 
 
 /***/ })
