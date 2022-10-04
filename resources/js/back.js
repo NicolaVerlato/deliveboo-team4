@@ -23,6 +23,7 @@ password.addEventListener('focusout', function(){
 // funzione che toglie il messaggio **La password deve essere di almeno 8 caratteri**
 password.addEventListener('click', function(){
     passwordMessage.innerHTML = ''
+    btn.disabled = false
 })
 
 
@@ -44,6 +45,7 @@ confirmPassword.addEventListener('focusout', function(){
 confirmPassword.addEventListener('click', function(){
     userMessage.innerHTML = '';
     confirmPassword.value = '';
+    btn.disabled = false
 })
 
 // funzione per far uscire un messaggio nel caso in cui l'iva
@@ -51,7 +53,14 @@ confirmPassword.addEventListener('click', function(){
 iva.addEventListener('focusout', function(){
     if(iva.value.length < 11) {
         ivaMessage.innerHTML = '<i>**La partita iva deve essere di 11 caratteri**</i>';
+        btn.disabled = true
     }
+})
+
+// funzione che toglie il messaggio **La partita iva deve essere di 11 caratteri** e abilita di nuovo il bottone
+iva.addEventListener('click', function(){
+    ivaMessage.innerHTML= '';
+    btn.disabled = false
 })
 
 
