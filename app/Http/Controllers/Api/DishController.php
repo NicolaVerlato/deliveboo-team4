@@ -17,4 +17,19 @@ class DishController extends Controller
 
         return response()->json($data);
     }
+
+    public function show($id) {
+        $dish = Dish::where('id', '=', $id)->get();
+
+        if($dish) {
+            $data = [
+                'success' => true,
+                'results' => $dish
+            ];
+        } else {
+            $data = ['success' => false];
+        };
+        
+        return response()->json($data);
+    }
 }

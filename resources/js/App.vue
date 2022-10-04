@@ -35,7 +35,7 @@
             </div>
         </main>
 
-        <footer style="background-color: #2f4858; color: white">
+        <footer>
             <Footer/>
         </footer>
     </div>
@@ -43,11 +43,13 @@
 </template>
 
 <script>
-import Footer from './components/Footer.vue';
+
+    import Footer from './components/Footer.vue';
+    import RestaurantDetails from './pages/RestaurantDetails.vue';
 
     export default {
         name: "App",
-        components: {Footer},
+        components: { Footer, RestaurantDetails },
         data() {
             return {
                 checkoutAmount: 0,
@@ -63,6 +65,11 @@ import Footer from './components/Footer.vue';
                 ]
             };
         },
+        methods: {
+            sendInfo(value) {
+                console.log(value);
+            }
+        },
         // methods: {
         //     incrementAmount() {
         //         let value = this.checkoutAmount;
@@ -75,6 +82,7 @@ import Footer from './components/Footer.vue';
 </script>
 
 <style lang="scss">
+
     header {
         nav {
             .navbar-brand {
@@ -86,4 +94,10 @@ import Footer from './components/Footer.vue';
             }
         }
     }
+
+    footer {
+        background-color: #2f4858; 
+        color: white;
+    }
+
 </style>

@@ -1909,11 +1909,14 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Footer_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Footer.vue */ "./resources/js/components/Footer.vue");
+/* harmony import */ var _pages_RestaurantDetails_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/RestaurantDetails.vue */ "./resources/js/pages/RestaurantDetails.vue");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   components: {
-    Footer: _components_Footer_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Footer: _components_Footer_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    RestaurantDetails: _pages_RestaurantDetails_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -1926,6 +1929,11 @@ __webpack_require__.r(__webpack_exports__);
         label: "Carrello"
       }]
     };
+  },
+  methods: {
+    sendInfo: function sendInfo(value) {
+      console.log(value);
+    }
   } // methods: {
   //     incrementAmount() {
   //         let value = this.checkoutAmount;
@@ -2025,8 +2033,61 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "HomePage"
+  name: "HomePage",
+  data: function data() {
+    return {
+      dish_id: [],
+      restaurant_id: [],
+      dishesArray: [],
+      dishes: []
+    };
+  },
+  methods: {
+    getInfo: function getInfo() {
+      for (var _i = 0, _Object$entries = Object.entries(localStorage); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
+
+        this.dish_id.push(key);
+        this.restaurant_id.push(value);
+      }
+
+      this.printDishes();
+    },
+    printDishes: function printDishes() {
+      var _this = this;
+
+      this.dish_id.forEach(function (element, index) {
+        if (index == 0) {
+          console.log('skip');
+          return;
+        } else {
+          axios.get("/api/dishes/".concat(element)).then(function (response) {
+            _this.dishes.push(response.data.results);
+
+            console.log('ok');
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getInfo();
+  }
 });
 
 /***/ }),
@@ -2079,7 +2140,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       restaurant: null,
-      dishes: []
+      dishes: [],
+      dishesidArray: []
     };
   },
   methods: {
@@ -2132,6 +2194,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    sendInfo: function sendInfo(value, restaurantId) {
+      if (localStorage.length == 0) {
+        localStorage.setItem('slug', this.restaurant.slug);
+        localStorage.setItem(value, restaurantId);
+      }
+
+      ;
+
+      if (localStorage.length > 1) {
+        if (localStorage.getItem('slug') == this.restaurant.slug) {
+          localStorage.setItem(value, restaurantId);
+        } else {
+          if (confirm("Sei sicuro di voler aggiungere un piatto di un altro ristorante? I piatti presenti nel tuo carrello verranno sovrascritti") == true) {
+            localStorage.clear();
+            localStorage.setItem('slug', this.restaurant.slug);
+            localStorage.setItem(value, restaurantId);
+          } else {
+            console.log('mantieni i dati');
+          }
+        }
+      }
+
+      ;
     }
   },
   mounted: function mounted() {
@@ -2188,12 +2274,7 @@ var render = function render() {
     }
   }, [_c("span", {
     staticClass: "visually-hidden"
-  }, [_vm._v(" " + _vm._s(_vm.checkoutAmount) + " ")])])], 2)])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _c("footer", {
-    staticStyle: {
-      "background-color": "#2f4858",
-      color: "white"
-    }
-  }, [_c("Footer")], 1)]);
+  }, [_vm._v(" " + _vm._s(_vm.checkoutAmount) + " ")])])], 2)])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _c("footer", [_c("Footer")], 1)]);
 };
 
 var staticRenderFns = [function () {
@@ -2500,16 +2581,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("div", {
-    staticClass: "container"
-  }, [_c("a", {
+    staticClass: "container",
+    staticStyle: {
+      height: "330px"
+    }
+  }, [_vm._l(_vm.dishes, function (item) {
+    return _c("p", {
+      key: item.id
+    }, [_vm._v("\n        " + _vm._s(item) + "   \n    ")]);
+  }), _vm._v(" "), _c("a", {
     staticStyle: {
       color: "white",
       "font-size": "30px"
@@ -2517,8 +2598,10 @@ var staticRenderFns = [function () {
     attrs: {
       href: "http://127.0.0.1:8000/orders/create"
     }
-  }, [_vm._v(" Completa pagamento ")])]);
-}];
+  }, [_vm._v(" \n        Completa pagamento \n    ")])], 2);
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -2650,18 +2733,18 @@ var render = function render() {
       staticClass: "card-title text-center"
     }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
       staticClass: "card-text text-center"
-    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _vm._m(0, true)])]) : _vm._e()]) : _vm._e();
-  })], 2) : _c("div", [_vm._m(1)])])]);
+    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", [_c("a", {
+      staticClass: "btn btn-light",
+      on: {
+        click: function click($event) {
+          return _vm.sendInfo(dish.id, dish.restaurant_id);
+        }
+      }
+    }, [_vm._v(" Aggiungi ")])])])]) : _vm._e()]) : _vm._e();
+  })], 2) : _c("div", [_vm._m(0)])])]);
 };
 
 var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", [_c("a", {
-    staticClass: "btn btn-light"
-  }, [_vm._v(" Aggiungi ")])]);
-}, function () {
   var _vm = this,
       _c = _vm._self._c;
 
@@ -7062,7 +7145,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "header nav .navbar-brand {\n  font-size: 24px;\n}\nheader nav .header-links {\n  color: white;\n  margin-left: 15px;\n}", ""]);
+exports.push([module.i, "header nav .navbar-brand {\n  font-size: 24px;\n}\nheader nav .header-links {\n  color: white;\n  margin-left: 15px;\n}\nfooter {\n  background-color: #2f4858;\n  color: white;\n}", ""]);
 
 // exports
 
