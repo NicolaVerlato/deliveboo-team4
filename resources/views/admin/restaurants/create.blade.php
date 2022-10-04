@@ -44,7 +44,7 @@
                             </label>
                             </div>
                         @endforeach
-                        <div id="user-message"></div>
+                        <div id="user-message" class="mt-2"></div>
                     </div> 
 
                     <div class="mb-3">

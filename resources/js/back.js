@@ -51,7 +51,7 @@ confirmPassword.addEventListener('click', function(){
 // funzione per far uscire un messaggio nel caso in cui l'iva
 // sia minore di 11 caratteri
 iva.addEventListener('focusout', function(){
-    if(iva.value.length < 11) {
+    if(iva.value.length < 11 || iva.value.length > 11) {
         ivaMessage.innerHTML = '<i>**La partita iva deve essere di 11 caratteri**</i>';
         btn.disabled = true
     }
