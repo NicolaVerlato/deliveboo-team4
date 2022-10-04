@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 // Import the page-components
 import HomePage from "./pages/HomePage.vue";
 import CheckoutPage from "./pages/CheckoutPage.vue";
+import RestaurantDetails from "./pages/RestaurantDetails.vue";
 
 Vue.use(VueRouter);
 
@@ -19,7 +20,10 @@ const router = new VueRouter({
         component: CheckoutPage,
         name: 'carrello' 
         },
-
+        { path: '/:slug', 
+        component: RestaurantDetails,
+        name: 'restaurant-details' 
+        }
     ]
 });
 
