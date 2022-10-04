@@ -9,7 +9,8 @@
                     :name="restaurantType.name" 
                     :id="'id-' + restaurantType.id" 
                     :value="restaurantType.id"
-                    @change="filterRestaurant($event)">
+                    v-model="vmodelFilter"
+                    @change="update()">
 
                 <label 
                     class="form-check-label" 
@@ -27,25 +28,14 @@ export default {
     data() {
         return {
             types: [],
-            filter: []
+            filter: [],
+            vmodelFilter: []
         };
     },
     methods: {
-        filterRestaurant: function(e) {
-        if(e.target.checked){
-            this.filter.push(e.target.value)
-            this.$emit('filterType', this.filter)
-        }else{
-           for (let i = 0; i < this.filter.length; i++) {
-                if (this.filter[i] == e.target.value) {
-                    let filterIndex = this.filter.indexOf(e.target.value)
-                    this.filter.splice(filterIndex, 1);
-                }
-           }
-           this.$emit('filterType', this.filter)
+        update() {
+            this.$emit('filterType', this.vmodelFilter)
         }
-        
-    }
     },
     mounted() {
         axios.get('/api/types')

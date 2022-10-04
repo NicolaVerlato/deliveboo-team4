@@ -70,7 +70,6 @@
         },
         methods: {
             setFilter(value) {
-                console.log(value)
                 if (value.length > 0) {
                     this.test = this.$set(this.test, value, {value: value});
                 } else {
