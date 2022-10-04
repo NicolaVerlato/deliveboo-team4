@@ -94,16 +94,34 @@
 /***/ (function(module, exports) {
 
 var userMessage = document.getElementById('user-message');
-var confirmPassword = document.getElementById('password-confirm'); // funzione per far uscire un messaggio nel caso in cui la password
+var passwordMessage = document.getElementById('password-message');
+var iva = document.getElementById('iva');
+var ivaMessage = document.getElementById('iva-message');
+var password = document.getElementById('password');
+var confirmPassword = document.getElementById('password-confirm');
+var btn = document.getElementById('btn');
+btn.disabled = false; // funzione per far uscire un messaggio nel caso in cui la password
+// sia più corta di 8 caratteri
+
+password.addEventListener('focusout', function () {
+  if (password.value.length < 8) {
+    passwordMessage.innerHTML = '<i>**La password deve essere di almeno 8 caratteri**</i>';
+    btn.disabled = true;
+  }
+}); // funzione che toglie il messaggio **La password deve essere di almeno 8 caratteri**
+
+password.addEventListener('click', function () {
+  passwordMessage.innerHTML = '';
+  btn.disabled = false;
+}); // funzione per far uscire un messaggio nel caso in cui la password
 // e la sua conferma siano diverse tra loro
 
 confirmPassword.addEventListener('focusout', function () {
-  var password = document.getElementById('password').value;
   var confirm = document.getElementById('password-confirm').value;
 
-  if (password != confirm) {
+  if (password.value != confirm) {
     userMessage.innerHTML = '<i>**Password di conferma errata**</i>';
-    confirm = '';
+    btn.disabled = true;
   }
 
   return userMessage;
@@ -111,7 +129,21 @@ confirmPassword.addEventListener('focusout', function () {
 
 confirmPassword.addEventListener('click', function () {
   userMessage.innerHTML = '';
-  changePassword.value = '';
+  confirmPassword.value = '';
+  btn.disabled = false;
+}); // funzione per far uscire un messaggio nel caso in cui l'iva
+// sia minore di 11 caratteri
+
+iva.addEventListener('focusout', function () {
+  if (iva.value.length < 11 || iva.value.length > 11) {
+    ivaMessage.innerHTML = '<i>**La partita iva deve essere di 11 caratteri**</i>';
+    btn.disabled = true;
+  }
+}); // funzione che toglie il messaggio **La partita iva deve essere di 11 caratteri** e abilita di nuovo il bottone
+
+iva.addEventListener('click', function () {
+  ivaMessage.innerHTML = '';
+  btn.disabled = false;
 });
 
 /***/ }),
@@ -123,7 +155,7 @@ confirmPassword.addEventListener('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
 
 
 /***/ })

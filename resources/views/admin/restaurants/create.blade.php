@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                     <label for="name"><span>*</span> Nome ristorante</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nome" name="name" value="{{ old('name') }}">
+                    <input type="text" class="form-control" id="name" placeholder="Nome" name="name" required value="{{ old('name') }}">
                     </div>
 
                     <div class="mt-5 mb-5">
@@ -44,11 +44,12 @@
                             </label>
                             </div>
                         @endforeach
+                        <div id="user-message" class="mt-2"></div>
                     </div> 
 
                     <div class="mb-3">
                         <label for="address"><span>*</span> Indirizzo Ristorante</label>
-                        <input type="text" class="form-control" id="address" placeholder="Indirizzo" name="address" value="{{ old('address') }}">
+                        <input type="text" required class="form-control" id="address" placeholder="Indirizzo" name="address" value="{{ old('address') }}">
                     </div>
 
                     <div class="mb-3">
@@ -60,7 +61,7 @@
                         <i>Tutti i campi contrassegnati con <span>*</span> sono obbligatori</i>
                     </div>
 
-                    <button type="submit" class="btn d-block mt-2 btn-primary">Submit</button>
+                    <button id="btn-create" type="submit" class="btn d-block mt-2 btn-primary">Submit</button>
                 </form>
 
         </div>

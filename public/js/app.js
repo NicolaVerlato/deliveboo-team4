@@ -54989,8 +54989,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/dbonafin/Boolean Projects/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
