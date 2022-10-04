@@ -24,7 +24,7 @@
                             </div>
                             
                             <div>
-                                <a class="btn btn-light"> Aggiungi </a>
+                                <a @click="sendInfo(dish.id, dish.restaurant_id)" class="btn btn-light"> Aggiungi </a>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,9 @@
         data() {
             return {
                 restaurant: null,
-                dishes: []            }
+                dishes: [],
+                dishesidArray: []
+            }
         },
         methods: {
             async getRestaurant() {
@@ -77,6 +79,26 @@
                     });
                 })
             },
+            sendInfo(value, restaurantId) {
+                if (localStorage.length == 0) {
+                    localStorage.setItem('slug', this.restaurant.slug);
+                    localStorage.setItem(value, restaurantId);
+                };
+
+                if (localStorage.length > 1) {
+                    if (localStorage.getItem('slug') == this.restaurant.slug) {
+                        localStorage.setItem(value, restaurantId);
+                    } else {
+                        if (confirm("Sei sicuro di voler aggiungere un piatto di un altro ristorante? I piatti presenti nel tuo carrello verranno sovrascritti") == true) {
+                            localStorage.clear();
+                            localStorage.setItem('slug', this.restaurant.slug);
+                            localStorage.setItem(value, restaurantId);
+                        } else {
+                            console.log('mantieni i dati');
+                        }
+                    }
+                };
+            }
         },
         mounted() {
             this.getRestaurant();
