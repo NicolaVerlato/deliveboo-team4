@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label"><span>*</span> Nome del piatto:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $dish->name) }}">
+                <input type="text" required class="form-control" id="name" name="name" value="{{ old('name', $dish->name) }}">
             </div>
 
             <div class="mb-3">
@@ -38,12 +38,12 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label"><span>*</span> Descrizione piatto:</label>
-                <textarea name="description" class="form-control" id="description" cols="30" rows="5">{{ old('description', $dish->description) }}</textarea>
+                <textarea name="description" required class="form-control" id="description" cols="30" rows="5">{{ old('description', $dish->description) }}</textarea>
             </div>
 
             <div class="mb-3">
                 <label for="price" class="form-label"><span>*</span> Prezzo:</label>
-                <input type="number" step=".01" class="form-control" id="price" name="price" value="{{ old('price', $dish->price) }}">
+                <input type="number" step=".01" required class="form-control" id="price" name="price" value="{{ old('price', $dish->price) }}">
             </div>
 
             <div class="mb-3 form-check">
