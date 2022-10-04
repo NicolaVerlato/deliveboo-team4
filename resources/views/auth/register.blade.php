@@ -89,7 +89,7 @@
                                     name="password" 
                                     required autocomplete="new-password"
                                 >
-
+                                <div id="password-message"></div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -131,6 +131,8 @@
                                     value="{{ old('iva') }}"
                                 >
 
+                                <div id="iva-message"></div>
+
                                 @error('iva')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -145,7 +147,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="btn">
                                     {{ __('Register') }}
                                 </button>
                             </div>
