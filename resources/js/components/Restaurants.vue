@@ -1,4 +1,5 @@
 <template>
+
     <section class="mt-4">
         <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
             Lista dei ristoranti
@@ -26,39 +27,50 @@
                           </div>
                         </div>
                         <p class="card-text">Indirizzo: {{restaurant.address}}</p>
-                        <a href="#" class="btn btn-primary">Dettagli</a>
+
+                        <router-link 
+                            class="btn btn-sm btn-primary"
+                            :to="{
+                                name: 'restaurant-details',
+                                params: {slug: restaurant.slug}
+                            }">View
+                        </router-link>
                     </div>
                 </div>
             </div>
         </div> 
 
     </section>
+
 </template>
 
 <script>
-export default {
-    name: 'Restaurants',
-    data() {
-        return {
-            restaurants: [],
-            restauranttype: [],
-            types: []
-        };
-    },
-    mounted() {
-        axios.get('/api/restaurants')
-        .then((response) => {
-               this.restaurants = response.data.results;
-        });
-        axios.get('/api/restauranttype')
-        .then((response) => {
-               this.restauranttype = response.data.results;
-        });
-        axios.get('/api/types')
-        .then((response) => {
-               this.types = response.data.results;
-        });
+
+    export default {
+        name: 'Restaurants',
+        data() {
+            return {
+                restaurants: [],
+                restauranttype: [],
+                types: [],
+                dishes: []
+            };
+        },
+        mounted() {
+            axios.get('/api/restaurants')
+            .then((response) => {
+                this.restaurants = response.data.results;
+            });
+            axios.get('/api/restauranttype')
+            .then((response) => {
+                this.restauranttype = response.data.results;
+            });
+            axios.get('/api/types')
+            .then((response) => {
+                this.types = response.data.results;
+            });
+        }
     }
-}
+
 </script>
 

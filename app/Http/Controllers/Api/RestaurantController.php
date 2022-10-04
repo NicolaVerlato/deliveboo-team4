@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Restaurant;
 use App\Type;
 use App\RestaurantType;
+use App\Dish;
 
 class RestaurantController extends Controller
 {
@@ -15,13 +16,31 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::all();
         $type = Type::all();
         $restauranttypes = RestaurantType::all();
+        $dishes = Dish::all();
         $data = [
             'success' => true,
             'results' => $restaurants,
             'type' => $type,
-            'data' => $restauranttypes
+            'data' => $restauranttypes,
+            'dishes' => $dishes
         ];
 
+        return response()->json($data);
+    }
+
+    public function showRestaurant($slug) {
+        $restaurant = Restaurant::where('slug', '=', $slug)->first();
+
+
+        if($restaurant) {
+            $data = [
+                'success' => true,
+                'results' => $restaurant
+            ];
+        } else {
+            $data = ['success' => false];
+        };
+        
         return response()->json($data);
     }
 }

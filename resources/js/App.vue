@@ -8,7 +8,7 @@
                         <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
                     </h2>
              
-                    <div class="navbar-nav align-center">
+                    <div class="navbar-nav align-center align-items-center">
                         
                         <router-link 
                             style="font-size: 20px;"
@@ -17,6 +17,13 @@
                             :key="index" 
                             :to="link.name"> {{link.label}} 
                         </router-link>
+
+                        <span 
+                        class="top-0 start-100 translate-middle p-2 border border-light rounded-circle"
+                        style="width: 40px; height: 40px; text-align: center; margin-left: 10px;">
+                            <span class="visually-hidden"> {{checkoutAmount}} </span>
+                        </span>
+                      
                     </div>
                 </div>
             </nav>
@@ -39,24 +46,32 @@
 import Footer from './components/Footer.vue';
 
     export default {
-    name: "App",
-    components: {Footer},
-    data() {
-        return {
-            links: [
-                {
-                    name: "/",
-                    label: "Home"
-                },
-                {
-                    name: "carrello",
-                    label: "Carrello"
-                },
-            ]
-        };
-    },
-    components: { Footer }
-}
+        name: "App",
+        components: {Footer},
+        data() {
+            return {
+                checkoutAmount: 0,
+                links: [
+                    {
+                        name: "/",
+                        label: "Home"
+                    },
+                    {
+                        name: "carrello",
+                        label: "Carrello"
+                    },
+                ]
+            };
+        },
+        // methods: {
+        //     incrementAmount() {
+        //         let value = this.checkoutAmount;
+        //         value++;
+        //         this.checkoutAmount = value;
+        //     }
+        // },
+    }
+
 </script>
 
 <style lang="scss">
