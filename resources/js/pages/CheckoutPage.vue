@@ -3,11 +3,16 @@
 
     <div class="container" style="height: 330px">
 
-     
-        <p v-for="item in dishes" :key="item.id"> 
-            <!-- To fix -->
-            {{item}}   
-        </p>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <div v-for="item in dishes" :key="item.id"> 
+                    <div v-for="ciao in item" :key="ciao.id">
+                        <h5 class="card-title">{{ciao.name}}</h5>
+                        <p class="card-text">{{ciao.price}}&euro;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <a style="color: white; font-size: 30px;" href="http://127.0.0.1:8000/orders/create"> 
@@ -40,15 +45,13 @@
             printDishes() {
                 this.dish_id.forEach((element, index) => {
                     if (index == 0) {
-                        console.log('skip');
                         return;
                     } else {
                         axios.get(`/api/dishes/${element}`)
                         .then((response) => {
                         this.dishes.push(response.data.results);
-                        console.log('ok');
                     })
-                    }
+                }
                 });
             }
         },
