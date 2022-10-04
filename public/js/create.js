@@ -81,49 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/back.js":
-/*!******************************!*\
-  !*** ./resources/js/back.js ***!
-  \******************************/
+/***/ "./resources/js/create.js":
+/*!********************************!*\
+  !*** ./resources/js/create.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var userMessage = document.getElementById('user-message');
-var confirmPassword = document.getElementById('password-confirm'); // funzione per far uscire un messaggio nel caso in cui la password
-// e la sua conferma siano diverse tra loro
-
-confirmPassword.addEventListener('focusout', function () {
-  var password = document.getElementById('password').value;
-  var confirm = document.getElementById('password-confirm').value;
-
-  if (password != confirm) {
-    userMessage.innerHTML = '<i>**Password di conferma errata**</i>';
-    confirm = '';
-  }
-
-  return userMessage;
-}); // funzione che svuota il campo 'conferma password' e toglie il messaggio
-
-confirmPassword.addEventListener('click', function () {
-  userMessage.innerHTML = '';
-  changePassword.value = '';
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/create.js'");
 
 /***/ }),
 
-/***/ 1:
-/*!************************************!*\
-  !*** multi ./resources/js/back.js ***!
-  \************************************/
+/***/ 2:
+/*!**************************************!*\
+  !*** multi ./resources/js/create.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/create.js */"./resources/js/create.js");
 
 
 /***/ })
