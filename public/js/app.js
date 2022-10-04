@@ -2073,13 +2073,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
       this.dish_id.forEach(function (element, index) {
         if (index == 0) {
-          console.log('skip');
           return;
         } else {
           axios.get("/api/dishes/".concat(element)).then(function (response) {
             _this.dishes.push(response.data.results);
-
-            console.log('ok');
           });
         }
       });
@@ -2586,11 +2583,26 @@ var render = function render() {
     staticStyle: {
       height: "330px"
     }
-  }, [_vm._l(_vm.dishes, function (item) {
-    return _c("p", {
+  }, [_c("div", {
+    staticClass: "card",
+    staticStyle: {
+      width: "18rem"
+    }
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, _vm._l(_vm.dishes, function (item) {
+    return _c("div", {
       key: item.id
-    }, [_vm._v("\n        " + _vm._s(item) + "   \n    ")]);
-  }), _vm._v(" "), _c("a", {
+    }, _vm._l(item, function (ciao) {
+      return _c("div", {
+        key: ciao.id
+      }, [_c("h5", {
+        staticClass: "card-title"
+      }, [_vm._v(_vm._s(ciao.name))]), _vm._v(" "), _c("p", {
+        staticClass: "card-text"
+      }, [_vm._v(_vm._s(ciao.price) + "€")])]);
+    }), 0);
+  }), 0)]), _vm._v(" "), _c("a", {
     staticStyle: {
       color: "white",
       "font-size": "30px"
@@ -2598,7 +2610,7 @@ var render = function render() {
     attrs: {
       href: "http://127.0.0.1:8000/orders/create"
     }
-  }, [_vm._v(" \n        Completa pagamento \n    ")])], 2);
+  }, [_vm._v(" \n        Completa pagamento \n    ")])]);
 };
 
 var staticRenderFns = [];
@@ -54989,8 +55001,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/nicolaverlato/Boolean progetti/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
