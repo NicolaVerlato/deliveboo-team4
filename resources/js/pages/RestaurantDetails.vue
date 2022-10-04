@@ -57,8 +57,8 @@
                 dishes: []            }
         },
         methods: {
-            getRestaurant() {
-                axios.get(`/api/restaurants/?slug=${this.$route.params.slug}`)
+            async getRestaurant() {
+                await axios.get(`/api/restaurants/?slug=${this.$route.params.slug}`)
                 .then((response) => {
                     response.data.results.forEach(element => {
                         // If the slug on the url is the same as one of the elements
@@ -69,8 +69,8 @@
                     });
                 })
             },
-            getDishes() {
-                axios.get(`/api/restaurants`)
+            async getDishes() {
+                await axios.get(`/api/restaurants`)
                 .then((response) => {
                     response.data.dishes.forEach(element => {
                         this.dishes.push(element);
