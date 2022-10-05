@@ -2876,14 +2876,13 @@ var render = function render() {
     },
     attrs: {
       href: "http://127.0.0.1:8000/orders/create/" + this.calcolo
-    }
-  }, [_vm._v(" \n        Completa pagamento \n    ")]), _vm._v(" "), _c("div", {
+    },
     on: {
       click: function click($event) {
         return _vm.calcolaPrice();
       }
     }
-  }, [_vm._v("calcprice test")])]);
+  }, [_vm._v(" \n        Completa pagamento \n    ")])]);
 };
 
 var staticRenderFns = [];

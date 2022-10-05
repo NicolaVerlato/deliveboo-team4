@@ -34,10 +34,9 @@
         </div>
 
 
-        <a style="color: white; font-size: 30px;" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo"> 
+        <a style="color: white; font-size: 30px;" @click="calcolaPrice()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo"> 
             Completa pagamento 
         </a>
-        <div @click="calcolaPrice()">calcprice test</div>
     </div>
 
 </template>
