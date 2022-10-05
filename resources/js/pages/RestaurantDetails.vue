@@ -12,21 +12,29 @@
                 <h4 class="text-center mt-4">Il nostro menù</h4>
 
 
-                <div v-for="dish in dishes" :key="dish.id"  v-if="dish.is_visible == 1" class="mb-3">
-                    <div v-if="restaurant.user_id == dish.restaurant_id">
+                <div v-for="dish in dishes" :key="dish.id" class="mb-3">
+                    <div v-if="dish.is_visible == 1">
+                        <div v-if="restaurant.user_id == dish.restaurant_id">
 
-                        <div class="card-body d-flex justify-content-around">
+                            <div class="card-body d-flex justify-content-around">
 
-                            <div>
-                                <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                <div>
+                                    <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
 
-                                <p class="card-text text-center"> Prezzo: {{dish.price}} &euro;</p>
-                            </div>
-                            
-                            <div>
-                                <a @click="sendInfo(dish.id, dish.restaurant_id)" class="btn btn-light"> Aggiungi </a>
+                                    <p class="card-text text-center"> Prezzo: {{dish.price}} &euro;</p>
+                                </div>
+                                
+                                <div>
+                                    <a @click="sendInfo(dish.id, dish.restaurant_id)" class="btn btn-light"> Aggiungi </a>
+                                </div>
+                                <div>
+                                    <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
+                                    <span :id="dish.id" class="counter">0</span>
+                                    <i @click="increment(dish.id, restaurant.slug)" :id="dish.id" class="fa-solid fa-plus"></i>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -55,10 +63,56 @@
             return {
                 restaurant: null,
                 dishes: [],
-                dishesidArray: []
+                dishesidArray: [],
+                basket: JSON.parse(localStorage.getItem("data")) || [],
             }
         },
         methods: {
+            checkAmount(a) {
+                let search = this.basket.find((x)=>x.id === a) || [];
+                console.log(search)
+            },
+            increment(a, slug) {
+                let counter = this.$el.querySelector(".counter").innerHTML
+                let search = this.basket.find((x)=>x.id === a)
+                if(search === undefined) {
+                    this.basket.push({
+                        id: a,
+                        item: 1,
+                        slug: slug
+                    })
+                } else {
+                    search.item += 1
+                }
+
+                localStorage.setItem("data", JSON.stringify(this.basket))
+                this.updateCart(a)
+            },
+            decrement(a) {
+                let counter = this.$el.querySelector(".counter").innerHTML
+                let search = this.basket.find((x)=>x.id === a)
+                if(search.item === undefined) {
+                    return
+                } else if (search.item === 0) {
+                    return
+                } else {
+                    search.item -= 1
+                }
+                this.updateCart(a)
+
+                this.basket = this.basket.filter((x)=>x.item !== 0)
+
+                localStorage.setItem("data", JSON.stringify(this.basket))
+            },
+            updateCart(id) {
+                let search = this.basket.find((x)=>x.id === id)
+                document.getElementById(id).innerHTML = search.item
+            },
+            loadingCart() {
+                this.basket.forEach(element => {
+                    document.getElementById(element.id).innerHTML = element.item
+                });
+            },
             async getRestaurant() {
                 await axios.get(`/api/restaurants/?slug=${this.$route.params.slug}`)
                 .then((response) => {
@@ -103,6 +157,9 @@
         mounted() {
             this.getRestaurant();
             this.getDishes();
+        },
+        updated() {
+            this.loadingCart()
         },
     }
 

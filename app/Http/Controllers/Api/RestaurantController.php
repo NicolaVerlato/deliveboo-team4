@@ -43,4 +43,18 @@ class RestaurantController extends Controller
         
         return response()->json($data);
     }
+    public function show($slug) {
+        $restaurant = Restaurant::where('slug', '=', $slug)->first();
+
+        if($restaurant) {
+            $data = [
+                'success' => true,
+                'results' => $restaurant
+            ];
+        } else {
+            $data = ['success' => false];
+        };
+        
+        return response()->json($data);
+    }
 }
