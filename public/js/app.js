@@ -2113,8 +2113,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var search = _this2.dishesArray.find(function (y) {
             return y.id === id;
           }) || [];
+          var qntDish = {
+            'quantita': x.item,
+            'piatto': search
+          };
 
-          _this2.allSearch.push(search);
+          _this2.allSearch.push(qntDish);
 
           _this2.getValue(id, item);
         }).join('');
@@ -2143,8 +2147,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
 
                   _this3.prices.push(_this3.partialTotal);
-
-                  _this3.finalPrice();
                 });
 
               case 2:
@@ -2155,16 +2157,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    finalPrice: function finalPrice() {
-      this.realTotal += this.partialTotal;
-      console.log('guarda questo', this.realTotal);
-    },
     updateCart: function updateCart(id) {
       var search = this.basket.find(function (x) {
         return x.id === id;
       });
       document.getElementById(id).innerHTML = search.item;
       this.getValue(id, search.item);
+      this.allSearch = [];
+      this.generateCartItems();
     },
     getInfo: function getInfo() {
       for (var _i = 0, _Object$entries = Object.entries(localStorage); _i < _Object$entries.length; _i++) {
@@ -2202,8 +2202,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         search.item += 1;
       }
 
-      localStorage.setItem("data", JSON.stringify(this.basket));
       this.updateCart(a);
+      localStorage.setItem("data", JSON.stringify(this.basket));
     },
     decrement: function decrement(a) {
       var counter = this.$el.querySelector(".counter").innerHTML;
@@ -2238,7 +2238,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getInfo();
     setTimeout(function () {
       return _this5.generateCartItems();
-    }, 4000);
+    }, 2000);
   },
   updated: function updated() {
     this.loadingCart();
@@ -2307,7 +2307,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }) || [];
       console.log(search);
     },
-    increment: function increment(a, slug) {
+    increment: function increment(a, slug, price) {
       var counter = this.$el.querySelector(".counter").innerHTML;
       var search = this.basket.find(function (x) {
         return x.id === a;
@@ -2317,7 +2317,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.basket.push({
           id: a,
           item: 1,
-          slug: slug
+          slug: slug,
+          price: price
         });
       } else {
         search.item += 1;
@@ -2407,13 +2408,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    sendInfo: function sendInfo(value, restaurantId) {
+    sendInfo: function sendInfo(value, restaurantId, price) {
       if (localStorage.length == 0) {
-        localStorage.setItem('slug', this.restaurant.slug);
+        localStorage.setItem('slug', this.restaurant.slug); // localStorage.setItem('price', this.restaurant.slug);
+
         localStorage.setItem(value, restaurantId);
       }
 
       ;
+      console.log(price);
 
       if (localStorage.length > 1) {
         if (localStorage.getItem('slug') == this.restaurant.slug) {
@@ -2809,43 +2812,49 @@ var render = function render() {
     attrs: {
       id: "shopping-cart"
     }
-  }), _vm._v(" "), _vm.allSearch ? _c("div", _vm._l(_vm.allSearch, function (dish) {
+  }), _vm._v(" "), _vm.allSearch ? _c("div", {
+    staticClass: "row"
+  }, _vm._l(_vm.allSearch, function (dish) {
     return _c("div", {
       key: dish.id
-    }, [_c("div", {
-      staticClass: "card",
-      staticStyle: {
-        width: "18rem"
-      }
-    }, [_c("div", {
-      staticClass: "card-body"
-    }, [_c("h5", {
-      staticClass: "card-title"
-    }, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v(_vm._s(dish.price) + "€")]), _vm._v(" "), _c("div", [_c("i", {
-      staticClass: "fa-solid fa-minus",
-      on: {
-        click: function click($event) {
-          return _vm.decrement(dish.id);
+    }, _vm._l(dish, function (singleDish, index) {
+      return _c("div", {
+        key: singleDish.id
+      }, [index == "piatto" ? _c("div", [_c("div", {
+        staticClass: "card",
+        staticStyle: {
+          width: "18rem"
         }
-      }
-    }), _vm._v(" "), _c("span", {
-      staticClass: "counter",
-      attrs: {
-        id: dish.id
-      }
-    }, [_vm._v("0")]), _vm._v(" "), _c("i", {
-      staticClass: "fa-solid fa-plus",
-      attrs: {
-        id: dish.id
-      },
-      on: {
-        click: function click($event) {
-          return _vm.increment(dish.id);
+      }, [_c("div", {
+        staticClass: "card-body"
+      }, [_c("h5", {
+        staticClass: "card-title"
+      }, [_vm._v(_vm._s(singleDish.name))]), _vm._v(" "), _c("p", {
+        staticClass: "card-text"
+      }, [_vm._v(_vm._s(singleDish.price * dish.quantita) + "€")]), _vm._v(" "), _c("div", [_c("i", {
+        staticClass: "fa-solid fa-minus",
+        on: {
+          click: function click($event) {
+            return _vm.decrement(singleDish.id);
+          }
         }
-      }
-    })])])])]);
+      }), _vm._v(" "), _c("span", {
+        staticClass: "counter",
+        attrs: {
+          id: singleDish.id
+        }
+      }, [_vm._v("0")]), _vm._v(" "), _c("i", {
+        staticClass: "fa-solid fa-plus",
+        attrs: {
+          id: singleDish.id
+        },
+        on: {
+          click: function click($event) {
+            return _vm.increment(singleDish.id);
+          }
+        }
+      })])])])]) : _vm._e()]);
+    }), 0);
   }), 0) : _c("div", [_vm._v("\n        vuoto\n    ")]), _vm._v(" "), _c("a", {
     staticStyle: {
       color: "white",
@@ -2989,14 +2998,7 @@ var render = function render() {
       staticClass: "card-title text-center"
     }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
       staticClass: "card-text text-center"
-    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", [_c("a", {
-      staticClass: "btn btn-light",
-      on: {
-        click: function click($event) {
-          return _vm.sendInfo(dish.id, dish.restaurant_id);
-        }
-      }
-    }, [_vm._v(" Aggiungi ")])]), _vm._v(" "), _c("div", [_c("i", {
+    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", [_c("i", {
       staticClass: "fa-solid fa-minus",
       on: {
         click: function click($event) {
@@ -3015,7 +3017,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.increment(dish.id, _vm.restaurant.slug);
+          return _vm.increment(dish.id, _vm.restaurant.slug, dish.price);
         }
       }
     })])])]) : _vm._e()]) : _vm._e()]);
