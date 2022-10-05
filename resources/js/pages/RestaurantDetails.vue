@@ -24,13 +24,13 @@
                                     <p class="card-text text-center"> Prezzo: {{dish.price}} &euro;</p>
                                 </div>
                                 
-                                <div>
-                                    <a @click="sendInfo(dish.id, dish.restaurant_id)" class="btn btn-light"> Aggiungi </a>
-                                </div>
+                                <!-- <div>
+                                    <a @click="sendInfo(dish.id, dish.restaurant_id, dish.price)" class="btn btn-light"> Aggiungi </a>
+                                </div> -->
                                 <div>
                                     <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
                                     <span :id="dish.id" class="counter">0</span>
-                                    <i @click="increment(dish.id, restaurant.slug)" :id="dish.id" class="fa-solid fa-plus"></i>
+                                    <i @click="increment(dish.id, restaurant.slug, dish.price)" :id="dish.id" class="fa-solid fa-plus"></i>
                                 </div>
                             </div>
                         </div>
@@ -72,14 +72,15 @@
                 let search = this.basket.find((x)=>x.id === a) || [];
                 console.log(search)
             },
-            increment(a, slug) {
+            increment(a, slug, price) {
                 let counter = this.$el.querySelector(".counter").innerHTML
                 let search = this.basket.find((x)=>x.id === a)
                 if(search === undefined) {
                     this.basket.push({
                         id: a,
                         item: 1,
-                        slug: slug
+                        slug: slug,
+                        price: price
                     })
                 } else {
                     search.item += 1
@@ -133,12 +134,13 @@
                     });
                 })
             },
-            sendInfo(value, restaurantId) {
+            sendInfo(value, restaurantId, price) {
                 if (localStorage.length == 0) {
                     localStorage.setItem('slug', this.restaurant.slug);
+                    // localStorage.setItem('price', this.restaurant.slug);
                     localStorage.setItem(value, restaurantId);
                 };
-
+                console.log(price)
                 if (localStorage.length > 1) {
                     if (localStorage.getItem('slug') == this.restaurant.slug) {
                         localStorage.setItem(value, restaurantId);

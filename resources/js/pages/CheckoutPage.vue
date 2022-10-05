@@ -9,18 +9,23 @@
         <div  id="shopping-cart">
 
         </div>
-        <div v-if="allSearch">
+        <div v-if="allSearch" class="row">
             <div v-for="dish in allSearch" :key="dish.id"> 
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{dish.name}}</h5>
-                        <p class="card-text">{{dish.price}}&euro;</p>
+                <div v-for="singleDish, index in dish" :key="singleDish.id">
+                    <div v-if="index == 'piatto'">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                        <h5 class="card-title">{{singleDish.name}}</h5>
+                        <p class="card-text">{{singleDish.price * dish.quantita}}&euro;</p>
                         <div>
-                                    <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
-                                    <span :id="dish.id" class="counter">0</span>
-                                    <i @click="increment(dish.id)" :id="dish.id" class="fa-solid fa-plus"></i>
+                        
+                                    <i @click="decrement(singleDish.id)" class="fa-solid fa-minus"></i>
+                                    <span :id="singleDish.id" class="counter">0</span>
+                                    <i @click="increment(singleDish.id)" :id="singleDish.id" class="fa-solid fa-plus"></i>
                                 </div>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -76,7 +81,9 @@
                    return ShoppingCart.innerHTML = this.basket.map((x)=>{
                     let {id, item} = x;
                     let search = this.dishesArray.find((y)=>y.id === id ) || []
-                    this.allSearch.push(search);
+                    let qntDish = {'quantita': x.item, 'piatto': search}
+                    this.allSearch.push(qntDish);
+
                     this.getValue(id, item)
                    }).join('')
                 } else {
@@ -97,18 +104,14 @@
                         this.partialTotal = price * quantity  
                     }
                     this.prices.push(this.partialTotal)
-                    this.finalPrice()
                 })
-            },
-            finalPrice() {
-                this.realTotal += this.partialTotal
-                console.log('guarda questo', this.realTotal)
             },
             updateCart(id) {
                 let search = this.basket.find((x)=>x.id === id)
                 document.getElementById(id).innerHTML = search.item
                 this.getValue(id, search.item)
-
+                this.allSearch = []
+                this.generateCartItems()
             },
             getInfo() {
                 for (const [key, value] of Object.entries(localStorage)) {
@@ -138,8 +141,8 @@
                     search.item += 1
                 }
 
-                localStorage.setItem("data", JSON.stringify(this.basket))
                 this.updateCart(a)
+                localStorage.setItem("data", JSON.stringify(this.basket))
             },
             decrement(a) {
                 let counter = this.$el.querySelector(".counter").innerHTML
@@ -166,7 +169,7 @@
         mounted() {
             this.getDishes();
             this.getInfo();
-            setTimeout(() => this.generateCartItems(), 4000);
+            setTimeout(() => this.generateCartItems(), 2000);
         },
         updated() {
             this.loadingCart()
