@@ -1,26 +1,28 @@
 <template>
 
 
-    <div class="container" style="height: 330px">
-
-        <div v-for="singleObj, index in dishes" :key="singleObj.id"> 
-            <div v-for="ciao in singleObj" :key="ciao.id">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ciao.name}}</h5>
-                        <p class="card-text">{{ciao.price}}&euro;</p>
-                        <div @loadstart="ciao(index, ciao.price)"></div>
+    <div class="container">
+        <div class="d-flex justify-content-center flex-wrap">
+            <div v-for="(singleObj, index) in dishes" :key="singleObj.id">
+                <div v-for="ciao in singleObj" :key="ciao.id">
+                    <div class="card m-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ciao.name}}</h5>
+                            <p class="card-text">{{ciao.price}}&euro;</p>
+                            <div @loadstart="ciao(index, ciao.price)"></div>
+                        </div>
+                        <label :for="ciao.id">Quantità prodotto</label>
+                        <input type="number" :name="ciao.id" :id="ciao.id" @change="event => getValue(event, ciao.price)">
                     </div>
-                    <label :for="ciao.id">Quantità prodotto</label>
-                    <input type="number" :name="ciao.id" :id="ciao.id" @change="event => getValue(event, ciao.price)">
                 </div>
             </div>
         </div>
 
-
-        <a style="color: white; font-size: 30px;" href="http://127.0.0.1:8000/orders/create"> 
+        <div class="text-center">
+            <a style="color: white; font-size: 30px;" href="http://127.0.0.1:8000/orders/create"> 
             Completa pagamento 
-        </a>
+            </a>
+        </div>
     </div>
 
 </template>
@@ -28,7 +30,7 @@
 <script>
 
     export default {
-        name: "HomePage",
+        name: "CheckoutPage",
         data() {
             return {
                 dish_id: [],
@@ -81,5 +83,4 @@
             this.getInfo();
         },
     }
-
 </script>

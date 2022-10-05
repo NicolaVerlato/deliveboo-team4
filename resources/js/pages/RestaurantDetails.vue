@@ -113,7 +113,6 @@
     @import '../../sass/partials/variables.scss';
 
     .card {
-        background-color: $brand-color;
         width: 800px;
         margin: 0 auto;
     }

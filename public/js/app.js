@@ -2046,16 +2046,36 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "HomePage",
+  name: "CheckoutPage",
   data: function data() {
     return {
       dish_id: [],
       restaurant_id: [],
       dishesArray: [],
-      dishes: []
+      dishes: [],
+      calcPrice: 0,
+      total: 0,
+      userInput: 0
     };
   },
   methods: {
+    ciao: function ciao(a, b) {
+      console.log(a, b);
+    },
+    getValue: function getValue(event, price) {
+      // console.log(price)
+      // console.log(event.target.valueAsNumber)
+      if (event.target.valueAsNumber > this.userInput) {
+        this.userInput = event.target.valueAsNumber;
+        this.calcPrice = 0;
+        this.calcPrice = parseInt(price) * event.target.valueAsNumber;
+        return this.calcPrice;
+      } else {
+        console.log('minore');
+      }
+
+      console.log('totale', this.total);
+    },
     getInfo: function getInfo() {
       for (var _i = 0, _Object$entries = Object.entries(localStorage); _i < _Object$entries.length; _i++) {
         var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
@@ -2463,7 +2483,7 @@ var render = function render() {
       key: restaurant.id,
       staticClass: "col mr-4"
     }, [_c("div", {
-      staticClass: "card",
+      staticClass: "card m-3",
       staticStyle: {
         width: "18rem"
       }
@@ -2473,7 +2493,13 @@ var render = function render() {
         src: "storage/" + restaurant.cover,
         alt: restaurant.title
       }
-    })]) : _vm._e(), _vm._v(" "), _c("div", {
+    })]) : _c("div", [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: "images/default-image.jpeg",
+        alt: restaurant.title
+      }
+    })]), _vm._v(" "), _c("div", {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
@@ -2579,30 +2605,59 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "container",
-    staticStyle: {
-      height: "330px"
-    }
+    staticClass: "container"
   }, [_c("div", {
-    staticClass: "card",
-    staticStyle: {
-      width: "18rem"
-    }
-  }, [_c("div", {
-    staticClass: "card-body"
-  }, _vm._l(_vm.dishes, function (item) {
+    staticClass: "d-flex justify-content-center flex-wrap"
+  }, _vm._l(_vm.dishes, function (singleObj, index) {
     return _c("div", {
-      key: item.id
-    }, _vm._l(item, function (ciao) {
+      key: singleObj.id
+    }, _vm._l(singleObj, function (ciao) {
       return _c("div", {
         key: ciao.id
+      }, [_c("div", {
+        staticClass: "card m-3",
+        staticStyle: {
+          width: "18rem"
+        }
+      }, [_c("div", {
+        staticClass: "card-body"
       }, [_c("h5", {
         staticClass: "card-title"
       }, [_vm._v(_vm._s(ciao.name))]), _vm._v(" "), _c("p", {
         staticClass: "card-text"
-      }, [_vm._v(_vm._s(ciao.price) + "€")])]);
+      }, [_vm._v(_vm._s(ciao.price) + "€")]), _vm._v(" "), _c("div", {
+        on: {
+          loadstart: function loadstart($event) {
+            return ciao(index, ciao.price);
+          }
+        }
+      })]), _vm._v(" "), _c("label", {
+        attrs: {
+          "for": ciao.id
+        }
+      }, [_vm._v("Quantità prodotto")]), _vm._v(" "), _c("input", {
+        attrs: {
+          type: "number",
+          name: ciao.id,
+          id: ciao.id
+        },
+        on: {
+          change: function change(event) {
+            return _vm.getValue(event, ciao.price);
+          }
+        }
+      })])]);
     }), 0);
-  }), 0)]), _vm._v(" "), _c("a", {
+  }), 0), _vm._v(" "), _vm._m(0)]);
+};
+
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "text-center"
+  }, [_c("a", {
     staticStyle: {
       color: "white",
       "font-size": "30px"
@@ -2610,10 +2665,8 @@ var render = function render() {
     attrs: {
       href: "http://127.0.0.1:8000/orders/create"
     }
-  }, [_vm._v(" \n        Completa pagamento \n    ")])]);
-};
-
-var staticRenderFns = [];
+  }, [_vm._v(" \n        Completa pagamento \n        ")])]);
+}];
 render._withStripped = true;
 
 
@@ -7195,7 +7248,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  background-color: #fea543;\n  width: 800px;\n  margin: 0 auto;\n}", ""]);
+exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 800px;\n  margin: 0 auto;\n}", ""]);
 
 // exports
 
@@ -55001,8 +55054,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
