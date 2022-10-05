@@ -8,13 +8,19 @@
         <div class="row row-cols-4">
             <!--Single restaurant-->
             <div v-for="restaurant in restaurants" :key="restaurant.id" class="col mr-4">
-                <div class="card" style="width: 18rem;">
-                    <div v-if="restaurant.cover">
-                        <img 
-                        class="card-img-top"  
-                        :src="'storage/' + restaurant.cover" 
-                        :alt="restaurant.title">
-                    </div>
+                <div class="card m-3" style="width: 18rem;">
+                        <div v-if="restaurant.cover">
+                            <img 
+                            class="card-img-top"  
+                            :src="'storage/' + restaurant.cover" 
+                            :alt="restaurant.title">
+                        </div>
+                        <div v-else>
+                            <img 
+                            class="card-img-top"  
+                            :src="'images/default-image.jpeg'"
+                            :alt="restaurant.title">
+                        </div>
                     <div class="card-body">
                         <h5 class="card-title">{{restaurant.name}}</h5>
                         <div v-for="item in restauranttype" :key="item.id">
@@ -39,7 +45,6 @@
                 </div>
             </div>
         </div> 
-
     </section>
 
 </template>
@@ -71,6 +76,5 @@
             });
         }
     }
-
 </script>
 

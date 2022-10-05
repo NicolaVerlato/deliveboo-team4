@@ -10964,6 +10964,7 @@ img {
 }
 
 .card_ms {
+  max-width: 50%;
   transform: scale(150%);
   margin-left: 33vw;
   margin-top: 150px;
