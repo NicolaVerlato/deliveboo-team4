@@ -34,7 +34,7 @@
         </div>
 
 
-        <a style="color: white; font-size: 30px;" @click="calcolaPrice()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo"> 
+        <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo"> 
             Completa pagamento 
         </a>
     </div>
@@ -65,6 +65,9 @@
             }
         },
         methods: {
+            emptyCart() {
+                localStorage.clear();
+            },
             calcolaPrice() {
                 this.allSearch.forEach(element => {
                     let prezzo = parseInt( element.piatto.price)

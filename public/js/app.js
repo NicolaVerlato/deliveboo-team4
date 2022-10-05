@@ -2076,6 +2076,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    emptyCart: function emptyCart() {
+      localStorage.clear();
+    },
     calcolaPrice: function calcolaPrice() {
       var _this = this;
 
@@ -2879,7 +2882,7 @@ var render = function render() {
     },
     on: {
       click: function click($event) {
-        return _vm.calcolaPrice();
+        _vm.calcolaPrice(), _vm.emptyCart();
       }
     }
   }, [_vm._v(" \n        Completa pagamento \n    ")])]);
