@@ -2071,12 +2071,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       partialTotal: 0,
       realTotal: 0,
       prices: [],
-      counter: 1
+      counter: 1,
+      calcolo: 0
     };
   },
   methods: {
-    getDishes: function getDishes() {
+    calcolaPrice: function calcolaPrice() {
       var _this = this;
+
+      this.allSearch.forEach(function (element) {
+        var prezzo = parseInt(element.piatto.price);
+        var quantita = parseInt(element.quantita);
+        _this.calcolo += prezzo * quantita;
+        console.log('prezzo', prezzo);
+        console.log('quantita', quantita);
+        console.log('calcolo', _this.calcolo);
+      });
+    },
+    getDishes: function getDishes() {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -2084,11 +2097,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/restaurants/".concat(_this.basket[0].slug)).then(function (response) {
+                return axios.get("/api/restaurants/".concat(_this2.basket[0].slug)).then(function (response) {
                   var ciao = response.data.results;
 
                   for (var i = 0; i < Object.keys(ciao).length; i++) {
-                    _this.dishes.push(Object.values(ciao)[i]);
+                    _this2.dishes.push(Object.values(ciao)[i]);
                   }
                 });
 
@@ -2101,7 +2114,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     generateCartItems: function generateCartItems() {
-      var _this2 = this;
+      var _this3 = this;
 
       var ShoppingCart = document.getElementById('shopping-cart');
       var label = document.getElementById('label');
@@ -2110,7 +2123,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return ShoppingCart.innerHTML = this.basket.map(function (x) {
           var id = x.id,
               item = x.item;
-          var search = _this2.dishesArray.find(function (y) {
+          var search = _this3.dishesArray.find(function (y) {
             return y.id === id;
           }) || [];
           var qntDish = {
@@ -2118,9 +2131,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             'piatto': search
           };
 
-          _this2.allSearch.push(qntDish);
+          _this3.allSearch.push(qntDish);
 
-          _this2.getValue(id, item);
+          _this3.getValue(id, item);
         }).join('');
       } else {
         ShoppingCart.innerHTML = "";
@@ -2128,7 +2141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     getValue: function getValue(dishId, quantity) {
-      var _this3 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -2139,14 +2152,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("/api/dishes/".concat(dishId)).then(function (response) {
                   var price = response.data.results[0].price;
 
-                  if (_this3.counter > 1) {
-                    _this3.partialTotal = parseInt(price) + parseInt(price);
-                    _this3.counter++;
+                  if (_this4.counter > 1) {
+                    _this4.partialTotal = parseInt(price) + parseInt(price);
+                    _this4.counter++;
                   } else {
-                    _this3.partialTotal = price * quantity;
+                    _this4.partialTotal = price * quantity;
                   }
 
-                  _this3.prices.push(_this3.partialTotal);
+                  _this4.prices.push(_this4.partialTotal);
                 });
 
               case 2:
@@ -2179,11 +2192,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.printDishes();
     },
     printDishes: function printDishes() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.basket.forEach(function (element, index) {
         axios.get("/api/dishes/".concat(element.id)).then(function (response) {
-          _this4.dishesArray.push(response.data.results[0]);
+          _this5.dishesArray.push(response.data.results[0]);
         });
       });
     },
@@ -2232,12 +2245,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.getDishes();
     this.getInfo();
     setTimeout(function () {
-      return _this5.generateCartItems();
+      return _this6.generateCartItems();
     }, 2000);
   },
   updated: function updated() {
@@ -2863,7 +2876,13 @@ var render = function render() {
     attrs: {
       href: "http://127.0.0.1:8000/orders/create"
     }
-  }, [_vm._v(" \n        Completa pagamento \n    ")])]);
+  }, [_vm._v(" \n        Completa pagamento \n    ")]), _vm._v(" "), _c("div", {
+    on: {
+      click: function click($event) {
+        return _vm.calcolaPrice();
+      }
+    }
+  }, [_vm._v("calcprice test")])]);
 };
 
 var staticRenderFns = [];

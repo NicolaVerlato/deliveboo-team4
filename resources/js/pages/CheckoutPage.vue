@@ -37,12 +37,12 @@
         <a style="color: white; font-size: 30px;" href="http://127.0.0.1:8000/orders/create"> 
             Completa pagamento 
         </a>
+        <div @click="calcolaPrice()">calcprice test</div>
     </div>
 
 </template>
 
 <script>
-
     export default {
         name: "HomePage",
         data() {
@@ -61,10 +61,21 @@
                 partialTotal: 0,
                 realTotal: 0,
                 prices: [],
-                counter: 1
+                counter: 1,
+                calcolo: 0
             }
         },
         methods: {
+            calcolaPrice() {
+                this.allSearch.forEach(element => {
+                    let prezzo = parseInt( element.piatto.price)
+                    let quantita = parseInt( element.quantita )
+                    this.calcolo += prezzo * quantita
+                    console.log('prezzo', prezzo)
+                    console.log('quantita', quantita)
+                    console.log('calcolo', this.calcolo)
+                });
+            },
             async getDishes() {
                 await axios.get(`/api/restaurants/${this.basket[0].slug}`)
                 .then((response) => {
@@ -112,6 +123,7 @@
                 this.getValue(id, search.item)
                 this.allSearch = []
                 this.generateCartItems()
+                
             },
             getInfo() {
                 for (const [key, value] of Object.entries(localStorage)) {
