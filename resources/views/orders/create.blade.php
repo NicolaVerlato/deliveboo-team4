@@ -53,7 +53,8 @@
 
                         <div>
                             <label for="order_total">Prezzo</label>
-                            <input type="text" name="order_total" id="order_total">
+                            <div>{{$TotalPrice}}&euro;</div>
+                            <input type="hidden" name="order_total" id="order_total" value="{{$TotalPrice}}">
                         </div>
 
                         <div class="mb-4 mt-4">

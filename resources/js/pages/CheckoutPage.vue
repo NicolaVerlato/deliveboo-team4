@@ -34,7 +34,7 @@
         </div>
 
 
-        <a style="color: white; font-size: 30px;" href="http://127.0.0.1:8000/orders/create"> 
+        <a style="color: white; font-size: 30px;" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo"> 
             Completa pagamento 
         </a>
         <div @click="calcolaPrice()">calcprice test</div>
@@ -74,6 +74,7 @@
                     console.log('prezzo', prezzo)
                     console.log('quantita', quantita)
                     console.log('calcolo', this.calcolo)
+                    return this.calcolo
                 });
             },
             async getDishes() {

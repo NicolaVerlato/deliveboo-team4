@@ -22,9 +22,12 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($price)
     {
-        return view('orders.create');
+        $data = [
+            'TotalPrice' => $price
+        ];
+        return view('orders.create', $data);
     }
 
     /**
@@ -107,7 +110,12 @@ class OrderController extends Controller
         ]);
 
         if ($result->success) {
-            return view('orders.success');
+            // !!!!!!! QUI METTEREMO I PIATTI PASSATI DALLA CREATE ALLO STORE ALLA EDIT E INFINE ALL'UPDATE
+            $data = [
+                'prezzo' => $order->order_total,
+                
+            ];
+            return view('orders.success', $data);
         } else {
             return view('orders.failed');
         }

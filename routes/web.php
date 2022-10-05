@@ -28,6 +28,7 @@ Route::middleware('auth')
 Auth::routes();
 
 Route::resource('/orders', 'OrderController');
+Route::get('/orders/create/{price}', 'OrderController@create');
 
 Route::get('{any?}', function () {
     return view('guest.home');

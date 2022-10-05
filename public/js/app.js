@@ -2086,6 +2086,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log('prezzo', prezzo);
         console.log('quantita', quantita);
         console.log('calcolo', _this.calcolo);
+        return _this.calcolo;
       });
     },
     getDishes: function getDishes() {
@@ -2874,7 +2875,7 @@ var render = function render() {
       "font-size": "30px"
     },
     attrs: {
-      href: "http://127.0.0.1:8000/orders/create"
+      href: "http://127.0.0.1:8000/orders/create/" + this.calcolo
     }
   }, [_vm._v(" \n        Completa pagamento \n    ")]), _vm._v(" "), _c("div", {
     on: {
