@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Dish;
+use App\DishOrder;
+use App\Restaurant;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -22,10 +26,30 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($price)
+    public function create($price, $id, $allDishesIds, $quantity, Dish $dish)
     {
+        $allDish = collect();
+        $allQuantity = collect();
+        for ($i=0; $i < Str::length($allDishesIds); $i++) { 
+            if($allDishesIds[$i] == '-') {
+
+            } else {
+                $allDish->push($allDishesIds[$i]);
+            }
+            if($quantity[$i] == '-') {
+
+            } else {
+                $allQuantity->push($quantity[$i]);
+            }
+        }
+
+        $dish_id = Dish::where('id', '=', $id)->get();
+
         $data = [
-            'TotalPrice' => $price
+            'TotalPrice' => $price,
+            'restaurant_id' => $dish_id[0]->restaurant_id,
+            'dish_id' => $allDish,
+            'quantity' => $allQuantity
         ];
         return view('orders.create', $data);
     }
@@ -39,11 +63,36 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order_data = $request->all();
-
+        
         $newOrder = new Order();
         $newOrder->fill($order_data);
-        // qua manca da aggiungere la FK del ristorante
         $newOrder->save();
+        $dishes = collect();
+        $amount = collect();
+        $ids = $order_data['dish_id'];
+        foreach (str_split($ids) as $char) {
+            if (is_numeric($char)) {
+                $dishes->push( Dish::where('id', '=', $char)->get());
+            }
+        }
+        $cycle = 0;
+        foreach ($order_data as $key => $value) {
+            $cycle ++;
+            if ($cycle > 8) {
+                $amount->push($value);
+            }
+        }
+        $cycle = 0;
+        foreach ($dishes as $key => $value) {
+            $cycle ++;
+            $newDishOrder = new DishOrder();
+            // $newDishOrder->fill($value[0]);
+            $newDishOrder->dish_id = $value[0]['id'];
+            $newDishOrder->order_id = $newOrder['id'];
+            $newDishOrder->quantity = $amount[$cycle - 1];
+            $newDishOrder->save();
+        }
+
 
         return redirect()->route('orders.edit', ['order' => $newOrder->id]);
     }
@@ -56,7 +105,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -74,10 +123,13 @@ class OrderController extends Controller
             'publicKey' => '68td22tzfk475g8b',
             'privateKey' => '3ebce2639ade8dd638023434949ad1c1'
         ]);
+        $data = [
+            'order' => $order
+        ];
 
         // PASSAGGIO DEL TOKEN ALLA ROTTA
         $token = $gateway->ClientToken()->generate();
-        return view('orders.edit', ['token' => $token, 'order' => $order]);
+        return view('orders.edit', ['token' => $token, 'order' => $order], $data);
     }
 
     /**
@@ -89,6 +141,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        dd($request);
         // INIZIALIZZAZIONE BRAINTREE
         $gateway = new \Braintree\Gateway([
             'environment' => 'sandbox',
@@ -108,12 +161,15 @@ class OrderController extends Controller
                 'submitForSettlement' => True
             ]
         ]);
-
         if ($result->success) {
-            // !!!!!!! QUI METTEREMO I PIATTI PASSATI DALLA CREATE ALLO STORE ALLA EDIT E INFINE ALL'UPDATE
+            $ristorante = Restaurant::find($order->restaurant_id);
+            
             $data = [
                 'prezzo' => $order->order_total,
-                
+                'nome' => $order->customer_name,
+                'mail' => $order->customer_email,
+                'indirizzo' => $order->customer_address,
+                'ristorante' => $ristorante
             ];
             return view('orders.success', $data);
         } else {

@@ -22,6 +22,7 @@
   <form method="POST" id="payment-form" action="{{route('orders.update', $order->id)}}" class="mx-auto">
     @csrf
     @method('PUT')
+    <input type="hidden" name="order_id" id="order_id" value="{{$order->id}}">
     <section class="mt-6 mb-3">
       <div class="card-header" id="payment-form-bg" style="font-size: 20px;">
         <h3 class="text-center text-2xl text-gray-800">Ordine effettuato da: 

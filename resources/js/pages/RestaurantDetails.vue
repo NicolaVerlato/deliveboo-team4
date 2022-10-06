@@ -92,7 +92,7 @@
             decrement(a) {
                 let counter = this.$el.querySelector(".counter").innerHTML
                 let search = this.basket.find((x)=>x.id === a)
-                if(search.item === undefined) {
+                if(search === undefined) {
                     return
                 } else if (search.item === 0) {
                     return

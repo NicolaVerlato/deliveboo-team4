@@ -34,7 +34,7 @@
         </div>
 
 
-        <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo"> 
+        <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo + '/' + this.basket[0].id + '/' + this.allDishesIds + '/' + this.allQuantity"> 
             Completa pagamento 
         </a>
     </div>
@@ -61,10 +61,20 @@
                 realTotal: 0,
                 prices: [],
                 counter: 1,
-                calcolo: 0
+                calcolo: 0,
+                allDishesIds: '',
+                allQuantity: ''
             }
         },
         methods: {
+            getAllDishesIds() {
+                this.basket.forEach(element => {
+                    let id = element.id
+                    let amount = element.item
+                    this.allDishesIds +=  id + '-'
+                    this.allQuantity += amount + '-'
+                });
+            },
             emptyCart() {
                 localStorage.clear();
             },
@@ -185,6 +195,7 @@
             this.getDishes();
             this.getInfo();
             setTimeout(() => this.generateCartItems(), 2000);
+            this.getAllDishesIds()
         },
         updated() {
             this.loadingCart()

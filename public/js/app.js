@@ -2072,28 +2072,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       realTotal: 0,
       prices: [],
       counter: 1,
-      calcolo: 0
+      calcolo: 0,
+      allDishesIds: '',
+      allQuantity: ''
     };
   },
   methods: {
+    getAllDishesIds: function getAllDishesIds() {
+      var _this = this;
+
+      this.basket.forEach(function (element) {
+        var id = element.id;
+        var amount = element.item;
+        _this.allDishesIds += id + '-';
+        _this.allQuantity += amount + '-';
+      });
+    },
     emptyCart: function emptyCart() {
       localStorage.clear();
     },
     calcolaPrice: function calcolaPrice() {
-      var _this = this;
+      var _this2 = this;
 
       this.allSearch.forEach(function (element) {
         var prezzo = parseInt(element.piatto.price);
         var quantita = parseInt(element.quantita);
-        _this.calcolo += prezzo * quantita;
+        _this2.calcolo += prezzo * quantita;
         console.log('prezzo', prezzo);
         console.log('quantita', quantita);
-        console.log('calcolo', _this.calcolo);
-        return _this.calcolo;
+        console.log('calcolo', _this2.calcolo);
+        return _this2.calcolo;
       });
     },
     getDishes: function getDishes() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -2101,11 +2113,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/restaurants/".concat(_this2.basket[0].slug)).then(function (response) {
+                return axios.get("/api/restaurants/".concat(_this3.basket[0].slug)).then(function (response) {
                   var ciao = response.data.results;
 
                   for (var i = 0; i < Object.keys(ciao).length; i++) {
-                    _this2.dishes.push(Object.values(ciao)[i]);
+                    _this3.dishes.push(Object.values(ciao)[i]);
                   }
                 });
 
@@ -2118,7 +2130,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     generateCartItems: function generateCartItems() {
-      var _this3 = this;
+      var _this4 = this;
 
       var ShoppingCart = document.getElementById('shopping-cart');
       var label = document.getElementById('label');
@@ -2127,7 +2139,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return ShoppingCart.innerHTML = this.basket.map(function (x) {
           var id = x.id,
               item = x.item;
-          var search = _this3.dishesArray.find(function (y) {
+          var search = _this4.dishesArray.find(function (y) {
             return y.id === id;
           }) || [];
           var qntDish = {
@@ -2135,9 +2147,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             'piatto': search
           };
 
-          _this3.allSearch.push(qntDish);
+          _this4.allSearch.push(qntDish);
 
-          _this3.getValue(id, item);
+          _this4.getValue(id, item);
         }).join('');
       } else {
         ShoppingCart.innerHTML = "";
@@ -2145,7 +2157,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     getValue: function getValue(dishId, quantity) {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -2156,14 +2168,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("/api/dishes/".concat(dishId)).then(function (response) {
                   var price = response.data.results[0].price;
 
-                  if (_this4.counter > 1) {
-                    _this4.partialTotal = parseInt(price) + parseInt(price);
-                    _this4.counter++;
+                  if (_this5.counter > 1) {
+                    _this5.partialTotal = parseInt(price) + parseInt(price);
+                    _this5.counter++;
                   } else {
-                    _this4.partialTotal = price * quantity;
+                    _this5.partialTotal = price * quantity;
                   }
 
-                  _this4.prices.push(_this4.partialTotal);
+                  _this5.prices.push(_this5.partialTotal);
                 });
 
               case 2:
@@ -2196,11 +2208,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.printDishes();
     },
     printDishes: function printDishes() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.basket.forEach(function (element, index) {
         axios.get("/api/dishes/".concat(element.id)).then(function (response) {
-          _this5.dishesArray.push(response.data.results[0]);
+          _this6.dishesArray.push(response.data.results[0]);
         });
       });
     },
@@ -2249,13 +2261,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.getDishes();
     this.getInfo();
     setTimeout(function () {
-      return _this6.generateCartItems();
+      return _this7.generateCartItems();
     }, 2000);
+    this.getAllDishesIds();
   },
   updated: function updated() {
     this.loadingCart();
@@ -2350,7 +2363,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return x.id === a;
       });
 
-      if (search.item === undefined) {
+      if (search === undefined) {
         return;
       } else if (search.item === 0) {
         return;
@@ -2878,7 +2891,7 @@ var render = function render() {
       "font-size": "30px"
     },
     attrs: {
-      href: "http://127.0.0.1:8000/orders/create/" + this.calcolo
+      href: "http://127.0.0.1:8000/orders/create/" + this.calcolo + "/" + this.basket[0].id + "/" + this.allDishesIds + "/" + this.allQuantity
     },
     on: {
       click: function click($event) {

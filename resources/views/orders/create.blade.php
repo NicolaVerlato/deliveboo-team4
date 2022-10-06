@@ -57,6 +57,16 @@
                             <input type="hidden" name="order_total" id="order_total" value="{{$TotalPrice}}">
                         </div>
 
+                        <div>
+                            <input type="hidden" name="restaurant_id" id="restaurant_id" value="{{$restaurant_id}}">
+                            <input type="hidden" name="dish_id" id="dish_id" value="{{$dish_id}}">
+                            @foreach ($quantity as $key => $item)
+                                <input type="hidden" name="id-{{$key}}" id="id-{{$key}}" value="{{$item}}">
+                            @endforeach
+                            {{-- <input type="hidden" name="amount" id="amount" value="{{$quantity}}"> --}}
+                        </div>
+                        
+
                         <div class="mb-4 mt-4">
                             <i>Tutti i campi contrassegnati con <span>*</span> sono obbligatori</i>
                         </div>
