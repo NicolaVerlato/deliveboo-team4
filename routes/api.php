@@ -22,5 +22,6 @@ Route::get('/restaurants', 'Api\RestaurantController@index');
 Route::get('/{slug}', 'Api\RestaurantController@showRestaurant');
 Route::get('/dishes', 'Api\DishController@index');
 Route::get('/dishes/{id}', 'Api\DishController@show');
+Route::get('/restaurants/{slug}', 'Api\RestaurantController@show');
 Route::get('/types', 'Api\TypeController@index');
 Route::get('/restauranttype', 'Api\RestaurantTypeController@index');
