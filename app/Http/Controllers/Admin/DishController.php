@@ -52,7 +52,7 @@ class DishController extends Controller
         // prendo il ristorante dell'utente loggato
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         // variabile per controllare se l'account ha già un ristorante nella dashboard
-        $restaurantLink = Restaurant::find($user->id);
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
         $data = [
             'restaurant' => $restaurant,
@@ -85,7 +85,7 @@ class DishController extends Controller
         // prendo dati utente loggato
         $user = Auth::user();
         // prendo il ristorante dell'utente loggato
-        $restaurant = Restaurant::findOrFail($user->id);
+        $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
 
         $new_dish = new Dish();
 
@@ -111,7 +111,7 @@ class DishController extends Controller
 
         $new_dish->fill($form_data);
         // la FK restaurant_id nella tabellla dishes è uguale all'id del ristorante
-        $new_dish->restaurant_id = $restaurant->id;
+        $new_dish->restaurant_id = $restaurant[0]->id;
         $new_dish->save();
 
         return redirect()->route('admin.dishes.show', ['dish' => $new_dish->id, 'saved' => 'yes']);
