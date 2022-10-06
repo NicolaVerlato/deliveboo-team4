@@ -124,7 +124,8 @@
                                 <input 
                                     id="iva" 
                                     type="text"
-                                    pattern="[0-9]+" 
+                                    pattern="[0-9]+"
+                                    placeholder="composta da 11 numeri" 
                                     class="form-control 
                                     @error('iva') is-invalid @enderror" 
                                     name="iva" 
