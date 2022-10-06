@@ -26,7 +26,7 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::where('user_id', '=', $user->id)->get();
         $now = Carbon::now();
         // variabile per controllare se l'account ha già un ristorante
-        $restaurantLink = Restaurant::find($user->id);
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
         $data = [
             'restaurants' => $restaurants,
