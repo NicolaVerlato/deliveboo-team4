@@ -2836,7 +2836,10 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "container"
+    staticClass: "container",
+    staticStyle: {
+      height: "330px"
+    }
   }, [_c("div", {
     attrs: {
       id: "label"
@@ -2894,10 +2897,17 @@ var render = function render() {
       "font-size": "30px"
     },
     attrs: {
-      href: "http://127.0.0.1:8000/orders/create"
+      href: "http://127.0.0.1:8000/orders/create/" + this.calcolo + "/" + this.basket[0].id + "/" + this.allDishesIds + "/" + this.allQuantity
+    },
+    on: {
+      click: function click($event) {
+        _vm.calcolaPrice(), _vm.emptyCart();
+      }
     }
   }, [_vm._v(" \n        Completa pagamento \n        ")])]);
-}];
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -55300,8 +55310,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
