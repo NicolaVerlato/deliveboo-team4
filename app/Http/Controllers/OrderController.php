@@ -141,7 +141,6 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        dd($request);
         // INIZIALIZZAZIONE BRAINTREE
         $gateway = new \Braintree\Gateway([
             'environment' => 'sandbox',
