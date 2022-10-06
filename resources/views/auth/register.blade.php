@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header"> {{'Register'}} </div>
+                <div class="card-header"> {{'Registrazione'}} </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -15,7 +15,7 @@
 
                         {{-- Name section  --}}
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Name'}} </label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Nome'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -38,7 +38,7 @@
 
                         {{-- Lastname section  --}}
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right"> {{'Lastname'}} </label>
+                            <label for="lastname" class="col-md-4 col-form-label text-md-right"> {{'Cognome'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -47,7 +47,7 @@
                                     class="form-control"
                                     name="lastname" 
                                     value="{{ old('lastname') }}" 
-                                    autocomplete="lastname" 
+                                    autocomplete="Cognome" 
                                     autofocus
                                 >
                             </div>
@@ -55,7 +55,7 @@
 
                         {{-- Email section  --}}
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'E-Mail Address'}} </label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Indirizzo email'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -100,7 +100,7 @@
 
                         {{-- Confirm password section  --}}                        
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Confirm Password'}} </label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"><span>*</span> {{'Conferma Password'}} </label>
 
                             <div class="col-md-6">
                                 <input 
@@ -123,7 +123,9 @@
                             <div class="col-md-6">
                                 <input 
                                     id="iva" 
-                                    type="text" 
+                                    type="text"
+                                    pattern="[0-9]+"
+                                    placeholder="composta da 11 numeri" 
                                     class="form-control 
                                     @error('iva') is-invalid @enderror" 
                                     name="iva" 
@@ -148,7 +150,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" id="btn">
-                                    {{ __('Register') }}
+                                    {{ __('Registrati') }}
                                 </button>
                             </div>
                         </div>

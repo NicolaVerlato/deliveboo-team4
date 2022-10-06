@@ -52,7 +52,7 @@ confirmPassword.addEventListener('click', function(){
 // sia minore di 11 caratteri
 iva.addEventListener('focusout', function(){
     if(iva.value.length < 11 || iva.value.length > 11) {
-        ivaMessage.innerHTML = '<i>**La partita iva deve essere di 11 caratteri**</i>';
+        ivaMessage.innerHTML = '<i>**La partita iva è composta da 11 numeri**</i>';
         btn.disabled = true
     }
 })
@@ -62,6 +62,3 @@ iva.addEventListener('click', function(){
     ivaMessage.innerHTML= '';
     btn.disabled = false
 })
-
-
-

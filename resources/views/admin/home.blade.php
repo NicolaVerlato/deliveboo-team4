@@ -23,7 +23,7 @@
                     
                     <h4>Mail: {{ $user->email }}</h4>
                     <p>La tua partita iva è: {{ $user->iva }}</p>
-                    <p>Created {{ $user->created_at->diffForHumans($now) }}</p>
+                    <p>Creato {{ $user->created_at->diffForHumans($now) }}</p>
 
                 </div>
             </div>
