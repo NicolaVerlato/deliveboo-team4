@@ -26,7 +26,7 @@ class DishController extends Controller
         // prendo i piatti dell'utente loggato comparando sempre la FK
         $dishes = Dish::where('restaurant_id', '=', $user->id)->paginate(6);
         // variabile per controllare se l'account ha già un ristorante
-        $restaurantLink = Restaurant::find($user->id);
+        $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
         $deleted = isset($page_data['deleted']) ? $page_data['deleted'] : null;
 
