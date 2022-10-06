@@ -136,7 +136,7 @@ confirmPassword.addEventListener('click', function () {
 
 iva.addEventListener('focusout', function () {
   if (iva.value.length < 11 || iva.value.length > 11) {
-    ivaMessage.innerHTML = '<i>**La partita iva deve essere di 11 caratteri**</i>';
+    ivaMessage.innerHTML = '<i>**La partita iva è composta da 11 numeri**</i>';
     btn.disabled = true;
   }
 }); // funzione che toglie il messaggio **La partita iva deve essere di 11 caratteri** e abilita di nuovo il bottone
@@ -155,7 +155,7 @@ iva.addEventListener('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })

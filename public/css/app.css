@@ -11115,6 +11115,10 @@ img {
   animation: spinHover 0.8s ease-out 0s 1 both;
 }
 
+input:invalid {
+  border: 2px solid red;
+}
+
 @keyframes spin {
   100% {
     -moz-transform: rotate(360deg);

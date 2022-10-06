@@ -61,7 +61,7 @@
                         <i>Tutti i campi contrassegnati con <span>*</span> sono obbligatori</i>
                     </div>
 
-                    <button id="btn-create" type="submit" class="btn d-block mt-2 btn-primary">Submit</button>
+                    <button id="btn-create" type="submit" class="btn d-block mt-2 btn-primary">Invia</button>
                 </form>
 
         </div>
