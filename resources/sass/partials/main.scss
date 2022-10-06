@@ -175,6 +175,8 @@ img {
     -moz-animation:spinHover  .8s ease-out 0s 1 both;
     animation:spinHover .8s ease-out 0s 1 both;
   }
+
+  // per dare il bordo ai campi input incorretti
   input:invalid {
     border: 2px solid red;
   }
