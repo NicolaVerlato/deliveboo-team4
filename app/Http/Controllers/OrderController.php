@@ -33,10 +33,12 @@ class OrderController extends Controller
         for ($i=0; $i < Str::length($allDishesIds); $i++) { 
             if($allDishesIds[$i] == '-') {
 
-            } else {
+            } else if (!is_nan($allDishesIds[$i])) {
                 $allDish->push($allDishesIds[$i]);
             }
         }
+        preg_match_all('!\d+!', $allDishesIds, $matches);
+
         for ($i=0; $i < Str::length($quantity); $i++) { 
             if($quantity[$i] == '-') {
     
@@ -49,7 +51,7 @@ class OrderController extends Controller
         $data = [
             'TotalPrice' => $price,
             'restaurant_id' => $dish_id[0]->restaurant_id,
-            'dish_id' => $allDish,
+            'dish_id' => $matches,
             'quantity' => $allQuantity
         ];
         return view('orders.create', $data);
@@ -71,8 +73,19 @@ class OrderController extends Controller
         $newOrder->save();
         $dishes = collect();
         $amount = collect();
-        $ids = $order_data['dish_id'];
-        foreach (str_split($ids) as $char) {
+        $string = 'dish_id-';
+        function startsWith( $order_data, $stringa ) {
+            $length = strlen( $stringa );
+            return substr($order_data, 0, $length ) === $stringa;
+       }
+       $ids = [];
+       foreach ($order_data as $key => $value) {
+            if (startsWith($key, $string)) {
+                $ids[] = $value;                
+            }
+        }
+
+        foreach ($ids as $char) {
             if (is_numeric($char)) {
                 $searchDish = Dish::where('id', '=', $char)->get();
                 if (count($searchDish) > 0) {
@@ -81,13 +94,16 @@ class OrderController extends Controller
             }
         }
         $cycle = 0;
+
+        $secondString = 'quantity-';
         foreach ($order_data as $key => $value) {
             $cycle ++;
-            if ($cycle > 8) {
-                $amount->push($value);
+            if (startsWith($key, $secondString)) {
+                $amount[] = $value;                
             }
         }
         $cycle = 0;
+
         foreach ($dishes as $key => $value) {
             $cycle ++;
             $newDishOrder = new DishOrder();

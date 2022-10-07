@@ -59,9 +59,11 @@
 
                         <div>
                             <input type="hidden" name="restaurant_id" id="restaurant_id" value="{{$restaurant_id}}">
-                            <input type="hidden" name="dish_id" id="dish_id" value="{{$dish_id}}">
+                            @foreach ($dish_id[0] as $item)
+                                <input type="hidden" name="dish_id-{{$item}}" id="dish_id-{{$item}}" value="{{$item}}">
+                            @endforeach
                             @foreach ($quantity as $key => $item)
-                                <input type="hidden" name="id-{{$key}}" id="id-{{$key}}" value="{{$item}}">
+                                <input type="hidden" name="quantity-{{$key}}" id="quantity-{{$key}}" value="{{$item}}">
                             @endforeach
                             {{-- <input type="hidden" name="amount" id="amount" value="{{$quantity}}"> --}}
                         </div>
