@@ -36,13 +36,14 @@ class OrderController extends Controller
             } else {
                 $allDish->push($allDishesIds[$i]);
             }
+        }
+        for ($i=0; $i < Str::length($quantity); $i++) { 
             if($quantity[$i] == '-') {
-
+    
             } else {
                 $allQuantity->push($quantity[$i]);
             }
         }
-
         $dish_id = Dish::where('id', '=', $id)->get();
 
         $data = [
