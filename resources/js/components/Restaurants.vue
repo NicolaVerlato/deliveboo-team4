@@ -1,14 +1,14 @@
 <template>
 
     <section class="mt-4">
-        <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
+        <h2 class="text-center text-uppercase" style="color:white; font-size: 30px; margin-bottom: 40px;">
             Lista dei ristoranti
         </h2>
 
-        <div class="row row-cols-4">
+        <div class="row row-cols-4 d-flex justify-content-center">
             <!--Single restaurant-->
             <div v-for="restaurant in restaurants" :key="restaurant.id" class="col mr-4">
-                <div class="card m-3" style="width: 18rem;">
+                <div class="card mb-4" style=" width: 18rem; border-radius: 50px 15px;">
                         <div v-if="restaurant.cover">
                             <img 
                             class="card-img-top"  
@@ -35,11 +35,11 @@
                         <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
                         <router-link 
-                            class="btn btn-sm btn-primary"
+                            class="btn btn_green"
                             :to="{
                                 name: 'restaurant-details',
                                 params: {slug: restaurant.slug}
-                            }">View
+                            }"><strong>Menu</strong>
                         </router-link>
                     </div>
                 </div>
@@ -77,4 +77,13 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+
+.btn_green {
+    background-color: #01a78e;
+    color: white;
+}
+</style>
+
 

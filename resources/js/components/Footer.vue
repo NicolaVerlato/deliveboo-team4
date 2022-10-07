@@ -5,8 +5,6 @@
             <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
         </h4>
 
-
-
         <h5 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 20px; margin-top: 30px;">
             <a 
             class="header-links" 
@@ -139,7 +137,6 @@
                     color: black;
                 }
             }
-         
         }
     }
 </style>
