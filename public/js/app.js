@@ -2329,7 +2329,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var counter = this.$el.querySelector(".counter").innerHTML;
       var search = this.basket.find(function (x) {
         return x.id === a;
-      });
+      }); // se il carrello non è vuoto
+
+      if (this.basket.length > 0) {
+        // se lo slug del ristorante attuale non corrisponde a quello nel carrello
+        if (slug !== this.basket[0].slug) {
+          // se conferma svuoto carrello e metto solo questo piatto
+          if (confirm('Si possono ordinare piatti solo da un ristorante. Se prosegui il carrello verrà svuotato e sostituito solo con questo piatto.')) {
+            window.localStorage.clear();
+            this.basket = [];
+            this.basket.push({
+              id: a,
+              item: 1,
+              slug: slug,
+              price: price
+            });
+            localStorage.setItem("data", JSON.stringify(this.basket));
+            this.updateCart(a);
+            return;
+          } else return;
+        }
+      }
 
       if (search === undefined) {
         this.basket.push({
@@ -2342,8 +2362,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         search.item += 1;
       }
 
-      localStorage.setItem("data", JSON.stringify(this.basket));
       this.updateCart(a);
+      localStorage.setItem("data", JSON.stringify(this.basket));
     },
     decrement: function decrement(a) {
       var counter = this.$el.querySelector(".counter").innerHTML;
@@ -55232,8 +55252,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
