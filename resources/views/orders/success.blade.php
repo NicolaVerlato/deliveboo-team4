@@ -14,15 +14,24 @@
         <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
     </h2>
 
-    <h4>Pagamento effettuato con successo</h4>
+    <h4>Grazie {{$nome}}, pagamento effettuato con successo</h4>
+
+    <h4>Ordine spedito a "{{$indirizzo}}" dal ristorante {{$ristorante->name}}</h4>
 
     <h4>Riepilogo ordine</h4>
     <ul>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
+        @foreach ($dish_order as $singleDishOrder)
+            @if ($order->id === $singleDishOrder->order_id)
+                @foreach ($allRestaurantDishes as $singleDish)                  
+                    @if ($singleDishOrder->dish_id === $singleDish->id)
+                        
+                    <li>Nome piatto: {{$singleDish->name}}, quantità: {{$singleDishOrder->quantity}}</li>
+                    @endif
+                @endforeach
+            @endif
+        @endforeach
     </ul>
+    <h3>Prezzo {{$prezzo}}</h3>
 
     <a style="color: white; text-decoration: none;" href="http://127.0.0.1:8000/"> Torna alla home </a>
 </body>

@@ -184,6 +184,8 @@ class OrderController extends Controller
         ]);
         if ($result->success) {
             $ristorante = Restaurant::find($order->restaurant_id);
+            $dish_order = DishOrder::where('order_id', '=', $order->id)->get();
+            $allRestaurantDishes = Dish::where('restaurant_id', '=', $ristorante->id)->get();
             $order->confirmed = 1;
             $order->save();
 
@@ -192,7 +194,10 @@ class OrderController extends Controller
                 'nome' => $order->customer_name,
                 'mail' => $order->customer_email,
                 'indirizzo' => $order->customer_address,
-                'ristorante' => $ristorante
+                'ristorante' => $ristorante,
+                'order' => $order,
+                'allRestaurantDishes' => $allRestaurantDishes,
+                'dish_order' => $dish_order
             ];
             return view('orders.success', $data);
         } else {
