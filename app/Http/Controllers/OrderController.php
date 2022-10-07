@@ -74,7 +74,10 @@ class OrderController extends Controller
         $ids = $order_data['dish_id'];
         foreach (str_split($ids) as $char) {
             if (is_numeric($char)) {
-                $dishes->push( Dish::where('id', '=', $char)->get());
+                $searchDish = Dish::where('id', '=', $char)->get();
+                if (count($searchDish) > 0) {
+                    $dishes->push( Dish::where('id', '=', $char)->get());
+                }
             }
         }
         $cycle = 0;
