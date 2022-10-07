@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!--HEADER-->
     <nav class="navbar navbar-expand-md navbar-dark flex-md-nowrap p-2 brand_color">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/"><strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
         </a>
         <ul class="navbar-nav px-3 ml-auto">
             <li class="nav-item">
@@ -39,6 +40,7 @@
             </li>
         </ul>
     </nav>
+    <!--SIDEBAR Dashboard-->
     <div class="container-fluid">
         <div class="row">
             <nav class="left_menu col-md-2 d-none d-md-block sidebar py-4">
@@ -88,7 +90,7 @@
                         @if (isset($restaurantLink))
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.stats.index') }}">
-                                    <i class="fa-solid fa-circle-plus big_icon"></i>
+                                    <i class="fa-solid fa-chart-simple big_icon"></i>
                                     Statistiche
                                 </a>
                             </li>
@@ -98,6 +100,7 @@
                 </div>
             </nav>
 
+            <!--MAIN-->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
                 @yield('content')
             </main>
