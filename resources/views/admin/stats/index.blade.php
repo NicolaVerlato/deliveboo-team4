@@ -9,14 +9,14 @@
                     <h3>Nome utente: {{ $singleOrder->customer_name }}</h3>
                     <h3>Email: {{ $singleOrder->customer_email }}</h3>
                     <h3>Indirizzo: {{ $singleOrder->customer_address }}</h3>
+                    <p>Ordine generato il: {{$singleOrder->created_at}}</p>
+                    <p>Ordine pagato il: {{$singleOrder->updated_at}}</p>
                     @foreach ($dishOrder as $singleDishOrder)
-                        @foreach ($singleDishOrder as $item)
+                        {{-- @foreach ($singleDishOrder as $item)
                             @if ($singleOrder->id == $item->order_id )
-                                <p>Quantità: {{$item->quantity}}</p>
-                                <p>Effettuato il: {{$item->created_at}}</p>
-                                <p>Aggiornato il: {{$item->updated_at}}</p>
+
                             @endif
-                        @endforeach
+                        @endforeach --}}
                     @endforeach
                     <a href="{{ route('admin.stats.show', ['stat' => $singleOrder->id]) }}"
                         class="btn ms_btn">

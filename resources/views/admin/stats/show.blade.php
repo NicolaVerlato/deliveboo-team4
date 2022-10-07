@@ -13,11 +13,12 @@
             @foreach ($allDishes as $singleDish)
             {{-- se il singolo piatto corrisponde al singolo elemento della tabella ponte --}}
                 @if ($singleDish->id == $singleDishOrder->dish_id)
-                    <h4>Piatto: {{$singleDish->name}}</h4>
+                    <h4 class="mt-4">Piatto: {{$singleDish->name}}</h4>
+                    <h6>Quantità: {{$singleDishOrder->quantity}}</h6>
                 @endif
             @endforeach
             @endforeach
-            <h4>Prezzo totale: {{ $order->order_total}}&euro;</h4>
+            <h4 class="mt-4">Prezzo totale: {{ $order->order_total}}&euro;</h4>
         </div>
 
     </div>
