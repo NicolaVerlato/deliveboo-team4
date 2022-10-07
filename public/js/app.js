@@ -1970,8 +1970,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/_arrayPush */ "./node_modules/lodash/_arrayPush.js");
-/* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurants',
@@ -1981,34 +1984,74 @@ __webpack_require__.r(__webpack_exports__);
       restauranttype: [],
       types: [],
       dishes: [],
-      checkedOptions: []
+      checkedOptions: [],
+      selectCategory: [],
+      filterData: Array
     };
   },
   methods: {
-    checkFilter: function checkFilter(value) {
-      if (this.checkedOptions.includes(value)) {
-        this.checkedOptions.filter(function (e) {
-          return e !== value;
-        }); // console.log('presente')
+    checkFilter: function checkFilter(event) {
+      // if (this.checkedOptions.includes(value)) {
+      //     this.checkedOptions.filter(function(e) { return e !== value })
+      //     // console.log('presente')
+      // } else {
+      //     // console.log('non ce')
+      //     this.checkedOptions.push(value)
+      // }
+      if (event.target.checked) {
+        this.selectCategory.push(event.target.id);
       } else {
-        // console.log('non ce')
-        this.checkedOptions.push(value);
-      }
+        var id = event.target.id;
 
-      console.log(this.checkedOptions);
+        var _iterator = _createForOfIteratorHelper(this.selectCategory),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var data = _step.value;
+
+            if (data === id) {
+              var index = this.selectCategory.indexOf(data);
+              this.selectCategory.splice(index, 1);
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    },
+    getFilterData: function getFilterData() {
+      var _this = this;
+
+      var pars = this.selectCategory.map(function (str) {
+        return parseInt(str);
+      });
+      var data = {
+        restauranttype: pars
+      };
+      axios.post('/api/restauranttype/' + this.selectCategory, {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(function (response) {
+        _this.filterData = response.data;
+        console.log(response);
+      });
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get('/api/restaurants').then(function (response) {
-      _this.restaurants = response.data.results;
+      _this2.restaurants = response.data.results;
     });
     axios.get('/api/restauranttype').then(function (response) {
-      _this.restauranttype = response.data.results;
+      _this2.restauranttype = response.data.results;
     });
     axios.get('/api/types').then(function (response) {
-      _this.types = response.data.results;
+      _this2.types = response.data.results;
     });
   }
 });
@@ -2706,24 +2749,31 @@ var render = function render() {
       staticClass: "form-check-input",
       attrs: {
         type: "checkbox",
-        name: "id-" + tipo.id,
-        id: "id-" + tipo.id
+        name: tipo.id,
+        id: tipo.id
       },
       domProps: {
+        checked: tipo.checked,
         value: tipo.id
       },
       on: {
         click: function click($event) {
-          return _vm.checkFilter(tipo.id);
+          return _vm.checkFilter($event);
         }
       }
     }), _vm._v(" "), _c("label", {
       staticClass: "form-check-label",
       attrs: {
-        "for": "id-" + tipo.id
+        "for": tipo.id
       }
     }, [_vm._v(_vm._s(tipo.name))])]);
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", [_c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.getFilterData();
+      }
+    }
+  }, [_vm._v("Applica filtro")])]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-4"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -18475,37 +18525,6 @@ if ( typeof noGlobal === "undefined" ) {
 
 return jQuery;
 } );
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_arrayPush.js":
-/*!*******************************************!*\
-  !*** ./node_modules/lodash/_arrayPush.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Appends the elements of `values` to `array`.
- *
- * @private
- * @param {Array} array The array to modify.
- * @param {Array} values The values to append.
- * @returns {Array} Returns `array`.
- */
-function arrayPush(array, values) {
-  var index = -1,
-      length = values.length,
-      offset = array.length;
-
-  while (++index < length) {
-    array[offset + index] = values[index];
-  }
-  return array;
-}
-
-module.exports = arrayPush;
 
 
 /***/ }),

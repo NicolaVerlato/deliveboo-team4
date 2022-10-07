@@ -1,12 +1,16 @@
 <template>
-
+    
     <section class="mt-4">
+
         <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
             Lista dei ristoranti
         </h2>
         <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
-            <input class="form-check-input" @click="checkFilter(tipo.id)" type="checkbox" :name="'id-'+tipo.id" :id="'id-'+tipo.id" :value="tipo.id">
-            <label class="form-check-label" :for="'id-'+tipo.id">{{ tipo.name }}</label>
+            <input class="form-check-input" @click="checkFilter($event)" type="checkbox" :name="tipo.id" :id="tipo.id" :checked="tipo.checked" :value="tipo.id">
+            <label class="form-check-label" :for="tipo.id">{{ tipo.name }}</label>
+        </div>
+        <div>
+            <button @click="getFilterData()">Applica filtro</button>
         </div>
         <div class="row row-cols-4">
             <!--Single restaurant-->
@@ -53,8 +57,6 @@
 </template>
 
 <script>
-import arrayPush from 'lodash/_arrayPush';
-
 
     export default {
         name: 'Restaurants',
@@ -64,20 +66,46 @@ import arrayPush from 'lodash/_arrayPush';
                 restauranttype: [],
                 types: [],
                 dishes: [],
-                checkedOptions: []
+                checkedOptions: [],
+                selectCategory: [],
+                filterData: Array
             };
         },
         methods: {
-            checkFilter(value) {
-                if (this.checkedOptions.includes(value)) {
-                    this.checkedOptions.filter(function(e) { return e !== value })
-                    // console.log('presente')
-                } else {
-                    // console.log('non ce')
-                    this.checkedOptions.push(value)
-                }
+            checkFilter(event) {
+                // if (this.checkedOptions.includes(value)) {
+                //     this.checkedOptions.filter(function(e) { return e !== value })
+                //     // console.log('presente')
+                // } else {
+                //     // console.log('non ce')
+                //     this.checkedOptions.push(value)
+                // }
 
-                console.log(this.checkedOptions)
+                if(event.target.checked) {
+                    this.selectCategory.push(event.target.id)
+                } else {
+                    const id = event.target.id
+                    for(let data of this.selectCategory) {
+                        if (data === id) {
+                            const index = this.selectCategory.indexOf(data);
+                            this.selectCategory.splice(index, 1)
+                        }
+                    }
+                }
+            },
+            getFilterData: function() {
+                const pars = this.selectCategory.map((str) => {
+                    return parseInt(str)
+                });
+                const data = {
+                    restauranttype: pars
+                }
+                axios.post('/api/restauranttype/'+this.selectCategory, {headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }}).then(response => {
+                    this.filterData = response.data
+                    console.log(response)
+                })
             }
         },
         mounted() {
