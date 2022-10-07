@@ -75,6 +75,25 @@
             increment(a, slug, price) {
                 let counter = this.$el.querySelector(".counter").innerHTML
                 let search = this.basket.find((x)=>x.id === a)
+                // se il carrello non è vuoto
+                if(this.basket.length > 0) {
+                    // se lo slug del ristorante attuale non corrisponde a quello nel carrello
+                    if(slug !== this.basket[0].slug) {
+                        // se conferma svuoto carrello e metto solo questo piatto
+                        if(confirm('Si possono ordinare piatti solo da un ristorante. Se prosegui il carrello verrà svuotato e sostituito solo con questo piatto.')) {
+                            window.localStorage.clear(); 
+                            this.basket = [];
+                            this.basket.push({
+                                id: a,
+                                item: 1,
+                                slug: slug,
+                                price: price
+                        })
+                        localStorage.setItem("data", JSON.stringify(this.basket))
+                        this.updateCart(a)
+                        return
+                        } else return
+                }}
                 if(search === undefined) {
                     this.basket.push({
                         id: a,
@@ -86,8 +105,8 @@
                     search.item += 1
                 }
 
-                localStorage.setItem("data", JSON.stringify(this.basket))
                 this.updateCart(a)
+                localStorage.setItem("data", JSON.stringify(this.basket))
             },
             decrement(a) {
                 let counter = this.$el.querySelector(".counter").innerHTML
