@@ -36,17 +36,26 @@ class RestaurantTypeController extends Controller
         foreach ($singleFilter as $key => $filter) {
             $filteredRestaurant = RestaurantType::where('type_id', '=', $filter)->get();
             array_push($allRes, $filteredRestaurant);
-            foreach ($allRes as $key => $value) {
-                $check = 0;
-                array_push($test, $value[$key]);
-                // if(in_array($value[$key]['type_id'] ,$filter)){
-                //     ++$checking;
+            // if($checking == count($singleFilter)){
+                //     $filered_restaurants[] = $allRes;
                 // }
             }
-            // if($checking == count($singleFilter)){
-            //     $filered_restaurants[] = $allRes;
-            // }
-        }
+            foreach ($allRes as $firstKey => $value) {
+                $check = 0;
+                
+                foreach ($value as $key => $ciaone) {
+                    foreach ($singleFilter as $key => $filtroSingolo) {
+                        // if($ciaone['type_id'] == $filtroSingolo){
+                        //     ++$checking;
+                            
+                        // }
+                        array_push($test, $ciaone['type_id']);
+                    }
+                }
+                // if($checking == count($allRes['type_id'])){
+                //     $filered_apartment_service[] = $value;
+                // }
+            }
 
 
         $data = [
