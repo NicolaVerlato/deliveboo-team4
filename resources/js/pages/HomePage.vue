@@ -41,7 +41,7 @@
         </div>
 
         <div style="color: white; padding-top: 50px;">
-            <Types/>
+    
         </div>
 
         <div class="container" style="padding-bottom: 50px;">
@@ -53,7 +53,6 @@
 
 <script>
 
-    import Types from '../components/Types.vue'; 
     import Restaurants from '../components/Restaurants.vue';
     import Dishes from '../components/Dishes.vue';
 
@@ -61,7 +60,6 @@
         name: "HomePage",
         components: {
             Restaurants,
-            Types,
             Dishes
         },
     }

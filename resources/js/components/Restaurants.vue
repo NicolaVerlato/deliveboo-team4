@@ -4,7 +4,10 @@
         <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
             Lista dei ristoranti
         </h2>
-
+        <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
+            <input class="form-check-input" @click="checkFilter(tipo.id)" type="checkbox" :name="'id-'+tipo.id" :id="'id-'+tipo.id" :value="tipo.id">
+            <label class="form-check-label" :for="'id-'+tipo.id">{{ tipo.name }}</label>
+        </div>
         <div class="row row-cols-4">
             <!--Single restaurant-->
             <div v-for="restaurant in restaurants" :key="restaurant.id" class="col mr-4">
@@ -50,6 +53,8 @@
 </template>
 
 <script>
+import arrayPush from 'lodash/_arrayPush';
+
 
     export default {
         name: 'Restaurants',
@@ -58,8 +63,22 @@
                 restaurants: [],
                 restauranttype: [],
                 types: [],
-                dishes: []
+                dishes: [],
+                checkedOptions: []
             };
+        },
+        methods: {
+            checkFilter(value) {
+                if (this.checkedOptions.includes(value)) {
+                    this.checkedOptions.filter(function(e) { return e !== value })
+                    // console.log('presente')
+                } else {
+                    // console.log('non ce')
+                    this.checkedOptions.push(value)
+                }
+
+                console.log(this.checkedOptions)
+            }
         },
         mounted() {
             axios.get('/api/restaurants')

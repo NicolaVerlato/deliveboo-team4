@@ -12,7 +12,7 @@ use App\Dish;
 class RestaurantController extends Controller
 {
     public function index() {
-
+        
         $restaurants = Restaurant::all();
         $type = Type::all();
         $restauranttypes = RestaurantType::all();

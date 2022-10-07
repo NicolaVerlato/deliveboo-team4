@@ -2,7 +2,6 @@
 
 
     <div class="container" style="height: 330px">
-
         <div id="label">
 
         </div>
@@ -37,7 +36,6 @@
         <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo + '/' + this.basket[0].id + '/' + this.allDishesIds + '/' + this.allQuantity"> 
             Completa pagamento 
             </a>
-        </div>
     </div>
 
 </template>

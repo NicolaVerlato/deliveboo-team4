@@ -66,6 +66,7 @@ class OrderController extends Controller
         
         $newOrder = new Order();
         $newOrder->fill($order_data);
+        $newOrder->confirmed = 0;
         $newOrder->save();
         $dishes = collect();
         $amount = collect();
@@ -94,7 +95,7 @@ class OrderController extends Controller
         }
 
 
-        return redirect()->route('orders.edit', ['order' => $newOrder->id]);
+        return redirect()->route('orders.edit', ['order' => $newOrder->id])->with( ['data' => $order_data]);
     }
 
     /**
@@ -123,8 +124,9 @@ class OrderController extends Controller
             'publicKey' => '68td22tzfk475g8b',
             'privateKey' => '3ebce2639ade8dd638023434949ad1c1'
         ]);
+
         $data = [
-            'order' => $order
+            'order' => $order,
         ];
 
         // PASSAGGIO DEL TOKEN ALLA ROTTA
@@ -162,7 +164,9 @@ class OrderController extends Controller
         ]);
         if ($result->success) {
             $ristorante = Restaurant::find($order->restaurant_id);
-            
+            $order->confirmed = 1;
+            $order->save();
+
             $data = [
                 'prezzo' => $order->order_total,
                 'nome' => $order->customer_name,
