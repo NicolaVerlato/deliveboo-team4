@@ -85,6 +85,14 @@
                                 </a>
                             </li>
                         @endif
+                        @if (isset($restaurantLink))
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ route('admin.stats.index') }}">
+                                    <i class="fa-solid fa-circle-plus big_icon"></i>
+                                    Statistiche
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                     
                 </div>
