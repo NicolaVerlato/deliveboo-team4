@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     /**
@@ -51,7 +51,7 @@ class OrderController extends Controller
         $price = $price / 2353699835353;
         $price = $price * 100;
         $price = $price / 23425232;
-        
+
         if ($price < 1) {
             return view('orders.error');
         }

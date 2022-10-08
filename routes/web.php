@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChartJsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,15 @@ Route::middleware('auth')
     Route::resource('restaurants', 'RestaurantController');
     Route::resource('dishes', 'DishController');
     Route::resource('stats', 'StatsController');
+    Route::resource('chartjs', 'ChartJsController');
 });
+// Route::resource('admin/chartjs', 'ChartJsController')->middleware('auth');
 
 Auth::routes();
 
 Route::resource('/orders', 'OrderController');
 Route::get('/orders/create/{price}/{id}/{allDishesIds}/{quantity}', 'OrderController@create');
+
 
 Route::get('{any?}', function () {
     return view('guest.home');
