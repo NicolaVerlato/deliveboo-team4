@@ -31,7 +31,7 @@
         <div v-else>
             vuoto
         </div>
-
+        <div @click="calcolaPrice()">aa</div>
 
         <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo + '/' + this.basket[0].id + '/' + this.allDishesIds + '/' + this.allQuantity"> 
             Completa pagamento 
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+    import CryptoJS from 'crypto-js';
     export default {
         name: "CheckoutPage",
         data() {
@@ -66,6 +67,35 @@
             }
         },
         methods: {
+            testEncrypt(toEncrypt) {
+                var CryptoJS = require("crypto-js/core");
+                var key = CryptoJS.enc.Hex.parse("0123456789abcdef0123456789abcdef");
+                var iv =  CryptoJS.enc.Hex.parse("abcdef9876543210abcdef9876543210");
+
+            /*
+            if you wish to have a more friendly key, you can convert letters to Hex this way:
+            var a = "D";
+            var hex_D = a.charCodeAt(0).toString(16);
+            just to mention,
+            if it were to binary, it would be:
+            var binary_D = a.charCodeAt(0).toString(2);
+            */
+
+            var secret = toEncrypt;
+            //crypted
+            var encrypted = CryptoJS.AES.encrypt(secret, key, {iv:iv});
+            //and the ciphertext put to base64
+            encrypted = encrypted.ciphertext.toString(CryptoJS.enc.Base64);    
+            console.log(encrypted)
+            return encrypted
+            //Assuming you have control on the server side, and know the key and iv hexes(we do),
+            //the encrypted var is all you need to pass through ajax,
+            //Let's follow with welcomed pure JS style, to reinforce one and other concept if needed
+            // var xh = new XMLHttpRequest();
+            // xh.open("POST", "decrypt_in_php.php", true);
+            // xh.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // xh.send("encrypted="+encodeURIComponent(encrypted));
+            },
             getAllDishesIds() {
                 this.basket.forEach(element => {
                     let id = element.id
@@ -82,11 +112,11 @@
                     let prezzo = parseInt( element.piatto.price)
                     let quantita = parseInt( element.quantita )
                     this.calcolo += prezzo * quantita
-                    console.log('prezzo', prezzo)
-                    console.log('quantita', quantita)
-                    console.log('calcolo', this.calcolo)
-                    return this.calcolo
-                });
+
+                    });
+                    this.calcolo = this.calcolo * 2353699835353;
+                    this.calcolo = this.calcolo / 100;
+                    this.calcolo = this.calcolo * 23425232;
             },
             async getDishes() {
                 await axios.get(`/api/restaurants/${this.basket[0].slug}`)
@@ -115,6 +145,7 @@
                     <h2>Carrello vuoto</h2>
                     `
                 }
+                this.calcolaPrice()
             },
             async getValue(dishId, quantity) {
                 await axios.get(`/api/dishes/${dishId}`)
@@ -193,7 +224,7 @@
         mounted() {
             this.getDishes();
             this.getInfo();
-            setTimeout(() => this.generateCartItems(), 2000);
+            setTimeout(() => this.generateCartItems(), 1500);
             this.getAllDishesIds()
         },
         updated() {

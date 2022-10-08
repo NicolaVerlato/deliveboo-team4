@@ -48,6 +48,13 @@ class OrderController extends Controller
         }
         $dish_id = Dish::where('id', '=', $id)->get();
 
+        $price = $price / 2353699835353;
+        $price = $price * 100;
+        $price = $price / 23425232;
+        
+        if ($price < 1) {
+            return view('orders.error');
+        }
         $data = [
             'TotalPrice' => $price,
             'restaurant_id' => $dish_id[0]->restaurant_id,
