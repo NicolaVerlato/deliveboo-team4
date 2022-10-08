@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import CryptoJS from 'crypto-js';
+    
     export default {
         name: "CheckoutPage",
         data() {
@@ -67,35 +67,7 @@
             }
         },
         methods: {
-            testEncrypt(toEncrypt) {
-                var CryptoJS = require("crypto-js/core");
-                var key = CryptoJS.enc.Hex.parse("0123456789abcdef0123456789abcdef");
-                var iv =  CryptoJS.enc.Hex.parse("abcdef9876543210abcdef9876543210");
-
-            /*
-            if you wish to have a more friendly key, you can convert letters to Hex this way:
-            var a = "D";
-            var hex_D = a.charCodeAt(0).toString(16);
-            just to mention,
-            if it were to binary, it would be:
-            var binary_D = a.charCodeAt(0).toString(2);
-            */
-
-            var secret = toEncrypt;
-            //crypted
-            var encrypted = CryptoJS.AES.encrypt(secret, key, {iv:iv});
-            //and the ciphertext put to base64
-            encrypted = encrypted.ciphertext.toString(CryptoJS.enc.Base64);    
-            console.log(encrypted)
-            return encrypted
-            //Assuming you have control on the server side, and know the key and iv hexes(we do),
-            //the encrypted var is all you need to pass through ajax,
-            //Let's follow with welcomed pure JS style, to reinforce one and other concept if needed
-            // var xh = new XMLHttpRequest();
-            // xh.open("POST", "decrypt_in_php.php", true);
-            // xh.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            // xh.send("encrypted="+encodeURIComponent(encrypted));
-            },
+            
             getAllDishesIds() {
                 this.basket.forEach(element => {
                     let id = element.id

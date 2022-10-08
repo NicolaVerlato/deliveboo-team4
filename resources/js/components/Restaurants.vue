@@ -12,6 +12,7 @@
                 :name="'id-'+tipo.id" 
                 :id="'id-'+tipo.id" 
                 :value="tipo.id"
+                v-model="checkedOptions"
             >
 
             <label class="form-check-label" :for="'id-'+tipo.id"> {{ tipo.name }} </label>
