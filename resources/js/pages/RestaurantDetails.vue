@@ -11,7 +11,7 @@
             <div v-if="restaurant.user_id">
                 <h4 class="text-center mt-4">Il nostro menù</h4>
 
-
+                <!-- Dishes section -->
                 <div v-for="dish in dishes" :key="dish.id" class="mb-3">
                     <div v-if="dish.is_visible == 1">
                         <div v-if="restaurant.user_id == dish.restaurant_id">
@@ -40,8 +40,9 @@
                 </div>
             </div>
 
+            <!-- If there are no dishes -->
             <div v-else> 
-               <p style="padding: 20px">
+               <p class="btn" style="padding: 20px">
                     Al momento non ci sono piatti disponibili. 
                     Torna alla 
                     <a style="color:white; padding: 20px 0;" href="/"> 
@@ -49,7 +50,41 @@
                     </a>
                </p>
             </div>
+        </div>
+
+
+        <div v-if="this.basket.length > 0" class="cart-preview">
             
+            <div class="toast" data-bs-autohide="false">
+
+                <div class="toast-header justify-content-center">
+                    <h5> Il tuo carrello </h5>
+                </div>
+
+                <div class="toast-body">
+                    <!-- For each item of the basket -->
+                    <div v-for="item in basket" :key="item.id" class="mb-3">
+                        <div v-if="item.is_visible == 1">
+                            <div v-if="restaurant.user_id == item.restaurant_id">
+
+                                <div class="card-body d-flex justify-content-around">
+
+                                    <div>
+                                        <h5 class="card-title text-center"> Piatto: {{item.name}} </h5>
+
+                                        <p class="card-text text-center"> Prezzo: {{item.price}} &euro;</p>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn btn-lg btn-cart">
+                        <a href="/carrello"> Vai al carrello </a>
+                    </div>
+                </div>
+            </div> 
         </div>
    </div>
 
@@ -191,7 +226,26 @@
     @import '../../sass/partials/variables.scss';
 
     .card {
-        width: 800px;
+        max-width: 600px;
         margin: 0 auto;
+    }
+    .cart-preview {
+        position: absolute;
+        top: 100px;
+        right: 30px;
+        .toast {
+            opacity: 1;
+        }
+        .btn {
+                display: block !important;
+            }
+        .btn-cart {
+            background-color: $brand-color;
+            margin: auto;
+         
+            a {
+                color: white;
+            }
+        }
     }
 </style>
