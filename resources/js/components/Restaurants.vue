@@ -110,7 +110,6 @@
                 </div>
 
             </div>
-        
     </section>
 
 </template>
@@ -174,9 +173,10 @@ import arrayPush from 'lodash/_arrayPush';
 
 <style lang="scss">
     .btn-filter {
+        cursor: pointer;
         color: white;
         border: 1px solid white;
-        padding: 4px;
+        padding: 6px;
         border-radius: 4px;
     }
 </style>

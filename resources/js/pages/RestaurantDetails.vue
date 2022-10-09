@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="wrapper">
         <div class="card mb-3">
 
             <div class="card-header d-flex align-items-center justify-content-center">
@@ -225,6 +225,9 @@
 
     @import '../../sass/partials/variables.scss';
 
+    .wrapper {
+        height: max-content;
+    }
     .card {
         max-width: 600px;
         margin: 0 auto;
