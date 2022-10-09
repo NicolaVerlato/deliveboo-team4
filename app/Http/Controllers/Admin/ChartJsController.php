@@ -64,5 +64,38 @@ class ChartJsController extends Controller
             return view('admin.chartjs.index', $data)->with('month',json_encode($month,JSON_NUMERIC_CHECK))->with('order',json_encode($orders,JSON_NUMERIC_CHECK));
     
         }
+        public function show($id) {
+            $user = Auth::user();
+            $data = [];
+            $allOrdersDate = [];
+            $month = [];
+            $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
+            for ($i=0; $i < 32; $i++) { 
+                $month[] = $i;
+            }
+            $orders = array(0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0, 12 => 0, 13 => 0, 14 => 0, 15 => 0, 16 => 0, 17 => 0, 18 => 0, 19 => 0, 20 => 0, 21 => 0, 22 => 0, 23 => 0, 24 => 0, 25 => 0, 26 => 0, 27 => 0, 28 => 0, 29 => 0, 30 => 0, 31 => 0);
+            $allOrders = Order::where('restaurant_id', '=', $restaurantLink[0]->id)->get();
+            foreach ($allOrders as $OrderKey => $OrderValue) {
+                $singleOrder = Carbon::createFromFormat('Y-m-d H:i:s', $OrderValue->created_at)->format('d');
+                array_push($allOrdersDate, $singleOrder);
+            }
+            foreach ($month as $dayKey => $singleDay) {
+                foreach ($allOrdersDate as $secondKey => $secondValue) {
+                    if ($secondValue == $singleDay) {
+    
+                        $orders[$singleDay] += 1;
+                    }
+                }
+            }
+            $total = 0;
+            foreach ($orders as $key => $value) {
+                $total += $value;
+            }
+            $data = [
+                'restaurantLink' => $restaurantLink,
+                'totalOrders' => $total
+            ];
+            return view('admin.chartjs.month', $data)->with('month',json_encode($month,JSON_NUMERIC_CHECK))->with('order',json_encode($orders,JSON_NUMERIC_CHECK));
+        }
     
 }

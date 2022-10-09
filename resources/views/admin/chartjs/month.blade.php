@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="text-center">
-            <a href="{{ route('admin.chartjs.show', ['chartj' => 0]) }}"><button>Statistiche mensili</button></a>
+            <a href="{{ route('admin.chartjs.index') }}"><button>STatistiche annuali</button></a>
         </div>
         <div class="col-md-10 offset-md-1">
-            <h1>Ciao, hai ricevuto {{$totalOrders}} ordini quest'anno</h1>
+            <h1>Ciao, hai ricevuto {{$totalOrders}} ordini questo mese</h1>
             <div class="panel panel-default">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
@@ -47,12 +47,11 @@
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Riepilogo ordini ristorante'
+                    text: 'Riepilogo ordini ristorante mensile'
                 }
             }
         });
     };
     
 </script>
-
 @endsection
