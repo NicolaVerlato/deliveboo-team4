@@ -18,11 +18,9 @@
         </div>
         <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
 
-        <div class="row row-cols-4">
+        <div v-if="this.checkedOptions.length == 0" class="row row-cols-4">
             <!--Single restaurant if the user doesnt select anything -->
-            <div v-if="this.checkedOptions.length == 0">
-                
-                <div v-for="restaurant in restaurants" :key="restaurant.id" class="col mr-4">
+            <div v-for="restaurant in restaurants" :key="restaurant.id" class="mr-4">
                     <div class="card m-3" style="width: 18rem;">
 
                         <div v-if="restaurant.cover">
@@ -63,12 +61,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- Single restaurant if the user selects a category -->
             <div v-else>
 
-                <div v-for="restaurant in checkedRestaurants" :key="restaurant.id" class="col mr-4">
+                <div class="row">
+                    <div v-for="restaurant in checkedRestaurants" :key="restaurant.id" class="col mr-4">
                     <div class="card m-3" style="width: 18rem;">
 
                         <div v-if="restaurant.cover">
@@ -109,9 +107,10 @@
                         </div>
                     </div>
                 </div>
+                </div>
 
             </div>
-        </div> 
+        
     </section>
 
 </template>
