@@ -55,7 +55,7 @@
 
         <div v-if="this.basket.length > 0" class="cart-preview">
             
-            <div class="toast" data-bs-autohide="false">
+            <div class="toast">
 
                 <div class="toast-header justify-content-center">
                     <h5> Il tuo carrello </h5>
@@ -64,20 +64,18 @@
                 <div class="toast-body">
                     <!-- For each item of the basket -->
                     <div v-for="item in basket" :key="item.id" class="mb-3">
-                        <div v-if="item.is_visible == 1">
-                            <div v-if="restaurant.user_id == item.restaurant_id">
+                        <!-- <div v-if="restaurant.user_id == item.restaurant_id"> -->
 
-                                <div class="card-body d-flex justify-content-around">
+                            <div class="card-body d-flex">
 
-                                    <div>
-                                        <h5 class="card-title text-center"> Piatto: {{item.name}} </h5>
-
-                                        <p class="card-text text-center"> Prezzo: {{item.price}} &euro;</p>
-                                    </div>
-                
+                                <div v-for="dish in dishes" :key="dish.id" v-if="dish.id == item.id">
+                                    <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                    <h6> Ristorante: {{restaurant.name}} </h6>
+                                    <div> Quantità: {{item.item}}</div>
                                 </div>
+                                
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
 
                     <div class="btn btn-lg btn-cart">
@@ -141,7 +139,7 @@
                 }
 
                 this.updateCart(a)
-                localStorage.setItem("data", JSON.stringify(this.basket))
+                localStorage.setItem("data", JSON.stringify(this.basket));
             },
             decrement(a) {
                 let counter = this.$el.querySelector(".counter").innerHTML
@@ -161,7 +159,7 @@
             },
             updateCart(id) {
                 let search = this.basket.find((x)=>x.id === id)
-                document.getElementById(id).innerHTML = search.item
+                document.getElementById(id).innerHTML = search.item;
             },
             loadingCart() {
                 this.basket.forEach(element => {
@@ -226,7 +224,7 @@
     @import '../../sass/partials/variables.scss';
 
     .wrapper {
-        height: max-content;
+        height: 400px;
     }
     .card {
         max-width: 600px;
@@ -238,6 +236,11 @@
         right: 30px;
         .toast {
             opacity: 1;
+            animation: fadeAbout 1s;
+            @keyframes fadeAbout {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
         }
         .btn {
                 display: block !important;
