@@ -32,19 +32,8 @@ class ChartJsController extends Controller
                 array_push($allOrdersDate, $singleOrder);
             }
             foreach ($month as $key => $value) {
-                // dd($restaurantLink[0]->id);
-               
-                
-                // $orders[] = $singleOrder;
-                // foreach ($orders as $key => $orderValue) {
-                //     if($orderValue == $value) {
-                //         $ordersTable[] = 1;
-                //     }
-                // }
-                // dd($allOrdersDate);
                 foreach ($allOrdersDate as $secondKey => $secondValue) {
                     if ($secondValue == $value) {
-    
                         $orders[$value] += 1;
                     }
                 }
@@ -59,8 +48,7 @@ class ChartJsController extends Controller
                 'restaurantLink' => $restaurantLink,
                 'totalOrders' => $total
             ];
-            // dd($ordersTable);
-            // dd($orders);
+
             return view('admin.chartjs.index', $data)->with('month',json_encode($month,JSON_NUMERIC_CHECK))->with('order',json_encode($orders,JSON_NUMERIC_CHECK));
     
         }
