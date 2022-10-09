@@ -31,7 +31,7 @@
             @endif
         @endforeach
     </ul>
-    <h3>Prezzo {{$prezzo}}</h3>
+    <h3>Prezzo {{$prezzo}}&euro;</h3>
 
     <a style="color: white; text-decoration: none;" href="http://127.0.0.1:8000/"> Torna alla home </a>
 </body>
