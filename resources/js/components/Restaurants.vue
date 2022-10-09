@@ -7,15 +7,16 @@
         <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
             <input 
                 class="form-check-input" 
-                @click="checkFilter(tipo.id)" 
                 type="checkbox" 
                 :name="'id-'+tipo.id" 
                 :id="'id-'+tipo.id" 
                 :value="tipo.id"
+                v-model="checkedOptions"
             >
 
             <label class="form-check-label" :for="'id-'+tipo.id"> {{ tipo.name }} </label>
         </div>
+        <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
 
         <div class="row row-cols-4">
             <!--Single restaurant if the user doesnt select anything -->
@@ -132,34 +133,50 @@ import arrayPush from 'lodash/_arrayPush';
             };
         },
         methods: {
-            checkFilter(value) {
-                // If the value of the selected input is not present in checked options - push it
-                if (!this.checkedOptions.includes(value)) {
-                    this.checkedOptions.push(value);
+            provaFiltro() {
+                // Al click ci prendiamo le checked options per la nuova chiamata axios
+                // Ciclo for che prende tutti gli id e fa una chiamata con gli id selezionati
+                // Poi un altro ciclo che compara gli id del risultato con l'id di ogni ristorante
+                // Se c'è corrispondenza si pushano gli item in checked restaurants
+                // Al termine del giro si svuota l'array checked restaurants che predispone array vuoto per future chiamate
+                axios.get('/api/restaurants') // Qui vanno appesi i parametri ovvero id presenti in checked options
+                .then((response) => {
+                    console.log(response)
+                    // this.restaurants = response.data.results;
+                });
 
-                    if (this.checkedOptions.length == 0) {
-                        return this.restaurants;  
-                    } else {
-                        // For each element of the restaurants array
-                        this.restaurants.forEach(element => {
-                            // For each item of the checked options array
-                            this.checkedOptions.forEach(item => {
-                                // If the checked value is the same as the user_id of the restaurant
-                                if (item == element.id) {
-                                    this.checkedRestaurants.push(element)
-                                } else {
-                                    // Return nothing
-                                    console.log('fanculo');
-                                }
-                            });
-                    }); }
-            } else {
-                const index = this.checkedOptions.indexOf(value);
-                if (index > -1) { 
-                this.checkedOptions.splice(index, 1);
-                }
-            }}  
-        },
+                console.log(this.checkedOptions);
+            },
+        },//checkFilter(value) {
+        //         // If the value of the selected input is not present in checked options - push it
+        //         // if (!this.checkedOptions.includes(value)) {
+        //         //     this.checkedOptions.push(value);
+
+        //             if (this.checkedOptions.length == 0) {
+        //                 return this.restaurants;  
+        //             } else {
+        //                 // For each element of the restaurants array
+        //             //     this.restaurants.forEach(element => {
+        //             //         // For each item of the checked options array
+        //             //         this.checkedOptions.forEach(item => {
+        //             //             // If the checked value is the same as the user_id of the restaurant
+        //             //             if (item == element.id) {
+        //             //                 if (!this.checkedRestaurants.includes(element)) {
+        //             //                     this.checkedRestaurants.push(element)
+        //             //                 } else if (this.checkedRestaurants.includes(element)) {
+        //             //                     const index = this.checkedRestaurants.indexOf(value);
+        //             //                     console.log(index);
+        //             //                     if (index > -1) { 
+        //             //                         this.checkedRestaurants.splice(index, 1);
+        //             //                     }
+        //             //                 }
+        //             //             } else {
+        //             //                 // Return nothing
+        //             //                 console.log('fanculo');
+        //             //             }
+        //             //         });
+        //             // }); }
+        // }},
         mounted() {
             axios.get('/api/restaurants')
             .then((response) => {
@@ -176,4 +193,13 @@ import arrayPush from 'lodash/_arrayPush';
         }
     }
 </script>
+
+<style lang="scss">
+    .btn-filter {
+        color: white;
+        border: 1px solid white;
+        padding: 4px;
+        border-radius: 4px;
+    }
+</style>
 

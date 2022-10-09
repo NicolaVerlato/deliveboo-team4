@@ -1986,50 +1986,59 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    checkFilter: function checkFilter(value) {
-      var _this = this;
-
-      // If the value of the selected input is not present in checked options - push it
-      if (!this.checkedOptions.includes(value)) {
-        this.checkedOptions.push(value);
-
-        if (this.checkedOptions.length == 0) {
-          return this.restaurants;
-        } else {
-          // For each element of the restaurants array
-          this.restaurants.forEach(function (element) {
-            // For each item of the checked options array
-            _this.checkedOptions.forEach(function (item) {
-              // If the checked value is the same as the user_id of the restaurant
-              if (item == element.id) {
-                _this.checkedRestaurants.push(element);
-              } else {
-                // Return nothing
-                console.log('fanculo');
-              }
-            });
-          });
-        }
-      } else {
-        var index = this.checkedOptions.indexOf(value);
-
-        if (index > -1) {
-          this.checkedOptions.splice(index, 1);
-        }
-      }
+    provaFiltro: function provaFiltro() {
+      // Al click ci prendiamo le checked options per la nuova chiamata axios
+      // Ciclo for che prende tutti gli id e fa una chiamata con gli id selezionati
+      // Poi un altro ciclo che compara gli id del risultato con l'id di ogni ristorante
+      // Se c'è corrispondenza si pushano gli item in checked restaurants
+      // Al termine del giro si svuota l'array checked restaurants che predispone array vuoto per future chiamate
+      axios.get('/api/restaurants') // Qui vanno appesi i parametri ovvero id presenti in checked options
+      .then(function (response) {
+        console.log(response); // this.restaurants = response.data.results;
+      });
+      console.log(this.checkedOptions);
     }
   },
+  //checkFilter(value) {
+  //         // If the value of the selected input is not present in checked options - push it
+  //         // if (!this.checkedOptions.includes(value)) {
+  //         //     this.checkedOptions.push(value);
+  //             if (this.checkedOptions.length == 0) {
+  //                 return this.restaurants;  
+  //             } else {
+  //                 // For each element of the restaurants array
+  //             //     this.restaurants.forEach(element => {
+  //             //         // For each item of the checked options array
+  //             //         this.checkedOptions.forEach(item => {
+  //             //             // If the checked value is the same as the user_id of the restaurant
+  //             //             if (item == element.id) {
+  //             //                 if (!this.checkedRestaurants.includes(element)) {
+  //             //                     this.checkedRestaurants.push(element)
+  //             //                 } else if (this.checkedRestaurants.includes(element)) {
+  //             //                     const index = this.checkedRestaurants.indexOf(value);
+  //             //                     console.log(index);
+  //             //                     if (index > -1) { 
+  //             //                         this.checkedRestaurants.splice(index, 1);
+  //             //                     }
+  //             //                 }
+  //             //             } else {
+  //             //                 // Return nothing
+  //             //                 console.log('fanculo');
+  //             //             }
+  //             //         });
+  //             // }); }
+  // }},
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     axios.get('/api/restaurants').then(function (response) {
-      _this2.restaurants = response.data.results;
+      _this.restaurants = response.data.results;
     });
     axios.get('/api/restauranttype').then(function (response) {
-      _this2.restauranttype = response.data.results;
+      _this.restauranttype = response.data.results;
     });
     axios.get('/api/types').then(function (response) {
-      _this2.types = response.data.results;
+      _this.types = response.data.results;
     });
   }
 });
@@ -2745,6 +2754,12 @@ var render = function render() {
         color: "white"
       }
     }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.checkedOptions,
+        expression: "checkedOptions"
+      }],
       staticClass: "form-check-input",
       attrs: {
         type: "checkbox",
@@ -2752,7 +2767,8 @@ var render = function render() {
         id: "id-" + tipo.id
       },
       domProps: {
-        value: tipo.id
+        value: tipo.id,
+        checked: Array.isArray(_vm.checkedOptions) ? _vm._i(_vm.checkedOptions, tipo.id) > -1 : _vm.checkedOptions
       },
       on: {
         click: function click($event) {
@@ -2765,7 +2781,14 @@ var render = function render() {
         "for": "id-" + tipo.id
       }
     }, [_vm._v(" " + _vm._s(tipo.name) + " ")])]);
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("span", {
+    staticClass: "btn-filter",
+    on: {
+      click: function click($event) {
+        return _vm.provaFiltro();
+      }
+    }
+  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-4"
   }, [this.checkedOptions.length == 0 ? _c("div", _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -7573,6 +7596,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".total-footer .faq-cols[data-v-61a7c374] {\n  display: flex;\n  align-self: center;\n}\n.total-footer .faq-cols ul[data-v-61a7c374] {\n  margin: 0 30px;\n}\n.total-footer .faq-cols ul .sub-list[data-v-61a7c374] {\n  margin: 0;\n}\n.total-footer .faq-cols ul li[data-v-61a7c374] {\n  margin: 6px;\n}\n.total-footer .faq-cols ul a[data-v-61a7c374] {\n  color: white;\n}\n.total-footer .container[data-v-61a7c374] {\n  display: flex;\n  justify-content: flex-end;\n  background-size: cover;\n  padding-bottom: 30px;\n}\n.total-footer .container h3[data-v-61a7c374] {\n  margin: 10px 0;\n}\n.total-footer .bottom-footer[data-v-61a7c374] {\n  position: relative;\n  background-color: white;\n}\n.total-footer .bottom-footer .container[data-v-61a7c374] {\n  height: 100%;\n  display: flex;\n  align-items: center;\n}\n.total-footer .bottom-footer .container h3[data-v-61a7c374] {\n  color: black;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".btn-filter {\n  color: white;\n  border: 1px solid white;\n  padding: 4px;\n  border-radius: 4px;\n}", ""]);
 
 // exports
 
@@ -38933,6 +38975,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&lang=scss&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&lang=scss&scoped=true& ***!
@@ -55015,7 +55087,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Restaurants_vue_vue_type_template_id_b2e8868a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Restaurants.vue?vue&type=template&id=b2e8868a& */ "./resources/js/components/Restaurants.vue?vue&type=template&id=b2e8868a&");
 /* harmony import */ var _Restaurants_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Restaurants.vue?vue&type=script&lang=js& */ "./resources/js/components/Restaurants.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Restaurants_vue_vue_type_style_index_0_id_b2e8868a_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss& */ "./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -55023,7 +55097,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Restaurants_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Restaurants_vue_vue_type_template_id_b2e8868a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Restaurants_vue_vue_type_template_id_b2e8868a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -55052,6 +55126,22 @@ component.options.__file = "resources/js/components/Restaurants.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Restaurants.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Restaurants.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss& ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_style_index_0_id_b2e8868a_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Restaurants.vue?vue&type=style&index=0&id=b2e8868a&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_style_index_0_id_b2e8868a_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_style_index_0_id_b2e8868a_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_style_index_0_id_b2e8868a_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Restaurants_vue_vue_type_style_index_0_id_b2e8868a_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 
