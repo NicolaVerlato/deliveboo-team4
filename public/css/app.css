@@ -11131,3 +11131,9 @@ input:invalid {
   }
 }
 
+.little_card {
+  border: 1px solid #fea543;
+  border-radius: 15px;
+  background-color: #fac486;
+}
+
