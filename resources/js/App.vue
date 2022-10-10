@@ -59,10 +59,6 @@
                         name: "/",
                         label: "Home"
                     },
-                    {
-                        name: "carrello",
-                        label: "Carrello"
-                    },
                 ]
             };
         },
