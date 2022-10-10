@@ -91,7 +91,7 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.stats.index') }}">
                                     <i class="fa-solid fa-chart-simple big_icon"></i>
-                                    Statistiche
+                                    Riepilogo Ordini
                                 </a>
                             </li>
                         @endif

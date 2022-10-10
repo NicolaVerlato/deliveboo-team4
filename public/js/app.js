@@ -1972,6 +1972,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/_arrayPush */ "./node_modules/lodash/_arrayPush.js");
 /* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurants',
@@ -1987,58 +1993,50 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     provaFiltro: function provaFiltro() {
-      // Al click ci prendiamo le checked options per la nuova chiamata axios
-      // Ciclo for che prende tutti gli id e fa una chiamata con gli id selezionati
-      // Poi un altro ciclo che compara gli id del risultato con l'id di ogni ristorante
-      // Se c'è corrispondenza si pushano gli item in checked restaurants
-      // Al termine del giro si svuota l'array checked restaurants che predispone array vuoto per future chiamate
-      axios.get('/api/restaurants') // Qui vanno appesi i parametri ovvero id presenti in checked options
-      .then(function (response) {
-        console.log(response); // this.restaurants = response.data.results;
+      var _this = this;
+
+      this.checkedRestaurants = [];
+      axios.get("/api/restaurants?categories=".concat(this.checkedOptions)).then(function (response) {
+        // Pivot table
+        var pivot = response.data.data; // Filter engine
+
+        var _iterator = _createForOfIteratorHelper(pivot),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var item = _step.value;
+
+            if (_this.checkedOptions.includes(item.type_id)) {
+              if (!_this.checkedRestaurants.includes(item)) {
+                if (!_this.checkedRestaurants.includes(item.restaurant_id)) {
+                  _this.checkedRestaurants.push(item); // Return just one element with that restaurant id
+
+
+                  return Array.from(new Set(_this.checkedRestaurants));
+                }
+              }
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
       });
-      console.log(this.checkedOptions);
     }
   },
-  //checkFilter(value) {
-  //         // If the value of the selected input is not present in checked options - push it
-  //         // if (!this.checkedOptions.includes(value)) {
-  //         //     this.checkedOptions.push(value);
-  //             if (this.checkedOptions.length == 0) {
-  //                 return this.restaurants;  
-  //             } else {
-  //                 // For each element of the restaurants array
-  //             //     this.restaurants.forEach(element => {
-  //             //         // For each item of the checked options array
-  //             //         this.checkedOptions.forEach(item => {
-  //             //             // If the checked value is the same as the user_id of the restaurant
-  //             //             if (item == element.id) {
-  //             //                 if (!this.checkedRestaurants.includes(element)) {
-  //             //                     this.checkedRestaurants.push(element)
-  //             //                 } else if (this.checkedRestaurants.includes(element)) {
-  //             //                     const index = this.checkedRestaurants.indexOf(value);
-  //             //                     console.log(index);
-  //             //                     if (index > -1) { 
-  //             //                         this.checkedRestaurants.splice(index, 1);
-  //             //                     }
-  //             //                 }
-  //             //             } else {
-  //             //                 // Return nothing
-  //             //                 console.log('fanculo');
-  //             //             }
-  //             //         });
-  //             // }); }
-  // }},
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get('/api/restaurants').then(function (response) {
-      _this.restaurants = response.data.results;
+      _this2.restaurants = response.data.results;
     });
     axios.get('/api/restauranttype').then(function (response) {
-      _this.restauranttype = response.data.results;
+      _this2.restauranttype = response.data.results;
     });
     axios.get('/api/types').then(function (response) {
-      _this.types = response.data.results;
+      _this2.types = response.data.results;
     });
   }
 });
@@ -2628,14 +2626,32 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", [_c("svg", {
+    staticStyle: {
+      opacity: "1",
+      width: "100%",
+      height: "60px",
+      fill: "#fea543",
+      transform: "rotateY(180deg)"
+    },
+    attrs: {
+      "data-name": "Layer 1",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 1200 120",
+      preserveAspectRatio: "none"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+    }
+  })]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]);
 };
 
 var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h4", {
+  return _c("h4", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "35px",
@@ -2645,7 +2661,12 @@ var staticRenderFns = [function () {
     staticClass: "fa-solid fa-cookie-bite"
   }), _c("i", {
     staticClass: "fa-solid fa-cookie-bite"
-  })])]), _vm._v(" "), _c("h5", {
+  })])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("h5", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "20px",
@@ -2659,7 +2680,12 @@ var staticRenderFns = [function () {
     attrs: {
       href: "http://127.0.0.1:8000/login"
     }
-  }, [_vm._v(" \n            Sezione ristoranti \n        ")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" \n            Sezione ristoranti \n        ")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
     staticClass: "total-footer"
   }, [_c("div", {
     staticClass: "top-footer"
@@ -2715,7 +2741,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Diritti")])])])])])])])]);
+  }, [_vm._v("Diritti")])])])])])])]);
 }];
 render._withStripped = true;
 
@@ -2771,8 +2797,23 @@ var render = function render() {
         checked: Array.isArray(_vm.checkedOptions) ? _vm._i(_vm.checkedOptions, tipo.id) > -1 : _vm.checkedOptions
       },
       on: {
-        click: function click($event) {
-          return _vm.checkFilter(tipo.id);
+        change: function change($event) {
+          var $$a = _vm.checkedOptions,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false;
+
+          if (Array.isArray($$a)) {
+            var $$v = tipo.id,
+                $$i = _vm._i($$a, $$v);
+
+            if ($$el.checked) {
+              $$i < 0 && (_vm.checkedOptions = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.checkedOptions = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.checkedOptions = $$c;
+          }
         }
       }
     }), _vm._v(" "), _c("label", {
@@ -2788,12 +2829,12 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
     staticClass: "row row-cols-4"
-  }, [this.checkedOptions.length == 0 ? _c("div", _vm._l(_vm.restaurants, function (restaurant) {
+  }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
-      staticClass: "col mr-4"
+      staticClass: "mr-5"
     }, [_c("div", {
       staticClass: "card m-3",
       staticStyle: {
@@ -2836,7 +2877,9 @@ var render = function render() {
         }
       }
     }, [_vm._v("View\n                        ")])], 2)])]);
-  }), 0) : _c("div", _vm._l(_vm.checkedRestaurants, function (restaurant) {
+  }), 0) : _c("div", [_c("div", {
+    staticClass: "row"
+  }, _vm._l(_vm.checkedRestaurants, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
       staticClass: "col mr-4"
@@ -3013,7 +3056,7 @@ var render = function render() {
     staticStyle: {
       opacity: "1",
       width: "100%",
-      height: "150px",
+      height: "100px",
       fill: "#fea543",
       transform: "rotateY(0deg)"
     },
@@ -3028,39 +3071,6 @@ var render = function render() {
       d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
     }
   })])])]), _vm._v(" "), _c("div", {
-    staticStyle: {
-      "background-color": "white"
-    }
-  }, [_c("p", {
-    staticStyle: {
-      padding: "100px 0",
-      "text-align": "center",
-      "font-size": "40px"
-    }
-  }, [_vm._v("\n            Qui sezione bianca bla bla assaggia piatti della tua zona\n        ")]), _vm._v(" "), _c("svg", {
-    staticStyle: {
-      opacity: "1",
-      width: "100%",
-      height: "80px",
-      fill: "rgb(254, 165, 67)",
-      transform: "rotateX(179deg)"
-    },
-    attrs: {
-      "data-name": "Layer 1",
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 1200 120",
-      preserveAspectRatio: "none"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-    }
-  })])]), _vm._v(" "), _c("div", {
-    staticStyle: {
-      color: "white",
-      "padding-top": "50px"
-    }
-  }), _vm._v(" "), _c("div", {
     staticClass: "container",
     staticStyle: {
       "padding-bottom": "50px"
@@ -3089,7 +3099,9 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("div", {
+  return _c("div", {
+    staticClass: "wrapper"
+  }, [_c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
     staticClass: "card-header d-flex align-items-center justify-content-center"
@@ -3136,23 +3148,22 @@ var render = function render() {
   })], 2) : _c("div", [_vm._m(0)])]), _vm._v(" "), this.basket.length > 0 ? _c("div", {
     staticClass: "cart-preview"
   }, [_c("div", {
-    staticClass: "toast",
-    attrs: {
-      "data-bs-autohide": "false"
-    }
+    staticClass: "toast"
   }, [_vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "toast-body"
   }, [_vm._l(_vm.basket, function (item) {
     return _c("div", {
       key: item.id,
       staticClass: "mb-3"
-    }, [item.is_visible == 1 ? _c("div", [_vm.restaurant.user_id == item.restaurant_id ? _c("div", [_c("div", {
-      staticClass: "card-body d-flex justify-content-around"
-    }, [_c("div", [_c("h5", {
-      staticClass: "card-title text-center"
-    }, [_vm._v(" Piatto: " + _vm._s(item.name) + " ")]), _vm._v(" "), _c("p", {
-      staticClass: "card-text text-center"
-    }, [_vm._v(" Prezzo: " + _vm._s(item.price) + " €")])])])]) : _vm._e()]) : _vm._e()]);
+    }, [_c("div", {
+      staticClass: "card-body d-flex"
+    }, _vm._l(_vm.dishes, function (dish) {
+      return dish.id == item.id ? _c("div", {
+        key: dish.id
+      }, [_c("h5", {
+        staticClass: "card-title text-center"
+      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e();
+    }), 0)]);
   }), _vm._v(" "), _vm._m(2)], 2)])]) : _vm._e()]);
 };
 
@@ -7614,7 +7625,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  color: white;\n  border: 1px solid white;\n  padding: 4px;\n  border-radius: 4px;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}", ""]);
 
 // exports
 
@@ -7633,7 +7644,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview[data-v-7720c0e8] {\n  position: absolute;\n  top: 100px;\n  right: 30px;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".wrapper[data-v-7720c0e8] {\n  height: 400px;\n}\n.card[data-v-7720c0e8] {\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview[data-v-7720c0e8] {\n  position: absolute;\n  top: 100px;\n  right: 30px;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 
@@ -55449,8 +55460,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
