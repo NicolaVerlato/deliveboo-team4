@@ -18,11 +18,12 @@
                             :to="link.name"> {{link.label}} 
                         </router-link>
 
-                        <span 
+                        <!-- In un mondo ideale contiene la somma degli elementi del carrello, sempre aggiornato -->
+                        <!-- <span 
                         class="top-0 start-100 translate-middle p-2 border border-light rounded-circle"
                         style="width: 40px; height: 40px; text-align: center; margin-left: 10px;">
                             <span class="visually-hidden"> {{checkoutAmount}} </span>
-                        </span>
+                        </span> -->
                       
                     </div>
                 </div>

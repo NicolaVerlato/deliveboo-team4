@@ -2538,7 +2538,7 @@ var render = function render() {
     staticClass: "container-fluid"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "navbar-nav align-center align-items-center"
-  }, [_vm._l(_vm.links, function (link, index) {
+  }, _vm._l(_vm.links, function (link, index) {
     return _c("router-link", {
       key: index,
       staticClass: "header-links",
@@ -2549,17 +2549,7 @@ var render = function render() {
         to: link.name
       }
     }, [_vm._v(" " + _vm._s(link.label) + " \n                    ")]);
-  }), _vm._v(" "), _c("span", {
-    staticClass: "top-0 start-100 translate-middle p-2 border border-light rounded-circle",
-    staticStyle: {
-      width: "40px",
-      height: "40px",
-      "text-align": "center",
-      "margin-left": "10px"
-    }
-  }, [_c("span", {
-    staticClass: "visually-hidden"
-  }, [_vm._v(" " + _vm._s(_vm.checkoutAmount) + " ")])])], 2)])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _c("footer", [_c("Footer")], 1)]);
+  }), 1)])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _c("footer", [_c("Footer")], 1)]);
 };
 
 var staticRenderFns = [function () {
