@@ -66,47 +66,54 @@
             <div v-else>
 
                 <div class="row">
-                    <div v-for="restaurant in checkedRestaurants" :key="restaurant.id" class="col mr-4">
-                    <div class="card m-3" style="width: 18rem;">
+                    <div v-for="singleRest in restaurants">
+                    <div 
+                        v-for="restaurant in checkedRestaurants"
+                        v-if="singleRest.id == restaurant.restaurant_id"
+                        :key="restaurant.id" 
+                        class="col mr-4"
+                    >
+                        <div class="card m-3" style="width: 18rem;">
 
-                        <div v-if="restaurant.cover">
-                            <img 
-                            class="card-img-top"  
-                            :src="'storage/' + restaurant.cover" 
-                            :alt="restaurant.title">
-                        </div>
+                            <div v-if="singleRest.cover">
+                                <img 
+                                class="card-img-top"  
+                                :src="'storage/' + singleRest.cover" 
+                                :alt="singleRest.title">
+                            </div>
 
-                        <div v-else>
-                            <img 
-                            class="card-img-top"  
-                            :src="'images/default-image.jpeg'"
-                            :alt="restaurant.title">
-                        </div>
+                            <div v-else>
+                                <img 
+                                class="card-img-top"  
+                                :src="'images/default-image.jpeg'"
+                                :alt="singleRest.title">
+                            </div>
 
-                        <div class="card-body">
+                            <div class="card-body">
 
-                            <h5 class="card-title"> {{restaurant.name}} </h5>
-                            <div v-for="item in restauranttype" :key="item.id">
-                                <div v-if="restaurant.id == item.restaurant_id">
-                                    <div v-for="singleType in types" :key="singleType.id">
-                                        <div v-if="item.type_id == singleType.id">
-                                            {{singleType.name}}
+                                <h5 class="card-title"> {{singleRest.name}} </h5>
+                                <div v-for="item in restauranttype" :key="item.id">
+                                    <div v-if="singleRest.id == item.restaurant_id">
+                                        <div v-for="singleType in types" :key="singleType.id">
+                                            <div v-if="item.type_id == singleType.id">
+                                                {{singleType.name}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <p class="card-text">Indirizzo: {{restaurant.address}}</p>
+                                <p class="card-text">Indirizzo: {{singleRest.address}}</p>
 
-                            <router-link 
-                                class="btn btn-sm btn-primary"
-                                :to="{
-                                    name: 'restaurant-details',
-                                    params: {slug: restaurant.slug}
-                                }">View
-                            </router-link>
+                                <router-link 
+                                    class="btn btn-sm btn-primary"
+                                    :to="{
+                                        name: 'restaurant-details',
+                                        params: {slug: singleRest.slug}
+                                    }">View
+                                </router-link>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    </div>
                 </div>
 
             </div>
