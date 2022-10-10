@@ -1924,9 +1924,6 @@ __webpack_require__.r(__webpack_exports__);
       links: [{
         name: "/",
         label: "Home"
-      }, {
-        name: "carrello",
-        label: "Carrello"
       }]
     };
   },
@@ -2344,10 +2341,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       restaurant: null,
       dishes: [],
       dishesidArray: [],
-      basket: JSON.parse(localStorage.getItem("data")) || []
+      basket: JSON.parse(localStorage.getItem("data")) || [],
+      calcolo: 0,
+      allDishesIds: '',
+      allQuantity: ''
     };
   },
   methods: {
+    getAllDishesIds: function getAllDishesIds() {
+      var _this = this;
+
+      this.basket.forEach(function (element) {
+        var id = element.id;
+        var amount = element.item;
+        _this.allDishesIds += id + '-';
+        _this.allQuantity += amount + '-';
+      });
+    },
+    emptyCart: function emptyCart() {
+      localStorage.clear();
+    },
+    calcolaPrice: function calcolaPrice() {
+      for (var i = 0; i < this.basket.length; i++) {
+        var prezzo = parseInt(this.basket[i].price);
+        var quantita = parseInt(this.basket[i].item);
+        this.calcolo += prezzo * quantita;
+      }
+
+      this.calcolo = this.calcolo * 2353699835353;
+      this.calcolo = this.calcolo / 100;
+      this.calcolo = this.calcolo * 23425232;
+    },
     checkAmount: function checkAmount(a) {
       var search = this.basket.find(function (x) {
         return x.id === a;
@@ -2426,7 +2450,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getRestaurant: function getRestaurant() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -2434,12 +2458,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/restaurants/?slug=".concat(_this.$route.params.slug)).then(function (response) {
+                return axios.get("/api/restaurants/?slug=".concat(_this2.$route.params.slug)).then(function (response) {
                   response.data.results.forEach(function (element) {
                     // If the slug on the url is the same as one of the elements
                     // Save the data on the empty restaurant
-                    if (_this.$route.params.slug === element.slug) {
-                      _this.restaurant = element;
+                    if (_this2.$route.params.slug === element.slug) {
+                      _this2.restaurant = element;
                     }
                   });
                 });
@@ -2453,7 +2477,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     getDishes: function getDishes() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -2463,7 +2487,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.next = 2;
                 return axios.get("/api/restaurants").then(function (response) {
                   response.data.dishes.forEach(function (element) {
-                    _this2.dishes.push(element);
+                    _this3.dishes.push(element);
                   });
                 });
 
@@ -2505,6 +2529,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getRestaurant();
     this.getDishes();
+    this.getAllDishesIds();
   },
   updated: function updated() {
     this.loadingCart();
@@ -3148,13 +3173,28 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "card-body d-flex"
     }, _vm._l(_vm.dishes, function (dish) {
-      return dish.id == item.id ? _c("div", {
+      return _c("div", {
         key: dish.id
-      }, [_c("h5", {
+      }, [dish.id == item.id ? _c("div", [_c("h5", {
         staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e();
+      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e()]);
     }), 0)]);
-  }), _vm._v(" "), _vm._m(2)], 2)])]) : _vm._e()]);
+  }), _vm._v(" "), _c("div", {
+    staticClass: "btn btn-lg btn-cart"
+  }, [_c("a", {
+    staticStyle: {
+      color: "white",
+      "font-size": "30px"
+    },
+    attrs: {
+      href: "http://127.0.0.1:8000/orders/create/" + this.calcolo + "/" + this.basket[0].id + "/" + this.allDishesIds + "/" + this.allQuantity
+    },
+    on: {
+      click: function click($event) {
+        _vm.calcolaPrice(), _vm.emptyCart();
+      }
+    }
+  }, [_vm._v(" \n                         Completa pagamento \n                     ")])])], 2)])]) : _vm._e()]);
 };
 
 var staticRenderFns = [function () {
@@ -3182,17 +3222,6 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "toast-header justify-content-center"
   }, [_c("h5", [_vm._v(" Il tuo carrello ")])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "btn btn-lg btn-cart"
-  }, [_c("a", {
-    attrs: {
-      href: "/carrello"
-    }
-  }, [_vm._v(" Vai al carrello ")])]);
 }];
 render._withStripped = true;
 
@@ -55450,8 +55479,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

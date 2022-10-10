@@ -68,10 +68,12 @@
 
                             <div class="card-body d-flex">
 
-                                <div v-for="dish in dishes" :key="dish.id" v-if="dish.id == item.id">
-                                    <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
-                                    <h6> Ristorante: {{restaurant.name}} </h6>
-                                    <div> Quantità: {{item.item}}</div>
+                                <div v-for="dish in dishes" :key="dish.id">
+                                    <div v-if="dish.id == item.id"> 
+                                        <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                        <h6> Ristorante: {{restaurant.name}} </h6>
+                                        <div> Quantità: {{item.item}}</div>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -79,7 +81,10 @@
                     </div>
 
                     <div class="btn btn-lg btn-cart">
-                        <a href="/carrello"> Vai al carrello </a>
+                        <!-- <a href="/carrello"> Vai al carrello </a> -->
+                        <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo + '/' + this.basket[0].id + '/' + this.allDishesIds + '/' + this.allQuantity"> 
+                            Completa pagamento 
+                        </a>
                     </div>
                 </div>
             </div> 
@@ -98,9 +103,33 @@
                 dishes: [],
                 dishesidArray: [],
                 basket: JSON.parse(localStorage.getItem("data")) || [],
+                calcolo: 0,
+                allDishesIds: '',
+                allQuantity: ''
             }
         },
         methods: {
+            getAllDishesIds() {
+                this.basket.forEach(element => {
+                    let id = element.id
+                    let amount = element.item
+                    this.allDishesIds +=  id + '-'
+                    this.allQuantity += amount + '-'
+                });
+            },
+            emptyCart() {
+                localStorage.clear();
+            },
+            calcolaPrice() {
+                    for (let i = 0; i < this.basket.length; i++) {
+                        let prezzo = parseInt( this.basket[i].price)
+                        let quantita = parseInt( this.basket[i].item )
+                        this.calcolo += prezzo * quantita
+                    }
+                    this.calcolo = this.calcolo * 2353699835353;
+                    this.calcolo = this.calcolo / 100;
+                    this.calcolo = this.calcolo * 23425232;
+            },
             checkAmount(a) {
                 let search = this.basket.find((x)=>x.id === a) || [];
                 console.log(search)
@@ -211,6 +240,7 @@
         mounted() {
             this.getRestaurant();
             this.getDishes();
+            this.getAllDishesIds();
         },
         updated() {
             this.loadingCart()
