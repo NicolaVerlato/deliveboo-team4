@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="text-center">
-            <a href="{{ route('admin.chartjs.index') }}"><button>STatistiche annuali</button></a>
+            <a href="{{ route('admin.chartjs.index') }}"><button>Statistiche annuali</button></a>
         </div>
         <div class="col-md-10 offset-md-1">
-            <h1>Ciao, hai ricevuto {{$totalOrders}} ordini questo mese</h1>
+            <h1>Ciao, hai guadagnato {{$totalOrders}}&euro; questo mese</h1>
             <div class="panel panel-default">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
@@ -22,12 +22,18 @@
 <script>
     var month = <?php echo $month; ?>;
     var order = <?php echo $order; ?>;
+    var quantity = <?php echo $quantity; ?>;
     var barChartData = {
         labels: month,
         datasets: [{
-            label: 'Orders',
+            label: 'Euro',
             backgroundColor: '#fba54f',
-            data: order
+            data: order 
+        },
+        {
+            label: 'Quantità',
+            backgroundColor: '#2f4858',
+            data: quantity 
         }]
     };
 
@@ -37,17 +43,29 @@
             type: 'bar',
             data: barChartData,
             options: {
-                elements: {
-                    rectangle: {
-                        borderWidth: 2,
-                        borderColor: '#c1c1c1',
-                        borderSkipped: 'bottom'
-                    }
-                },
+                scales: {
+                yAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: "Euro",
+                    },
+                    
+                  },
+                ],
+                xAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: "Giorni",
+                    },
+                  },
+                ],
+              },
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Riepilogo ordini ristorante mensile'
+                    text: 'Riepilogo guadagni ristorante mensile'
                 }
             }
         });

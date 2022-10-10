@@ -7,7 +7,7 @@
             <a href="{{ route('admin.chartjs.show', ['chartj' => 0]) }}"><button>Statistiche mensili</button></a>
         </div>
         <div class="col-md-10 offset-md-1">
-            <h1>Ciao, hai ricevuto {{$totalOrders}} ordini quest'anno</h1>
+            <h1>Ciao, hai guadagnato {{$totalOrders}}&euro; quest'anno</h1>
             <div class="panel panel-default">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
@@ -25,8 +25,21 @@
     var barChartData = {
         labels: month,
         datasets: [{
-            label: 'Orders',
-            backgroundColor: '#fba54f',
+            label: 'Euro',
+            backgroundColor: [
+          "#566573",
+          "#99a3a4",
+          "#dc7633",
+          "#f5b041",
+          "#f7dc6f",
+          "#82e0aa",
+          "#73c6b6",
+          "#5dade2",
+          "#a569bd",
+          "#ec7063",
+          "#a5754a",
+          '#fba54f'
+        ],
             data: order
         }]
     };
@@ -34,7 +47,7 @@
     window.onload = function() {
         var ctx = document.getElementById("canvas").getContext("2d");
         window.myBar = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: barChartData,
             options: {
                 elements: {
@@ -47,7 +60,7 @@
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Riepilogo ordini ristorante'
+                    text: 'Riepilogo guadagni ristorante annuale'
                 }
             }
         });

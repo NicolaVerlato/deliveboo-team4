@@ -4,9 +4,9 @@
     <div class="container">
         <h2 class="ms_title">Ordini effettuati nel tuo ristorante</h2>
         @foreach ($orders as $singleOrder)
-            <div class="card mt-3" style="width: 25rem;">
+        @if ($singleOrder->confirmed)
+        <div class="card mt-3" style="width: 25rem;">
                 <div class="card-body">
-                    @if ($singleOrder->confirmed)
                         <h3 class="card-title">Nome utente: {{ $singleOrder->customer_name }}</h3>
                         <h3 class="card-title">Email: {{ $singleOrder->customer_email }}</h3>
                         <h3 class="card-title">Indirizzo: {{ $singleOrder->customer_address }}</h3>
@@ -23,9 +23,9 @@
                             class="btn ms_btn">
                             Dettagli ordine
                         </a>
-                    @endif
+                    </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
 @endsection
