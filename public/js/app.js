@@ -2371,6 +2371,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.calcolo = this.calcolo * 2353699835353;
       this.calcolo = this.calcolo / 100;
       this.calcolo = this.calcolo * 23425232;
+      this.getAllDishesIds();
     },
     checkAmount: function checkAmount(a) {
       var search = this.basket.find(function (x) {
@@ -2382,7 +2383,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var counter = this.$el.querySelector(".counter").innerHTML;
       var search = this.basket.find(function (x) {
         return x.id === a;
-      }); // se il carrello non è vuoto
+      });
+      console.log(counter); // se il carrello non è vuoto
 
       if (this.basket.length > 0) {
         // se lo slug del ristorante attuale non corrisponde a quello nel carrello
@@ -2412,7 +2414,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           price: price
         });
       } else {
-        search.item += 1;
+        if (search.item < 9) {
+          search.item += 1;
+        } else {
+          alert('Il quantitativo massimo di ordini per ciascun piatto è 9!');
+        }
       }
 
       this.updateCart(a);
@@ -3177,7 +3183,13 @@ var render = function render() {
         key: dish.id
       }, [dish.id == item.id ? _c("div", [_c("h5", {
         staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e()]);
+      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", {
+        on: {
+          click: function click($event) {
+            return _vm.getAllDishesIds();
+          }
+        }
+      }, [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e()]);
     }), 0)]);
   }), _vm._v(" "), _c("div", {
     staticClass: "btn btn-lg btn-cart"

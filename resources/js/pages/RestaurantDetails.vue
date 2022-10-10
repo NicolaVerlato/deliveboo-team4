@@ -72,7 +72,7 @@
                                     <div v-if="dish.id == item.id"> 
                                         <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
                                         <h6> Ristorante: {{restaurant.name}} </h6>
-                                        <div> Quantità: {{item.item}}</div>
+                                        <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
                                     </div>
                                 </div>
                                 
@@ -129,6 +129,7 @@
                     this.calcolo = this.calcolo * 2353699835353;
                     this.calcolo = this.calcolo / 100;
                     this.calcolo = this.calcolo * 23425232;
+                    this.getAllDishesIds();
             },
             checkAmount(a) {
                 let search = this.basket.find((x)=>x.id === a) || [];
@@ -137,6 +138,7 @@
             increment(a, slug, price) {
                 let counter = this.$el.querySelector(".counter").innerHTML
                 let search = this.basket.find((x)=>x.id === a)
+                console.log(counter)
                 // se il carrello non è vuoto
                 if(this.basket.length > 0) {
                     // se lo slug del ristorante attuale non corrisponde a quello nel carrello
@@ -164,7 +166,11 @@
                         price: price
                     })
                 } else {
-                    search.item += 1
+                    if(search.item < 9) {
+                        search.item += 1
+                    } else {
+                        alert('Il quantitativo massimo di ordini per ciascun piatto è 9!')
+                    }
                 }
 
                 this.updateCart(a)
