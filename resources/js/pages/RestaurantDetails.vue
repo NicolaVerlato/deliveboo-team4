@@ -7,11 +7,10 @@
                 <h2 class="card-title text-center" style="margin: 0 !important;"> {{restaurant.name}} </h2>
             </div>
 
-
             <div v-if="restaurant.user_id">
                 <h4 class="text-center mt-4">Il nostro menù</h4>
 
-                <!-- Dishes section -->
+                <!-- DISHES section -->
                 <div v-for="dish in dishes" :key="dish.id" class="mb-3">
                     <div v-if="dish.is_visible == 1">
                         <div v-if="restaurant.user_id == dish.restaurant_id">
@@ -34,9 +33,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 
@@ -51,7 +48,6 @@
                </p>
             </div>
         </div>
-
 
         <div v-if="this.basket.length > 0" class="cart-preview">
             
@@ -216,16 +212,12 @@
             this.loadingCart()
         },
     }
-
 </script>
 
 <style lang="scss" scoped>
 
-    @import '../../sass/partials/variables.scss';
+@import '../../sass/partials/variables.scss';
 
-    .wrapper {
-        height: 400px;
-    }
     .card {
         max-width: 600px;
         margin: 0 auto;

@@ -1,38 +1,50 @@
 <template>
 
     <section class="mt-4">
-        <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
-            Lista dei ristoranti
+        <!--Title-->
+        <h2 class="text-center text-uppercase fs-1" style="color:white; font-size: 30px; margin-bottom: 40px;">
+            <b>Lista dei ristoranti</b>
         </h2>
-        <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
-            <input 
+        <!--CHECKBOX-->
+        <div class="d-flex justify-content-center m-5">
+            <div 
+                v-for="tipo in types" 
+                :key="tipo.id" 
+                class="form-check form-check-inline"  
+                style="color:white;">
+
+                <input 
                 class="form-check-input" 
                 type="checkbox" 
                 :name="'id-'+tipo.id" 
                 :id="'id-'+tipo.id" 
                 :value="tipo.id"
                 v-model="checkedOptions"
-            >
+                >
+                <label class="form-check-label text-uppercase" :for="'id-'+tipo.id"> <b>{{ tipo.name }}</b> </label>
+            </div>
 
-            <label class="form-check-label" :for="'id-'+tipo.id"> {{ tipo.name }} </label>
+            <span class="btn-filter" @click="provaFiltro()"><strong>Applica filtri</strong></span>
         </div>
-        <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
 
+        <!--RESTAURANTS-->
         <div v-if="this.checkedRestaurants.length == 0" class="row row-cols-4">
             <!--Single restaurant if the user doesnt select anything -->
             <div v-for="restaurant in restaurants" :key="restaurant.id" class="mr-5">
-                    <div class="card m-3" style="width: 18rem;">
+                    <div class="card mb-4" style=" width: 18rem; border-radius: 50px 15px;">
 
                         <div v-if="restaurant.cover">
                             <img 
-                            class="card-img-top"  
+                            class="card-img-top" 
+                            style="border-radius: 50px 15px 15px;" 
                             :src="'storage/' + restaurant.cover" 
                             :alt="restaurant.title">
                         </div>
 
                         <div v-else>
                             <img 
-                            class="card-img-top"  
+                            class="card-img-top"
+                            style="border-radius: 50px 15px 15px;"  
                             :src="'images/default-image.jpeg'"
                             :alt="restaurant.title">
                         </div>
@@ -52,11 +64,11 @@
                             <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
                             <router-link 
-                                class="btn btn-sm btn-primary"
+                                class="btn btn_green"
                                 :to="{
                                     name: 'restaurant-details',
                                     params: {slug: restaurant.slug}
-                                }">View
+                                }"><strong>Menu</strong>
                             </router-link>
                         </div>
                     </div>
@@ -67,48 +79,50 @@
 
                 <div class="row">
                     <div v-for="restaurant in checkedRestaurants" :key="restaurant.id" class="col mr-4">
-                    <div class="card m-3" style="width: 18rem;">
 
-                        <div v-if="restaurant.cover">
-                            <img 
-                            class="card-img-top"  
-                            :src="'storage/' + restaurant.cover" 
-                            :alt="restaurant.title">
-                        </div>
+                        <div class="card mb-4" style=" width: 18rem; border-radius: 50px 15px;">
 
-                        <div v-else>
-                            <img 
-                            class="card-img-top"  
-                            :src="'images/default-image.jpeg'"
-                            :alt="restaurant.title">
-                        </div>
+                            <div v-if="restaurant.cover">
+                                <img 
+                                class="card-img-top"
+                                style="border-radius: 50px 15px 15px;"  
+                                :src="'storage/' + restaurant.cover" 
+                                :alt="restaurant.title">
+                            </div>
 
-                        <div class="card-body">
+                            <div v-else>
+                                <img 
+                                class="card-img-top"
+                                style="border-radius: 50px 15px 15px;"  
+                                :src="'images/default-image.jpeg'"
+                                :alt="restaurant.title">
+                            </div>
 
-                            <h5 class="card-title"> {{restaurant.name}} </h5>
-                            <div v-for="item in restauranttype" :key="item.id">
-                                <div v-if="restaurant.id == item.restaurant_id">
-                                    <div v-for="singleType in types" :key="singleType.id">
-                                        <div v-if="item.type_id == singleType.id">
-                                            {{singleType.name}}
+                            <div class="card-body">
+
+                                <h5 class="card-title"> {{restaurant.name}} </h5>
+                                <div v-for="item in restauranttype" :key="item.id">
+                                    <div v-if="restaurant.id == item.restaurant_id">
+                                        <div v-for="singleType in types" :key="singleType.id">
+                                            <div v-if="item.type_id == singleType.id">
+                                                {{singleType.name}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <p class="card-text">Indirizzo: {{restaurant.address}}</p>
+                                <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
-                            <router-link 
-                                class="btn btn-sm btn-primary"
-                                :to="{
-                                    name: 'restaurant-details',
-                                    params: {slug: restaurant.slug}
-                                }">View
-                            </router-link>
+                                <router-link 
+                                    class="btn btn_green"
+                                    :to="{
+                                        name: 'restaurant-details',
+                                        params: {slug: restaurant.slug}
+                                    }"><strong>Menu</strong>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-
             </div>
     </section>
 
@@ -171,13 +185,19 @@ import arrayPush from 'lodash/_arrayPush';
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "./resources/sass/partials/_variables.scss";
+
     .btn-filter {
         cursor: pointer;
-        color: white;
+        background-color: white;
+        color: $brand_color;
         border: 1px solid white;
         padding: 6px;
         border-radius: 4px;
     }
+    .btn_green {
+    background-color: $green_details;
+    color: white;
+    }
 </style>
-
