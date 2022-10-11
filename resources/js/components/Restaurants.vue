@@ -18,7 +18,7 @@
         </div>
         <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
 
-        <div v-if="this.checkedOptions.length == 0" class="row row-cols-4">
+        <div v-if="this.checkedRestaurants.length == 0" class="row row-cols-4">
             <!--Single restaurant if the user doesnt select anything -->
             <div v-for="restaurant in restaurants" :key="restaurant.id" class="mr-5">
                     <div class="card m-3" style="width: 18rem;">

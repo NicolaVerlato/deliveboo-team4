@@ -2785,7 +2785,7 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedOptions.length == 0 ? _c("div", {
+  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
     staticClass: "row row-cols-4"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
