@@ -8,14 +8,13 @@
             </div>
 
 
-            <div v-if="restaurant.user_id">
+            <div v-if="this.counter > 0">
                 <h4 class="text-center mt-4">Il nostro menù</h4>
 
                 <!-- Dishes section -->
                 <div v-for="dish in dishes" :key="dish.id" class="mb-3">
                     <div v-if="dish.is_visible == 1">
                         <div v-if="restaurant.user_id == dish.restaurant_id">
-
                             <div class="card-body d-flex justify-content-around">
 
                                 <div>
@@ -105,10 +104,19 @@
                 basket: JSON.parse(localStorage.getItem("data")) || [],
                 calcolo: 0,
                 allDishesIds: '',
-                allQuantity: ''
+                allQuantity: '',
+                counter: 0
             }
         },
         methods: {
+            async countDishesForMenu() {
+                await this.dishes.forEach(element => {
+                    if (element.restaurant_id == this.restaurant.id) {
+                        this.counter += 1
+                    }
+                });
+
+            },
             getAllDishesIds() {
                 this.basket.forEach(element => {
                     let id = element.id
@@ -247,6 +255,7 @@
         mounted() {
             this.getRestaurant();
             this.getDishes();
+            setTimeout(() => this.countDishesForMenu(), 1000);  
         },
         updated() {
             this.loadingCart()
