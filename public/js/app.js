@@ -3128,6 +3128,8 @@ var render = function render() {
   return _c("div", {
     staticClass: "container wrapper"
   }, [_c("div", {
+    staticClass: "row row-col-auto"
+  }, [_c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
     staticClass: "card-header d-flex align-items-center justify-content-center"
@@ -3215,7 +3217,7 @@ var render = function render() {
         _vm.calcolaPrice(), _vm.emptyCart();
       }
     }
-  }, [_vm._v(" \n                         Completa pagamento \n                     ")])])], 2)])]) : _vm._e()]);
+  }, [_vm._v(" \n                             Completa pagamento \n                         ")])])], 2)])]) : _vm._e()])]);
 };
 
 var staticRenderFns = [function () {
@@ -3227,7 +3229,7 @@ var staticRenderFns = [function () {
     staticStyle: {
       padding: "20px"
     }
-  }, [_vm._v("\n                 Al momento non ci sono piatti disponibili. \n                 Torna alla \n                 "), _c("a", {
+  }, [_vm._v("\n                     Al momento non ci sono piatti disponibili. \n                     Torna alla \n                     "), _c("a", {
     staticStyle: {
       color: "white",
       padding: "20px 0"
@@ -3235,7 +3237,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "/"
     }
-  }, [_vm._v(" \n                     Home \n                 ")])]);
+  }, [_vm._v(" \n                         Home \n                     ")])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -7665,7 +7667,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-between;\n}", ""]);
 
 // exports
 
@@ -7684,7 +7686,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview[data-v-7720c0e8] {\n  position: absolute;\n  top: 100px;\n  right: 30px;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 500px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 

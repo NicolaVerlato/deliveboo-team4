@@ -1,95 +1,97 @@
 <template>
 
     <div class="container wrapper">
-        <div class="card mb-3">
+        <div class="row row-col-auto">
+            <div class="card mb-3">
 
-            <div class="card-header d-flex align-items-center justify-content-center">
-                <h2 class="card-title text-center" style="margin: 0 !important;"> {{restaurant.name}} </h2>
-            </div>
+                <div class="card-header d-flex align-items-center justify-content-center">
+                    <h2 class="card-title text-center" style="margin: 0 !important;"> {{restaurant.name}} </h2>
+                </div>
 
 
-            <div v-if="this.counter > 0">
-                <h4 class="text-center mt-4">Il nostro menù</h4>
+                <div v-if="this.counter > 0">
+                    <h4 class="text-center mt-4">Il nostro menù</h4>
 
-                <!-- Dishes section -->
-                <div v-for="dish in dishes" :key="dish.id" class="mb-3">
-                    <div v-if="dish.is_visible == 1">
-                        <div v-if="restaurant.user_id == dish.restaurant_id">
-                            <div class="card-body d-flex justify-content-around">
+                    <!-- Dishes section -->
+                    <div v-for="dish in dishes" :key="dish.id" class="mb-3">
+                        <div v-if="dish.is_visible == 1">
+                            <div v-if="restaurant.user_id == dish.restaurant_id">
+                                <div class="card-body d-flex justify-content-around">
 
-                                <div>
-                                    <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                    <div>
+                                        <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
 
-                                    <p class="card-text text-center"> Prezzo: {{dish.price}} &euro;</p>
-                                </div>
-                                
-                                <!-- <div>
-                                    <a @click="sendInfo(dish.id, dish.restaurant_id, dish.price)" class="btn btn-light"> Aggiungi </a>
-                                </div> -->
-                                <div>
-                                    <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
-                                    <span :id="dish.id" class="counter">0</span>
-                                    <i @click="increment(dish.id, restaurant.slug, dish.price)" :id="dish.id" class="fa-solid fa-plus"></i>
+                                        <p class="card-text text-center"> Prezzo: {{dish.price}} &euro;</p>
+                                    </div>
+                                    
+                                    <!-- <div>
+                                        <a @click="sendInfo(dish.id, dish.restaurant_id, dish.price)" class="btn btn-light"> Aggiungi </a>
+                                    </div> -->
+                                    <div>
+                                        <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
+                                        <span :id="dish.id" class="counter">0</span>
+                                        <i @click="increment(dish.id, restaurant.slug, dish.price)" :id="dish.id" class="fa-solid fa-plus"></i>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
-
-                </div>
-            </div>
-
-            <!-- If there are no dishes -->
-            <div v-else> 
-               <p class="btn" style="padding: 20px">
-                    Al momento non ci sono piatti disponibili. 
-                    Torna alla 
-                    <a style="color:white; padding: 20px 0;" href="/"> 
-                        Home 
-                    </a>
-               </p>
-            </div>
-        </div>
-
-
-        <div v-if="this.basket.length > 0" class="cart-preview">
-            
-            <div class="toast">
-
-                <div class="toast-header justify-content-center">
-                    <h5> Il tuo carrello </h5>
                 </div>
 
-                <div class="toast-body">
-                    <!-- For each item of the basket -->
-                    <div v-for="item in basket" :key="item.id" class="mb-3">
-                        <!-- <div v-if="restaurant.user_id == item.restaurant_id"> -->
-
-                            <div class="card-body d-flex">
-
-                                <div v-for="dish in dishes" :key="dish.id">
-                                    <div v-if="dish.id == item.id"> 
-                                        <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
-                                        <div v-for="restaurant in restaurants" :key="restaurant.id">
-                                            <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
-                                        </div>
-                                        <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
-                                        <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        <!-- </div> -->
-                    </div>
-
-                    <div class="btn btn-lg btn-cart">
-                        <!-- <a href="/carrello"> Vai al carrello </a> -->
-                        <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo + '/' + this.basket[0].id + '/' + this.allDishesIds + '/' + this.allQuantity"> 
-                            Completa pagamento 
+                <!-- If there are no dishes -->
+                <div v-else> 
+                <p class="btn" style="padding: 20px">
+                        Al momento non ci sono piatti disponibili. 
+                        Torna alla 
+                        <a style="color:white; padding: 20px 0;" href="/"> 
+                            Home 
                         </a>
-                    </div>
+                </p>
                 </div>
-            </div> 
+            </div>
+
+
+            <div v-if="this.basket.length > 0" class="cart-preview">
+                
+                <div class="toast">
+
+                    <div class="toast-header justify-content-center">
+                        <h5> Il tuo carrello </h5>
+                    </div>
+
+                    <div class="toast-body">
+                        <!-- For each item of the basket -->
+                        <div v-for="item in basket" :key="item.id" class="mb-3">
+                            <!-- <div v-if="restaurant.user_id == item.restaurant_id"> -->
+
+                                <div class="card-body d-flex">
+
+                                    <div v-for="dish in dishes" :key="dish.id">
+                                        <div v-if="dish.id == item.id"> 
+                                            <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                            <div v-for="restaurant in restaurants" :key="restaurant.id">
+                                                <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
+                                            </div>
+                                            <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
+                                            <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            <!-- </div> -->
+                        </div>
+
+                        <div class="btn btn-lg btn-cart">
+                            <!-- <a href="/carrello"> Vai al carrello </a> -->
+                            <a style="color: white; font-size: 30px;" @click="calcolaPrice(), emptyCart()" :href="'http://127.0.0.1:8000/orders/create/' + this.calcolo + '/' + this.basket[0].id + '/' + this.allDishesIds + '/' + this.allQuantity"> 
+                                Completa pagamento 
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
         </div>
    </div>
 
@@ -279,13 +281,14 @@
     @import '../../sass/partials/variables.scss';
 
     .card {
+        width: 500px;
         max-width: 600px;
         margin: 0 auto;
     }
     .cart-preview {
-        position: absolute;
-        top: 100px;
-        right: 30px;
+        // position: absolute;
+        // top: 100px;
+        // right: 30px;
         .toast {
             opacity: 1;
             animation: fadeAbout 1s;

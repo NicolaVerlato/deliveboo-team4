@@ -173,5 +173,8 @@ import arrayPush from 'lodash/_arrayPush';
         padding: 6px;
         border-radius: 4px;
     }
+    .row {
+        justify-content: space-between;
+    }
 </style>
 

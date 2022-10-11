@@ -208,10 +208,25 @@ img {
     .ms_main_view {
       justify-content: center;
     }
+    .row {
+      flex-direction: column;
+      align-items: center;
+    }
+    .wrapper {
+      justify-content: center;
+      padding-bottom: 50px;
+
+    }
   }
   @include media-breakpoint-down(lg) {
     .ms_main_view {
       justify-content: center;
+    }
+    .row {
+      justify-content: space-between;
+    }
+    .wrapper {
+      justify-content: space-evenly;
     }
   }
 
