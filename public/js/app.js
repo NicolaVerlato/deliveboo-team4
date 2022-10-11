@@ -2357,6 +2357,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this.allDishesIds += id + '-';
         _this.allQuantity += amount + '-';
       });
+      console.log(this.allDishesIds, this.allQuantity);
     },
     emptyCart: function emptyCart() {
       localStorage.clear();
@@ -2371,6 +2372,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.calcolo = this.calcolo * 2353699835353;
       this.calcolo = this.calcolo / 100;
       this.calcolo = this.calcolo * 23425232;
+      this.getAllDishesIds();
     },
     checkAmount: function checkAmount(a) {
       var search = this.basket.find(function (x) {
@@ -2894,52 +2896,54 @@ var render = function render() {
     }, [_vm._v("View\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
     staticClass: "row"
-  }, _vm._l(_vm.checkedRestaurants, function (restaurant) {
-    return _c("div", {
-      key: restaurant.id,
-      staticClass: "col mr-4"
-    }, [_c("div", {
-      staticClass: "card m-3",
-      staticStyle: {
-        width: "18rem"
-      }
-    }, [restaurant.cover ? _c("div", [_c("img", {
-      staticClass: "card-img-top",
-      attrs: {
-        src: "storage/" + restaurant.cover,
-        alt: restaurant.title
-      }
-    })]) : _c("div", [_c("img", {
-      staticClass: "card-img-top",
-      attrs: {
-        src: "images/default-image.jpeg",
-        alt: restaurant.title
-      }
-    })]), _vm._v(" "), _c("div", {
-      staticClass: "card-body"
-    }, [_c("h5", {
-      staticClass: "card-title"
-    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
-      return _c("div", {
-        key: item.id
-      }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
+  }, _vm._l(_vm.restaurants, function (singleRest) {
+    return _c("div", _vm._l(_vm.checkedRestaurants, function (restaurant) {
+      return singleRest.id == restaurant.restaurant_id ? _c("div", {
+        key: restaurant.id,
+        staticClass: "col mr-4"
+      }, [_c("div", {
+        staticClass: "card m-3",
+        staticStyle: {
+          width: "18rem"
+        }
+      }, [singleRest.cover ? _c("div", [_c("img", {
+        staticClass: "card-img-top",
+        attrs: {
+          src: "storage/" + singleRest.cover,
+          alt: singleRest.title
+        }
+      })]) : _c("div", [_c("img", {
+        staticClass: "card-img-top",
+        attrs: {
+          src: "images/default-image.jpeg",
+          alt: singleRest.title
+        }
+      })]), _vm._v(" "), _c("div", {
+        staticClass: "card-body"
+      }, [_c("h5", {
+        staticClass: "card-title"
+      }, [_vm._v(" " + _vm._s(singleRest.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
         return _c("div", {
-          key: singleType.id
-        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
-      }), 0) : _vm._e()]);
-    }), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("router-link", {
-      staticClass: "btn btn-sm btn-primary",
-      attrs: {
-        to: {
-          name: "restaurant-details",
-          params: {
-            slug: restaurant.slug
+          key: item.id
+        }, [singleRest.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
+          return _c("div", {
+            key: singleType.id
+          }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                            " + _vm._s(singleType.name) + "\n                                        ")]) : _vm._e()]);
+        }), 0) : _vm._e()]);
+      }), _vm._v(" "), _c("p", {
+        staticClass: "card-text"
+      }, [_vm._v("Indirizzo: " + _vm._s(singleRest.address))]), _vm._v(" "), _c("router-link", {
+        staticClass: "btn btn-sm btn-primary",
+        attrs: {
+          to: {
+            name: "restaurant-details",
+            params: {
+              slug: singleRest.slug
+            }
           }
         }
-      }
-    }, [_vm._v("View\n                        ")])], 2)])]);
+      }, [_vm._v("View\n                            ")])], 2)])]) : _vm._e();
+    }), 0);
   }), 0)])], 2);
 };
 
@@ -55479,8 +55483,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

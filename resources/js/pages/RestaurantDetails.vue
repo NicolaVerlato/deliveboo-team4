@@ -116,6 +116,7 @@
                     this.allDishesIds +=  id + '-'
                     this.allQuantity += amount + '-'
                 });
+                console.log(this.allDishesIds, this.allQuantity);
             },
             emptyCart() {
                 localStorage.clear();
@@ -129,6 +130,7 @@
                     this.calcolo = this.calcolo * 2353699835353;
                     this.calcolo = this.calcolo / 100;
                     this.calcolo = this.calcolo * 23425232;
+                    this.getAllDishesIds();
             },
             checkAmount(a) {
                 let search = this.basket.find((x)=>x.id === a) || [];
