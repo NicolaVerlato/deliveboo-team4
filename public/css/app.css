@@ -10934,6 +10934,7 @@ a.text-dark:focus {
 
 body {
   color: #2f4858;
+  min-width: 480px;
 }
 
 .brand_color {
@@ -11117,6 +11118,37 @@ img {
 
 input:invalid {
   border: 2px solid red;
+}
+
+.type_not_typo {
+  color: green;
+}
+
+.ms_filters {
+  display: flex;
+  justify-content: center;
+}
+
+.upper {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 991.98px) {
+  .ms_filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ms_main_view {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .ms_main_view {
+    justify-content: center;
+  }
 }
 
 @keyframes spin {

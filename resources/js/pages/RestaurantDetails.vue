@@ -1,6 +1,6 @@
 <template>
 
-    <div class="wrapper">
+    <div class="container wrapper">
         <div class="card mb-3">
 
             <div class="card-header d-flex align-items-center justify-content-center">

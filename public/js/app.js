@@ -2316,18 +2316,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       basket: JSON.parse(localStorage.getItem("data")) || [],
       calcolo: 0,
       allDishesIds: '',
-      allQuantity: ''
+      allQuantity: '',
+      counter: 0,
+      restaurants: []
     };
   },
   methods: {
-    getAllDishesIds: function getAllDishesIds() {
+    countDishesForMenu: function countDishesForMenu() {
       var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.dishes.forEach(function (element) {
+                  if (element.restaurant_id == _this.restaurant.id) {
+                    if (element.is_visible == 1) {
+                      _this.counter += 1;
+                    }
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getAllDishesIds: function getAllDishesIds() {
+      var _this2 = this;
 
       this.basket.forEach(function (element) {
         var id = element.id;
         var amount = element.item;
-        _this.allDishesIds += id + '-';
-        _this.allQuantity += amount + '-';
+        _this2.allDishesIds += id + '-';
+        _this2.allQuantity += amount + '-';
       });
       console.log(this.allDishesIds, this.allQuantity);
     },
@@ -2429,33 +2456,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getRestaurant: function getRestaurant() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get("/api/restaurants/?slug=".concat(_this2.$route.params.slug)).then(function (response) {
-                  response.data.results.forEach(function (element) {
-                    // If the slug on the url is the same as one of the elements
-                    // Save the data on the empty restaurant
-                    if (_this2.$route.params.slug === element.slug) {
-                      _this2.restaurant = element;
-                    }
-                  });
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getDishes: function getDishes() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -2464,9 +2464,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get("/api/restaurants").then(function (response) {
-                  response.data.dishes.forEach(function (element) {
-                    _this3.dishes.push(element);
+                return axios.get("/api/restaurants/?slug=".concat(_this3.$route.params.slug)).then(function (response) {
+                  response.data.results.forEach(function (element) {
+                    // If the slug on the url is the same as one of the elements
+                    // Save the data on the empty restaurant
+                    if (_this3.$route.params.slug === element.slug) {
+                      _this3.restaurant = element;
+                    }
                   });
                 });
 
@@ -2476,6 +2480,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    getDishes: function getDishes() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get("/api/restaurants").then(function (response) {
+                  response.data.dishes.forEach(function (element) {
+                    _this4.dishes.push(element);
+                  });
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     },
     sendInfo: function sendInfo(value, restaurantId, price) {
@@ -2506,8 +2533,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
+    var _this5 = this;
+
     this.getRestaurant();
     this.getDishes();
+    setTimeout(function () {
+      return _this5.countDishesForMenu();
+    }, 1000);
+    axios.get('/api/restaurants').then(function (response) {
+      _this5.restaurants = response.data.results;
+    });
   },
   updated: function updated() {
     this.loadingCart();
@@ -2538,7 +2573,7 @@ var render = function render() {
       color: "white"
     }
   }, [_c("div", {
-    staticClass: "container-fluid"
+    staticClass: "container"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "navbar-nav align-center align-items-center"
   }, _vm._l(_vm.links, function (link, index) {
@@ -2637,14 +2672,18 @@ var render = function render() {
     attrs: {
       d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
     }
-  })]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]);
+  })]), _vm._v(" "), _vm._m(0)]);
 };
 
 var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("h4", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "upper"
+  }, [_c("h4", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "35px",
@@ -2654,12 +2693,7 @@ var staticRenderFns = [function () {
     staticClass: "fa-solid fa-cookie-bite"
   }), _c("i", {
     staticClass: "fa-solid fa-cookie-bite"
-  })])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("h5", {
+  })])]), _vm._v(" "), _c("h5", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "20px",
@@ -2673,12 +2707,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "http://127.0.0.1:8000/login"
     }
-  }, [_vm._v(" \n            Sezione ristoranti \n        ")])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
+  }, [_vm._v(" \n                    Sezione ristoranti \n                ")])])]), _vm._v(" "), _c("div", {
     staticClass: "total-footer"
   }, [_c("div", {
     staticClass: "top-footer"
@@ -2734,7 +2763,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Diritti")])])])])])])]);
+  }, [_vm._v("Diritti")])])])])])])])]);
 }];
 render._withStripped = true;
 
@@ -2757,7 +2786,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("section", {
-    staticClass: "mt-4"
+    staticClass: "container mt-4"
   }, [_c("h2", {
     staticClass: "text-center",
     staticStyle: {
@@ -2765,7 +2794,9 @@ var render = function render() {
       "font-size": "30px",
       "margin-bottom": "40px"
     }
-  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), _vm._l(_vm.types, function (tipo) {
+  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), _c("div", {
+    staticClass: "ms_filters text-center"
+  }, [_vm._l(_vm.types, function (tipo) {
     return _c("div", {
       key: tipo.id,
       staticClass: "form-check form-check-inline",
@@ -2822,12 +2853,11 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
-    staticClass: "row row-cols-4"
+  }, [_vm._v(" Applica filtri ")])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
+    staticClass: "ms_main_view row g-2 row-col-auto"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
-      key: restaurant.id,
-      staticClass: "mr-5"
+      key: restaurant.id
     }, [_c("div", {
       staticClass: "card m-3",
       staticStyle: {
@@ -2849,17 +2879,19 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
-    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
         key: item.id
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
-        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
+        }, [item.type_id == singleType.id ? _c("div", {
+          staticClass: "type_not_typo"
+        }, [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
-    }), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("router-link", {
+    }), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -2871,7 +2903,7 @@ var render = function render() {
       }
     }, [_vm._v("View\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
-    staticClass: "row"
+    staticClass: "row g-2"
   }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
     return _c("div", {
       key: restaurant.id,
@@ -2897,17 +2929,18 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
-    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
-        key: item.id
+        key: item.id,
+        staticClass: "type_not_typo"
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
         }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                            " + _vm._s(singleType.name) + "\n                                        ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
-    }), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("router-link", {
+    }), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -2918,7 +2951,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("View\n                        ")])], 2)])]);
-  }), 0)])], 2);
+  }), 0)])]);
 };
 
 var staticRenderFns = [];
@@ -3093,7 +3126,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "wrapper"
+    staticClass: "container wrapper"
   }, [_c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
@@ -3103,7 +3136,7 @@ var render = function render() {
     staticStyle: {
       margin: "0 !important"
     }
-  }, [_vm._v(" " + _vm._s(_vm.restaurant.name) + " ")])]), _vm._v(" "), _vm.restaurant.user_id ? _c("div", [_c("h4", {
+  }, [_vm._v(" " + _vm._s(_vm.restaurant.name) + " ")])]), _vm._v(" "), this.counter > 0 ? _c("div", [_c("h4", {
     staticClass: "text-center mt-4"
   }, [_vm._v("Il nostro menù")]), _vm._v(" "), _vm._l(_vm.dishes, function (dish) {
     return _c("div", {
@@ -3155,13 +3188,17 @@ var render = function render() {
         key: dish.id
       }, [dish.id == item.id ? _c("div", [_c("h5", {
         staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", {
+      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
+        return _c("div", {
+          key: restaurant.id
+        }, [restaurant.id == dish.restaurant_id ? _c("h6", [_vm._v(_vm._s(restaurant.name))]) : _vm._e()]);
+      }), _vm._v(" "), _c("div", {
         on: {
           click: function click($event) {
             return _vm.getAllDishesIds();
           }
         }
-      }, [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e()]);
+      }, [_vm._v(" Quantità: " + _vm._s(item.item))])], 2) : _vm._e()]);
     }), 0)]);
   }), _vm._v(" "), _c("div", {
     staticClass: "btn btn-lg btn-cart"
