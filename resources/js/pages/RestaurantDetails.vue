@@ -116,6 +116,7 @@
                     this.allDishesIds +=  id + '-'
                     this.allQuantity += amount + '-'
                 });
+                console.log(this.allDishesIds, this.allQuantity);
             },
             emptyCart() {
                 localStorage.clear();
