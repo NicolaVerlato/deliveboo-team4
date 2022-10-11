@@ -62,18 +62,12 @@
                     </div>
                 </div>
             </div>
-            <!-- Single restaurant if the user selects a category -->
+            <!-- Restaurants if the user selects a category -->
             <div v-else>
 
                 <div class="row">
-                    <div v-for="singleRest in restaurants">
-                    <div 
-                        v-for="restaurant in checkedRestaurants"
-                        v-if="singleRest.id == restaurant.restaurant_id"
-                        :key="restaurant.id" 
-                        class="col mr-4"
-                    >
-                        <div class="card m-3" style="width: 18rem;">
+                    <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col mr-4">
+                    <div class="card m-3" style="width: 18rem;">
 
                             <div v-if="singleRest.cover">
                                 <img 
@@ -103,17 +97,16 @@
                                 </div>
                                 <p class="card-text">Indirizzo: {{singleRest.address}}</p>
 
-                                <router-link 
-                                    class="btn btn-sm btn-primary"
-                                    :to="{
-                                        name: 'restaurant-details',
-                                        params: {slug: singleRest.slug}
-                                    }">View
-                                </router-link>
-                            </div>
+                            <router-link 
+                                class="btn btn-sm btn-primary"
+                                :to="{
+                                    name: 'restaurant-details',
+                                    params: {slug: restaurant.slug}
+                                }">View
+                            </router-link>
                         </div>
                     </div>
-                    </div>
+                </div>
                 </div>
 
             </div>
@@ -140,26 +133,18 @@ import arrayPush from 'lodash/_arrayPush';
         methods: {
             provaFiltro() {
                 this.checkedRestaurants= [];
-
-                axios.get(`/api/restaurants?categories=${this.checkedOptions}`) 
-                .then((response) => {
-                    // Pivot table
-                    let pivot = response.data.data;
-
-                    // Filter engine
-                    for (const item of pivot) {
-                        if (this.checkedOptions.includes(item.type_id)) {
-                            if (!this.checkedRestaurants.includes(item)) {
-                                if (!this.checkedRestaurants.includes(item.restaurant_id)) {
-                                    this.checkedRestaurants.push(item);
-                                    // Return just one element with that restaurant id
-                                    return Array.from(new Set(this.checkedRestaurants));
-                                }
-                            }
-                        }
-                    }
-                });
-            },
+                
+                if (this.checkedOptions.length == 0) {
+                    this.checkedRestaurants= [];
+                    return
+                } else {
+                    axios.get(`/api/types/${this.checkedOptions}`) 
+                    .then((response) => {
+                        this.checkedRestaurants.push(response.data.results[0].restaurants)
+                    });    
+                }
+                
+            }
         },
         mounted() {
             axios.get('/api/restaurants')

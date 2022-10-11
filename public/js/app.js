@@ -1969,12 +1969,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/_arrayPush */ "./node_modules/lodash/_arrayPush.js");
 /* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurants',
@@ -1993,34 +1987,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this = this;
 
       this.checkedRestaurants = [];
-      axios.get("/api/restaurants?categories=".concat(this.checkedOptions)).then(function (response) {
-        // Pivot table
-        var pivot = response.data.data; // Filter engine
 
-        var _iterator = _createForOfIteratorHelper(pivot),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var item = _step.value;
-
-            if (_this.checkedOptions.includes(item.type_id)) {
-              if (!_this.checkedRestaurants.includes(item)) {
-                if (!_this.checkedRestaurants.includes(item.restaurant_id)) {
-                  _this.checkedRestaurants.push(item); // Return just one element with that restaurant id
-
-
-                  return Array.from(new Set(_this.checkedRestaurants));
-                }
-              }
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-      });
+      if (this.checkedOptions.length == 0) {
+        this.checkedRestaurants = [];
+        return;
+      } else {
+        axios.get("/api/types/".concat(this.checkedOptions)).then(function (response) {
+          _this.checkedRestaurants.push(response.data.results[0].restaurants);
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -2166,9 +2141,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           _this4.getValue(id, item);
         }).join('');
-      } else {
-        ShoppingCart.innerHTML = "";
-        label.innerHTML = "\n                    <h2>Carrello vuoto</h2>\n                    ";
       }
 
       this.calcolaPrice();
@@ -2901,54 +2873,52 @@ var render = function render() {
     }, [_vm._v("View\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
     staticClass: "row"
-  }, _vm._l(_vm.restaurants, function (singleRest) {
-    return _c("div", _vm._l(_vm.checkedRestaurants, function (restaurant) {
-      return singleRest.id == restaurant.restaurant_id ? _c("div", {
-        key: restaurant.id,
-        staticClass: "col mr-4"
-      }, [_c("div", {
-        staticClass: "card m-3",
-        staticStyle: {
-          width: "18rem"
-        }
-      }, [singleRest.cover ? _c("div", [_c("img", {
-        staticClass: "card-img-top",
-        attrs: {
-          src: "storage/" + singleRest.cover,
-          alt: singleRest.title
-        }
-      })]) : _c("div", [_c("img", {
-        staticClass: "card-img-top",
-        attrs: {
-          src: "images/default-image.jpeg",
-          alt: singleRest.title
-        }
-      })]), _vm._v(" "), _c("div", {
-        staticClass: "card-body"
-      }, [_c("h5", {
-        staticClass: "card-title"
-      }, [_vm._v(" " + _vm._s(singleRest.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+  }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
+    return _c("div", {
+      key: restaurant.id,
+      staticClass: "col mr-4"
+    }, [_c("div", {
+      staticClass: "card m-3",
+      staticStyle: {
+        width: "18rem"
+      }
+    }, [restaurant.cover ? _c("div", [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: "storage/" + restaurant.cover,
+        alt: restaurant.title
+      }
+    })]) : _c("div", [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: "images/default-image.jpeg",
+        alt: restaurant.title
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "card-body"
+    }, [_c("h5", {
+      staticClass: "card-title"
+    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+      return _c("div", {
+        key: item.id
+      }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
-          key: item.id
-        }, [singleRest.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
-          return _c("div", {
-            key: singleType.id
-          }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                            " + _vm._s(singleType.name) + "\n                                        ")]) : _vm._e()]);
-        }), 0) : _vm._e()]);
-      }), _vm._v(" "), _c("p", {
-        staticClass: "card-text"
-      }, [_vm._v("Indirizzo: " + _vm._s(singleRest.address))]), _vm._v(" "), _c("router-link", {
-        staticClass: "btn btn-sm btn-primary",
-        attrs: {
-          to: {
-            name: "restaurant-details",
-            params: {
-              slug: singleRest.slug
-            }
+          key: singleType.id
+        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
+      }), 0) : _vm._e()]);
+    }), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn btn-sm btn-primary",
+      attrs: {
+        to: {
+          name: "restaurant-details",
+          params: {
+            slug: restaurant.slug
           }
         }
-      }, [_vm._v("View\n                            ")])], 2)])]) : _vm._e();
-    }), 0);
+      }
+    }, [_vm._v("View\n                        ")])], 2)])]);
   }), 0)])], 2);
 };
 
