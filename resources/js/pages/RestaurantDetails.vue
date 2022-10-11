@@ -11,7 +11,7 @@
             <div v-if="this.counter > 0">
                 <h4 class="text-center mt-4">Il nostro menù</h4>
 
-                <!-- Dishes section -->
+                <!-- DISHES section -->
                 <div v-for="dish in dishes" :key="dish.id" class="mb-3">
                     <div v-if="dish.is_visible == 1">
                         <div v-if="restaurant.user_id == dish.restaurant_id">
@@ -33,9 +33,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 
@@ -50,7 +48,6 @@
                </p>
             </div>
         </div>
-
 
         <div v-if="this.basket.length > 0" class="cart-preview">
             
@@ -271,12 +268,11 @@
             this.loadingCart()
         },
     }
-
 </script>
 
 <style lang="scss" scoped>
 
-    @import '../../sass/partials/variables.scss';
+@import '../../sass/partials/variables.scss';
 
     .card {
         max-width: 600px;

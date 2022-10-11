@@ -21,6 +21,10 @@
             </div>
         </div>
 
+        <div style="padding-bottom: 50px; background-color: white;">
+            <Carousel/>            
+        </div>
+
         <div class="container" style="padding-bottom: 50px;">
             <Restaurants/>            
         </div>
@@ -32,13 +36,14 @@
 
     import Restaurants from '../components/Restaurants.vue';
     import Dishes from '../components/Dishes.vue';
+    import Carousel from '../components/Carousel.vue';
 
     export default {
         name: "HomePage",
         components: {
             Restaurants,
-            Dishes
+            Dishes,
+            Carousel
         },
     }
-
 </script>
