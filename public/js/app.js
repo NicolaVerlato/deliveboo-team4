@@ -2316,18 +2316,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       basket: JSON.parse(localStorage.getItem("data")) || [],
       calcolo: 0,
       allDishesIds: '',
-      allQuantity: ''
+      allQuantity: '',
+      counter: 0,
+      restaurants: []
     };
   },
   methods: {
-    getAllDishesIds: function getAllDishesIds() {
+    countDishesForMenu: function countDishesForMenu() {
       var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.dishes.forEach(function (element) {
+                  if (element.restaurant_id == _this.restaurant.id) {
+                    if (element.is_visible == 1) {
+                      _this.counter += 1;
+                    }
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getAllDishesIds: function getAllDishesIds() {
+      var _this2 = this;
 
       this.basket.forEach(function (element) {
         var id = element.id;
         var amount = element.item;
-        _this.allDishesIds += id + '-';
-        _this.allQuantity += amount + '-';
+        _this2.allDishesIds += id + '-';
+        _this2.allQuantity += amount + '-';
       });
       console.log(this.allDishesIds, this.allQuantity);
     },
@@ -2429,33 +2456,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getRestaurant: function getRestaurant() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get("/api/restaurants/?slug=".concat(_this2.$route.params.slug)).then(function (response) {
-                  response.data.results.forEach(function (element) {
-                    // If the slug on the url is the same as one of the elements
-                    // Save the data on the empty restaurant
-                    if (_this2.$route.params.slug === element.slug) {
-                      _this2.restaurant = element;
-                    }
-                  });
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getDishes: function getDishes() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -2464,9 +2464,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get("/api/restaurants").then(function (response) {
-                  response.data.dishes.forEach(function (element) {
-                    _this3.dishes.push(element);
+                return axios.get("/api/restaurants/?slug=".concat(_this3.$route.params.slug)).then(function (response) {
+                  response.data.results.forEach(function (element) {
+                    // If the slug on the url is the same as one of the elements
+                    // Save the data on the empty restaurant
+                    if (_this3.$route.params.slug === element.slug) {
+                      _this3.restaurant = element;
+                    }
                   });
                 });
 
@@ -2476,6 +2480,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    getDishes: function getDishes() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get("/api/restaurants").then(function (response) {
+                  response.data.dishes.forEach(function (element) {
+                    _this4.dishes.push(element);
+                  });
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     },
     sendInfo: function sendInfo(value, restaurantId, price) {
@@ -2506,8 +2533,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
+    var _this5 = this;
+
     this.getRestaurant();
     this.getDishes();
+    setTimeout(function () {
+      return _this5.countDishesForMenu();
+    }, 1000);
+    axios.get('/api/restaurants').then(function (response) {
+      _this5.restaurants = response.data.results;
+    });
   },
   updated: function updated() {
     this.loadingCart();
@@ -3103,7 +3138,7 @@ var render = function render() {
     staticStyle: {
       margin: "0 !important"
     }
-  }, [_vm._v(" " + _vm._s(_vm.restaurant.name) + " ")])]), _vm._v(" "), _vm.restaurant.user_id ? _c("div", [_c("h4", {
+  }, [_vm._v(" " + _vm._s(_vm.restaurant.name) + " ")])]), _vm._v(" "), this.counter > 0 ? _c("div", [_c("h4", {
     staticClass: "text-center mt-4"
   }, [_vm._v("Il nostro menù")]), _vm._v(" "), _vm._l(_vm.dishes, function (dish) {
     return _c("div", {
@@ -3155,13 +3190,17 @@ var render = function render() {
         key: dish.id
       }, [dish.id == item.id ? _c("div", [_c("h5", {
         staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("h6", [_vm._v(" Ristorante: " + _vm._s(_vm.restaurant.name) + " ")]), _vm._v(" "), _c("div", {
+      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
+        return _c("div", {
+          key: restaurant.id
+        }, [restaurant.id == dish.restaurant_id ? _c("h6", [_vm._v(_vm._s(restaurant.name))]) : _vm._e()]);
+      }), _vm._v(" "), _c("div", {
         on: {
           click: function click($event) {
             return _vm.getAllDishesIds();
           }
         }
-      }, [_vm._v(" Quantità: " + _vm._s(item.item))])]) : _vm._e()]);
+      }, [_vm._v(" Quantità: " + _vm._s(item.item))])], 2) : _vm._e()]);
     }), 0)]);
   }), _vm._v(" "), _c("div", {
     staticClass: "btn btn-lg btn-cart"
@@ -55463,8 +55502,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
