@@ -2508,7 +2508,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getRestaurant();
     this.getDishes();
-    this.getAllDishesIds();
   },
   updated: function updated() {
     this.loadingCart();
@@ -2904,7 +2903,7 @@ var render = function render() {
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
-        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
+        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                            " + _vm._s(singleType.name) + "\n                                        ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
     }), _vm._v(" "), _c("p", {
       staticClass: "card-text"
@@ -7648,7 +7647,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".wrapper[data-v-7720c0e8] {\n  height: 400px;\n}\n.card[data-v-7720c0e8] {\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview[data-v-7720c0e8] {\n  position: absolute;\n  top: 100px;\n  right: 30px;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".card[data-v-7720c0e8] {\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview[data-v-7720c0e8] {\n  position: absolute;\n  top: 100px;\n  right: 30px;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 

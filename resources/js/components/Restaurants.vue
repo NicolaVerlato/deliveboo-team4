@@ -69,25 +69,25 @@
                     <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col mr-4">
                     <div class="card m-3" style="width: 18rem;">
 
-                            <div v-if="singleRest.cover">
+                            <div v-if="restaurant.cover">
                                 <img 
                                 class="card-img-top"  
-                                :src="'storage/' + singleRest.cover" 
-                                :alt="singleRest.title">
+                                :src="'storage/' + restaurant.cover" 
+                                :alt="restaurant.title">
                             </div>
 
                             <div v-else>
                                 <img 
                                 class="card-img-top"  
                                 :src="'images/default-image.jpeg'"
-                                :alt="singleRest.title">
+                                :alt="restaurant.title">
                             </div>
 
                             <div class="card-body">
 
-                                <h5 class="card-title"> {{singleRest.name}} </h5>
+                                <h5 class="card-title"> {{restaurant.name}} </h5>
                                 <div v-for="item in restauranttype" :key="item.id">
-                                    <div v-if="singleRest.id == item.restaurant_id">
+                                    <div v-if="restaurant.id == item.restaurant_id">
                                         <div v-for="singleType in types" :key="singleType.id">
                                             <div v-if="item.type_id == singleType.id">
                                                 {{singleType.name}}
@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="card-text">Indirizzo: {{singleRest.address}}</p>
+                                <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
                             <router-link 
                                 class="btn btn-sm btn-primary"
