@@ -247,7 +247,6 @@
         mounted() {
             this.getRestaurant();
             this.getDishes();
-            this.getAllDishesIds();
         },
         updated() {
             this.loadingCart()
@@ -260,9 +259,6 @@
 
     @import '../../sass/partials/variables.scss';
 
-    .wrapper {
-        height: 400px;
-    }
     .card {
         max-width: 600px;
         margin: 0 auto;
