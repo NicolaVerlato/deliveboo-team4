@@ -174,7 +174,7 @@ import arrayPush from 'lodash/_arrayPush';
         border-radius: 4px;
     }
     .row {
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
 </style>
 

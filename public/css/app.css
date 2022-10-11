@@ -11161,7 +11161,7 @@ input:invalid {
   }
 
   .row {
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   .wrapper {

@@ -7667,7 +7667,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-between;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}", ""]);
 
 // exports
 
