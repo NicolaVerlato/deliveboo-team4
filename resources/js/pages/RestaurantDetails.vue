@@ -70,7 +70,10 @@
                                 <div v-for="dish in dishes" :key="dish.id">
                                     <div v-if="dish.id == item.id"> 
                                         <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
-                                        <h6> Ristorante: {{restaurant.name}} </h6>
+                                        <div v-for="restaurant in restaurants" :key="restaurant.id">
+                                            <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
+                                        </div>
+                                        <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
                                         <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
                                     </div>
                                 </div>
@@ -105,14 +108,17 @@
                 calcolo: 0,
                 allDishesIds: '',
                 allQuantity: '',
-                counter: 0
+                counter: 0,
+                restaurants: []
             }
         },
         methods: {
             async countDishesForMenu() {
                 await this.dishes.forEach(element => {
                     if (element.restaurant_id == this.restaurant.id) {
-                        this.counter += 1
+                        if (element.is_visible == 1) {
+                            this.counter += 1
+                        }
                     }
                 });
 
@@ -255,7 +261,11 @@
         mounted() {
             this.getRestaurant();
             this.getDishes();
-            setTimeout(() => this.countDishesForMenu(), 1000);  
+            setTimeout(() => this.countDishesForMenu(), 1000);
+            axios.get('/api/restaurants')
+            .then((response) => {
+                this.restaurants = response.data.results;
+            });  
         },
         updated() {
             this.loadingCart()
