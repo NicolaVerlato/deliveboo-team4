@@ -18,7 +18,7 @@
         </div>
         <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
 
-        <div v-if="this.checkedRestaurants.length == 0" class="row row-cols-4">
+        <div v-if="this.checkedOptions.length == 0" class="row row-cols-4">
             <!--Single restaurant if the user doesnt select anything -->
             <div v-for="restaurant in restaurants" :key="restaurant.id" class="mr-5">
                     <div class="card m-3" style="width: 18rem;">
@@ -62,11 +62,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Single restaurant if the user selects a category -->
+            <!-- Restaurants if the user selects a category -->
             <div v-else>
 
                 <div class="row">
-                    <div v-for="restaurant in checkedRestaurants" :key="restaurant.id" class="col mr-4">
+                    <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col mr-4">
                     <div class="card m-3" style="width: 18rem;">
 
                         <div v-if="restaurant.cover">
@@ -133,26 +133,12 @@ import arrayPush from 'lodash/_arrayPush';
         methods: {
             provaFiltro() {
                 this.checkedRestaurants= [];
-
-                axios.get(`/api/restaurants?categories=${this.checkedOptions}`) 
+                
+                axios.get(`/api/types/${this.checkedOptions}`) 
                 .then((response) => {
-                    // Pivot table
-                    let pivot = response.data.data;
-
-                    // Filter engine
-                    for (const item of pivot) {
-                        if (this.checkedOptions.includes(item.type_id)) {
-                            if (!this.checkedRestaurants.includes(item)) {
-                                if (!this.checkedRestaurants.includes(item.restaurant_id)) {
-                                    this.checkedRestaurants.push(item);
-                                    // Return just one element with that restaurant id
-                                    return Array.from(new Set(this.checkedRestaurants));
-                                }
-                            }
-                        }
-                    }
+                    this.checkedRestaurants.push(response.data.results[0].restaurants)
                 });
-            },
+            }
         },
         mounted() {
             axios.get('/api/restaurants')

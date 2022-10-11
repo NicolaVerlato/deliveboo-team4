@@ -18,4 +18,19 @@ class TypeController extends Controller
 
         return response()->json($data);
     }
+
+    public function show($id) {
+        $type = Type::where('id', '=', $id)->with('restaurants')->get();
+
+        if($type) {
+            $data = [
+                'success' => true,
+                'results' => $type
+            ];
+        } else {
+            $data = ['success' => false];
+        };
+        
+        return response()->json($data);
+    }
 }

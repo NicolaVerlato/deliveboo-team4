@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/types', 'Api\TypeController@index');
+Route::get('/types/{id}', 'Api\TypeController@show');
 Route::get('/restaurants', 'Api\RestaurantController@index');
 Route::get('/{slug}', 'Api\RestaurantController@showRestaurant');
 Route::get('/dishes', 'Api\DishController@index');

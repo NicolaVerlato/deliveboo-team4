@@ -1972,12 +1972,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/_arrayPush */ "./node_modules/lodash/_arrayPush.js");
 /* harmony import */ var lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_arrayPush__WEBPACK_IMPORTED_MODULE_0__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurants',
@@ -1996,33 +1990,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this = this;
 
       this.checkedRestaurants = [];
-      axios.get("/api/restaurants?categories=".concat(this.checkedOptions)).then(function (response) {
-        // Pivot table
-        var pivot = response.data.data; // Filter engine
-
-        var _iterator = _createForOfIteratorHelper(pivot),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var item = _step.value;
-
-            if (_this.checkedOptions.includes(item.type_id)) {
-              if (!_this.checkedRestaurants.includes(item)) {
-                if (!_this.checkedRestaurants.includes(item.restaurant_id)) {
-                  _this.checkedRestaurants.push(item); // Return just one element with that restaurant id
-
-
-                  return Array.from(new Set(_this.checkedRestaurants));
-                }
-              }
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
+      axios.get("/api/types/".concat(this.checkedOptions)).then(function (response) {
+        _this.checkedRestaurants.push(response.data.results[0].restaurants);
       });
     }
   },
@@ -2169,9 +2138,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           _this4.getValue(id, item);
         }).join('');
-      } else {
-        ShoppingCart.innerHTML = "";
-        label.innerHTML = "\n                    <h2>Carrello vuoto</h2>\n                    ";
       }
 
       this.calcolaPrice();
@@ -2819,7 +2785,7 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
+  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedOptions.length == 0 ? _c("div", {
     staticClass: "row row-cols-4"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -2869,7 +2835,7 @@ var render = function render() {
     }, [_vm._v("View\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
     staticClass: "row"
-  }, _vm._l(_vm.checkedRestaurants, function (restaurant) {
+  }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
     return _c("div", {
       key: restaurant.id,
       staticClass: "col mr-4"

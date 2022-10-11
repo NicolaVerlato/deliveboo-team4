@@ -109,12 +109,7 @@
 
                     this.getValue(id, item)
                    }).join('')
-                } else {
-                    ShoppingCart.innerHTML = ``
-                    label.innerHTML = `
-                    <h2>Carrello vuoto</h2>
-                    `
-                }
+                } 
                 this.calcolaPrice()
             },
             async getValue(dishId, quantity) {
