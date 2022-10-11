@@ -134,10 +134,16 @@ import arrayPush from 'lodash/_arrayPush';
             provaFiltro() {
                 this.checkedRestaurants= [];
                 
-                axios.get(`/api/types/${this.checkedOptions}`) 
-                .then((response) => {
-                    this.checkedRestaurants.push(response.data.results[0].restaurants)
-                });
+                if (this.checkedOptions.length == 0) {
+                    this.checkedRestaurants= [];
+                    return
+                } else {
+                    axios.get(`/api/types/${this.checkedOptions}`) 
+                    .then((response) => {
+                        this.checkedRestaurants.push(response.data.results[0].restaurants)
+                    });    
+                }
+                
             }
         },
         mounted() {

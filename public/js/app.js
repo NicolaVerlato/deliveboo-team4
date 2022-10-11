@@ -1990,9 +1990,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.checkedRestaurants = [];
-      axios.get("/api/types/".concat(this.checkedOptions)).then(function (response) {
-        _this.checkedRestaurants.push(response.data.results[0].restaurants);
-      });
+
+      if (this.checkedOptions.length == 0) {
+        this.checkedRestaurants = [];
+        return;
+      } else {
+        axios.get("/api/types/".concat(this.checkedOptions)).then(function (response) {
+          _this.checkedRestaurants.push(response.data.results[0].restaurants);
+        });
+      }
     }
   },
   mounted: function mounted() {
