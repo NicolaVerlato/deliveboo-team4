@@ -10932,6 +10932,12 @@ a.text-dark:focus {
   }
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   color: #2f4858;
   min-width: 480px;

@@ -1,4 +1,10 @@
 //COMMON
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 body {
     color: $secondary_color;
     min-width: 480px;
