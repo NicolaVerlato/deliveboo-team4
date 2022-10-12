@@ -305,7 +305,8 @@
         margin: 0 auto;
     }
     .ms_quantities {
-        line-height: 8;
+        display: flex;
+        align-items: center;
         font-size: 1.5rem;
     }
     
