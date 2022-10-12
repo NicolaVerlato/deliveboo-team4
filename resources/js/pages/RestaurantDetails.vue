@@ -80,6 +80,9 @@
                                             <div v-for="restaurant in restaurants" :key="restaurant.id">
                                                 <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
                                             </div>
+                                            <div>
+                                                <h6>Parziale: {{dish.price * item.item}}&euro;</h6>
+                                            </div>
                                             <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
                                             <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
                                         </div>
@@ -88,6 +91,8 @@
                                 </div>
                             <!-- </div> -->
                         </div>
+
+                        <div>Prezzo totale: {{calcoloShow}}&euro;</div>
 
                         <div class="btn btn-lg btn-cart">
                             <!-- <a href="/carrello"> Vai al carrello </a> -->
