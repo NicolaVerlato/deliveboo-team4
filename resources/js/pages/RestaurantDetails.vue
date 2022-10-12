@@ -190,6 +190,7 @@
                         })
                         localStorage.setItem("data", JSON.stringify(this.basket))
                         this.updateCart(a)
+                        this.calcolaPrezzoCarrello()
                         return
                         } else return
                 }}

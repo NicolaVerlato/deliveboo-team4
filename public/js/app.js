@@ -2453,6 +2453,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             });
             localStorage.setItem("data", JSON.stringify(this.basket));
             this.updateCart(a);
+            this.calcolaPrezzoCarrello();
             return;
           } else return;
         }
@@ -2784,20 +2785,12 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "container"
+    staticClass: "total-footer"
   }, [_c("div", {
-    staticClass: "upper"
-  }, [_c("h4", {
-    staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
-    staticStyle: {
-      "font-size": "35px",
-      "margin-top": "30px"
-    }
-  }, [_c("strong", [_vm._v("Deliveb"), _c("i", {
-    staticClass: "fa-solid fa-cookie-bite"
-  }), _c("i", {
-    staticClass: "fa-solid fa-cookie-bite"
-  })])]), _vm._v(" "), _c("h5", {
+    staticClass: "top-footer"
+  }, [_c("div", {
+    staticClass: "container"
+  }, [_c("h5", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "20px",
@@ -2811,13 +2804,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "http://127.0.0.1:8000/login"
     }
-  }, [_vm._v(" \n                    Sezione ristoranti \n                ")])])]), _vm._v(" "), _c("div", {
-    staticClass: "total-footer"
-  }, [_c("div", {
-    staticClass: "top-footer"
-  }, [_c("div", {
-    staticClass: "container"
-  }, [_c("div", {
+  }, [_vm._v(" \n                            Sezione ristoranti \n                        ")])]), _vm._v(" "), _c("div", {
     staticClass: "faq-cols"
   }, [_c("ul", [_c("li", [_c("h3", [_vm._v("Chi siamo")])]), _vm._v(" "), _c("li", [_c("a", {
     attrs: {
@@ -2867,7 +2854,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Diritti")])])])])])])])]);
+  }, [_vm._v("Diritti")])])])])])])]);
 }];
 render._withStripped = true;
 
@@ -7781,7 +7768,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".total-footer .faq-cols[data-v-61a7c374] {\n  display: flex;\n  align-self: center;\n}\n.total-footer .faq-cols ul[data-v-61a7c374] {\n  margin: 0 30px;\n}\n.total-footer .faq-cols ul .sub-list[data-v-61a7c374] {\n  margin: 0;\n}\n.total-footer .faq-cols ul li[data-v-61a7c374] {\n  margin: 6px;\n}\n.total-footer .faq-cols ul a[data-v-61a7c374] {\n  color: white;\n}\n.total-footer .container[data-v-61a7c374] {\n  display: flex;\n  justify-content: flex-end;\n  background-size: cover;\n  padding-bottom: 30px;\n}\n.total-footer .container h3[data-v-61a7c374] {\n  margin: 10px 0;\n}\n.total-footer .bottom-footer[data-v-61a7c374] {\n  position: relative;\n  background-color: white;\n}\n.total-footer .bottom-footer .container[data-v-61a7c374] {\n  height: 100%;\n  display: flex;\n  align-items: center;\n}\n.total-footer .bottom-footer .container h3[data-v-61a7c374] {\n  color: black;\n}", ""]);
+exports.push([module.i, ".total-footer .faq-cols[data-v-61a7c374] {\n  display: flex;\n  align-self: center;\n}\n.total-footer .faq-cols ul[data-v-61a7c374] {\n  margin: 0 30px;\n}\n.total-footer .faq-cols ul .sub-list[data-v-61a7c374] {\n  margin: 0;\n}\n.total-footer .faq-cols ul li[data-v-61a7c374] {\n  margin: 6px;\n}\n.total-footer .faq-cols ul a[data-v-61a7c374] {\n  color: white;\n}\n.total-footer .navbar-brand[data-v-61a7c374] {\n  display: flex;\n  align-items: center;\n}\n.total-footer .container[data-v-61a7c374] {\n  display: flex;\n  justify-content: space-between;\n  background-size: cover;\n  padding-bottom: 30px;\n}\n.total-footer .container h3[data-v-61a7c374] {\n  margin: 10px 0;\n}\n.total-footer .bottom-footer[data-v-61a7c374] {\n  position: relative;\n  background-color: white;\n}\n.total-footer .bottom-footer .container[data-v-61a7c374] {\n  height: 100%;\n  display: flex;\n  align-items: center;\n}\n.total-footer .bottom-footer .container h3[data-v-61a7c374] {\n  color: black;\n}", ""]);
 
 // exports
 
