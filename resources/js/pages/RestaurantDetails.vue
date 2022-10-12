@@ -210,6 +210,7 @@
 
                 this.updateCart(a)
                 localStorage.setItem("data", JSON.stringify(this.basket));
+                this.calcolaPrezzoCarrello();
             },
             decrement(a) {
                 let counter = this.$el.querySelector(".counter").innerHTML
@@ -226,6 +227,7 @@
                 this.basket = this.basket.filter((x)=>x.item !== 0)
 
                 localStorage.setItem("data", JSON.stringify(this.basket))
+                this.calcolaPrezzoCarrello();
             },
             updateCart(id) {
                 let search = this.basket.find((x)=>x.id === id)
