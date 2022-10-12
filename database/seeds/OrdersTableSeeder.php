@@ -23,7 +23,7 @@ class OrdersTableSeeder extends Seeder
             $new_order->restaurant_id = $faker->randomDigitNotNull();
             $new_order->confirmed = 1;
             $new_order->created_at = $faker->dateTimeThisYear();
-            $new_order->updated_at = $faker->dateTimeThisYear();
+            $new_order->updated_at = $new_order->created_at;
 
             $new_order->save();
         }
