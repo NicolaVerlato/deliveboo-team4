@@ -715,7 +715,7 @@ pre code {
 
 .col {
   flex-basis: 0;
-  flex-grow: 1;
+  flex-grow: 0;
   max-width: 100%;
 }
 
@@ -11161,7 +11161,6 @@ input:invalid {
   }
 
   .row {
-    flex-direction: column;
     align-items: center;
   }
 

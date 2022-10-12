@@ -3007,11 +3007,11 @@ var render = function render() {
       }
     }, [_vm._v(" Menù\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
-    staticClass: "row g-2"
+    staticClass: "ms_main_view row d-flex justify-content-around g-2"
   }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
     return _c("div", {
       key: restaurant.id,
-      staticClass: "col mr-4"
+      staticClass: "col"
     }, [_c("div", {
       staticClass: "card m-3",
       staticStyle: {

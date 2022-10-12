@@ -67,8 +67,8 @@
             <!-- Restaurants if the user selects a category -->
             <div v-else>
 
-                <div class="row g-2">
-                    <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col mr-4">
+                <div class="ms_main_view row d-flex justify-content-around g-2">
+                    <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col">
                     <div class="card m-3" style="width: 18rem;">
 
                             <div v-if="restaurant.cover">
