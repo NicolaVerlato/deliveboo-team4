@@ -2399,7 +2399,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.allDishesIds += id + '-';
         _this2.allQuantity += amount + '-';
       });
-      console.log(this.allDishesIds, this.allQuantity);
     },
     emptyCart: function emptyCart() {
       localStorage.clear();
@@ -2416,18 +2415,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.calcolo = this.calcolo * 23425232;
       this.getAllDishesIds();
     },
+    calcolaPrezzoCarrello: function calcolaPrezzoCarrello() {
+      this.calcoloShow = 0;
+
+      for (var i = 0; i < this.basket.length; i++) {
+        var prezzo = parseInt(this.basket[i].price);
+        var quantita = parseInt(this.basket[i].item);
+        this.calcoloShow += prezzo * quantita;
+      }
+
+      return this.calcoloShow;
+    },
     checkAmount: function checkAmount(a) {
       var search = this.basket.find(function (x) {
         return x.id === a;
       }) || [];
-      console.log(search);
     },
     increment: function increment(a, slug, price) {
       var counter = this.$el.querySelector(".counter").innerHTML;
       var search = this.basket.find(function (x) {
         return x.id === a;
-      });
-      console.log(counter); // se il carrello non è vuoto
+      }); // se il carrello non è vuoto
 
       if (this.basket.length > 0) {
         // se lo slug del ristorante attuale non corrisponde a quello nel carrello
@@ -2556,7 +2564,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       ;
-      console.log(price);
 
       if (localStorage.length > 1) {
         if (localStorage.getItem('slug') == this.restaurant.slug) {
@@ -2566,9 +2573,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             localStorage.clear();
             localStorage.setItem('slug', this.restaurant.slug);
             localStorage.setItem(value, restaurantId);
-          } else {
-            console.log('mantieni i dati');
-          }
+          } else {}
         }
       }
 
@@ -2616,7 +2621,7 @@ var render = function render() {
       color: "white"
     }
   }, [_c("div", {
-    staticClass: "container-fluid"
+    staticClass: "container"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "navbar-nav align-center align-items-center"
   }, _vm._l(_vm.links, function (link, index) {
@@ -2770,14 +2775,18 @@ var render = function render() {
     attrs: {
       d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
     }
-  })]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]);
+  })]), _vm._v(" "), _vm._m(0)]);
 };
 
 var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("h4", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "upper"
+  }, [_c("h4", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "35px",
@@ -2787,12 +2796,7 @@ var staticRenderFns = [function () {
     staticClass: "fa-solid fa-cookie-bite"
   }), _c("i", {
     staticClass: "fa-solid fa-cookie-bite"
-  })])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("h5", {
+  })])]), _vm._v(" "), _c("h5", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "20px",
@@ -2806,12 +2810,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "http://127.0.0.1:8000/login"
     }
-  }, [_vm._v(" \n            Sezione ristoranti \n        ")])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
+  }, [_vm._v(" \n                    Sezione ristoranti \n                ")])])]), _vm._v(" "), _c("div", {
     staticClass: "total-footer"
   }, [_c("div", {
     staticClass: "top-footer"
@@ -2867,7 +2866,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Diritti")])])])])])])]);
+  }, [_vm._v("Diritti")])])])])])])])]);
 }];
 render._withStripped = true;
 
@@ -2890,7 +2889,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("section", {
-    staticClass: "mt-4"
+    staticClass: "container mt-4"
   }, [_c("h2", {
     staticClass: "text-center",
     staticStyle: {
@@ -2898,7 +2897,9 @@ var render = function render() {
       "font-size": "30px",
       "margin-bottom": "40px"
     }
-  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), _vm._l(_vm.types, function (tipo) {
+  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), _c("div", {
+    staticClass: "ms_filters text-center"
+  }, [_vm._l(_vm.types, function (tipo) {
     return _c("div", {
       key: tipo.id,
       staticClass: "form-check form-check-inline",
@@ -2955,12 +2956,11 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_vm._v(" Applica filtri ")]), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
-    staticClass: "row row-cols-4"
+  }, [_vm._v(" Applica filtri ")])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
+    staticClass: "ms_main_view row g-2 row-col-auto"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
-      key: restaurant.id,
-      staticClass: "mr-5"
+      key: restaurant.id
     }, [_c("div", {
       staticClass: "card m-3",
       staticStyle: {
@@ -2982,17 +2982,19 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
-    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
         key: item.id
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
-        }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
+        }, [item.type_id == singleType.id ? _c("div", {
+          staticClass: "type_not_typo"
+        }, [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
-    }), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("router-link", {
+    }), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -3004,7 +3006,7 @@ var render = function render() {
       }
     }, [_vm._v("View\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
-    staticClass: "row"
+    staticClass: "row g-2"
   }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
     return _c("div", {
       key: restaurant.id,
@@ -3030,17 +3032,18 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
-    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+    }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
-        key: item.id
+        key: item.id,
+        staticClass: "type_not_typo"
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
         }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                            " + _vm._s(singleType.name) + "\n                                        ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
-    }), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _c("router-link", {
+    }), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -3051,7 +3054,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("View\n                        ")])], 2)])]);
-  }), 0)])], 2);
+  }), 0)])]);
 };
 
 var staticRenderFns = [];
@@ -3231,7 +3234,9 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "wrapper"
+    staticClass: "container wrapper"
+  }, [_c("div", {
+    staticClass: "row row-col-auto"
   }, [_c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
@@ -3248,16 +3253,24 @@ var render = function render() {
       key: dish.id,
       staticClass: "mb-3"
     }, [dish.is_visible == 1 ? _c("div", [_vm.restaurant.user_id == dish.restaurant_id ? _c("div", [_c("div", {
-      staticClass: "card-body d-flex justify-content-around"
-    }, [_c("div", [_c("h5", {
+      staticClass: "card-body d-flex justify-content-between"
+    }, [_c("div", [dish.cover ? _c("div", [_c("img", {
+      staticClass: "card-img-left",
+      attrs: {
+        src: "storage/" + dish.cover,
+        alt: dish.title
+      }
+    })]) : _vm._e(), _vm._v(" "), _c("h5", {
       staticClass: "card-title text-center"
-    }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
+    }, [_vm._v(" " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
       staticClass: "card-text text-center"
-    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", [_c("i", {
+    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", {
+      staticClass: "ms_quantities"
+    }, [_c("i", {
       staticClass: "fa-solid fa-minus",
       on: {
         click: function click($event) {
-          return _vm.decrement(dish.id);
+          _vm.decrement(dish.id), _vm.calcolaPrezzoCarrello();
         }
       }
     }), _vm._v(" "), _c("span", {
@@ -3272,7 +3285,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.increment(dish.id, _vm.restaurant.slug, dish.price);
+          _vm.increment(dish.id, _vm.restaurant.slug, dish.price), _vm.calcolaPrezzoCarrello();
         }
       }
     })])])]) : _vm._e()]) : _vm._e()]);
@@ -3292,8 +3305,8 @@ var render = function render() {
       return _c("div", {
         key: dish.id
       }, [dish.id == item.id ? _c("div", [_c("h5", {
-        staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
+        staticClass: "card-title text-left"
+      }, [_vm._v(" " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
         return _c("div", {
           key: restaurant.id
         }, [restaurant.id == dish.restaurant_id ? _c("h6", [_vm._v(_vm._s(restaurant.name))]) : _vm._e()]);
@@ -3305,7 +3318,7 @@ var render = function render() {
         }
       }, [_vm._v(" Quantità: " + _vm._s(item.item))])], 2) : _vm._e()]);
     }), 0)]);
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", [_c("h5", [_vm._v("Prezzo totale: " + _vm._s(_vm.calcoloShow) + "€")])]), _vm._v(" "), _c("div", {
     staticClass: "btn btn-lg btn-cart"
   }, [_c("a", {
     staticStyle: {
@@ -3320,7 +3333,7 @@ var render = function render() {
         _vm.calcolaPrice(), _vm.emptyCart();
       }
     }
-  }, [_vm._v(" \n                         Completa pagamento \n                     ")])])], 2)])]) : _vm._e()]);
+  }, [_vm._v(" \n                             Completa pagamento \n                         ")])])], 2)])]) : _vm._e()])]);
 };
 
 var staticRenderFns = [function () {
@@ -3332,7 +3345,7 @@ var staticRenderFns = [function () {
     staticStyle: {
       padding: "20px"
     }
-  }, [_vm._v("\n                 Al momento non ci sono piatti disponibili. \n                 Torna alla \n                 "), _c("a", {
+  }, [_vm._v("\n                     Al momento non ci sono piatti disponibili. \n                     Torna alla \n                     "), _c("a", {
     staticStyle: {
       color: "white",
       padding: "20px 0"
@@ -3340,7 +3353,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "/"
     }
-  }, [_vm._v(" \n                     Home \n                 ")])]);
+  }, [_vm._v(" \n                         Home \n                     ")])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -7789,7 +7802,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}", ""]);
 
 // exports
 
@@ -7808,7 +7821,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview[data-v-7720c0e8] {\n  position: absolute;\n  top: 100px;\n  right: 30px;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 450px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.ms_quantities[data-v-7720c0e8] {\n  line-height: 8;\n  font-size: 1.5rem;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 

@@ -1,6 +1,7 @@
 //COMMON
 body {
     color: $secondary_color;
+    min-width: 480px;
 }  
 .brand_color {
     background-color: $brand_color;
@@ -47,6 +48,11 @@ img {
 .card-img-top {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+} 
+.card-img-left {
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.5rem;
 } 
 .title_list {
     font-size: 30px;
@@ -181,6 +187,54 @@ img {
     border: 2px solid red;
   }
   
+  // tipologie ristoranti
+  .type_not_typo {
+    color: green;
+  }
+
+  // checkbox filtri
+  .ms_filters {
+    display: flex;
+    justify-content: center;
+  }
+
+  .upper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // Parte responsive
+  @include media-breakpoint-down(sm) {}
+  @include media-breakpoint-down(md) {
+    .ms_filters {
+      flex-direction: column;
+      align-items: center;
+    }
+    .ms_main_view {
+      justify-content: center;
+    }
+    .row {
+      flex-direction: column;
+      align-items: center;
+    }
+    .wrapper {
+      justify-content: center;
+      padding-bottom: 50px;
+
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    .ms_main_view {
+      justify-content: center;
+    }
+    .row {
+      justify-content: space-evenly;
+    }
+    .wrapper {
+      justify-content: space-evenly;
+    }
+  }
+
   @-webkit-keyframes spin {
     100% {
       -webkit-transform: rotate(360deg);
