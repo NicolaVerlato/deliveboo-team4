@@ -80,11 +80,11 @@
                                             <div v-for="restaurant in restaurants" :key="restaurant.id">
                                                 <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
                                             </div>
+                                            <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
                                             <div>
-                                                <h6>Parziale: {{dish.price * item.item}}&euro;</h6>
+                                                <h6>Totale piatto: {{dish.price * item.item}}&euro;</h6>
                                             </div>
                                             <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
-                                            <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
                                         </div>
                                     </div>
                                     
@@ -92,7 +92,7 @@
                             <!-- </div> -->
                         </div>
 
-                        <div>Prezzo totale: {{calcoloShow}}&euro;</div>
+                        <div class="toast-cart-total">Totale ordine: {{calcoloShow}}&euro;</div>
 
                         <div class="btn btn-lg btn-cart">
                             <!-- <a href="/carrello"> Vai al carrello </a> -->
@@ -308,6 +308,14 @@
         line-height: 8;
         font-size: 1.5rem;
     }
+    
+    h5 {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    // .toast-header h5 {        
+    //     font-size: 1.2rem;
+    // }
     .cart-preview {
         // position: absolute;
         // top: 100px;

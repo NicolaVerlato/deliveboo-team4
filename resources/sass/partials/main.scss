@@ -191,6 +191,11 @@ img {
   .type_not_typo {
     color: green;
   }
+  .toast-cart-total {
+    text-align: center;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+  }
 
   // checkbox filtri
   .ms_filters {
@@ -201,6 +206,9 @@ img {
   .upper {
     display: flex;
     justify-content: space-between;
+  }
+  .wrapper {    
+    padding-top: 10px;
   }
 
   // Parte responsive
@@ -219,7 +227,8 @@ img {
     }
     .wrapper {
       justify-content: center;
-      padding-bottom: 50px;
+      padding-top: 30px;
+      padding-bottom: 30px;
 
     }
   }

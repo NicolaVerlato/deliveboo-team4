@@ -2361,7 +2361,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       allDishesIds: '',
       allQuantity: '',
       counter: 0,
-      restaurants: []
+      restaurants: [],
+      calcoloShow: 0
     };
   },
   methods: {
@@ -2474,6 +2475,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.updateCart(a);
       localStorage.setItem("data", JSON.stringify(this.basket));
+      this.calcolaPrezzoCarrello();
     },
     decrement: function decrement(a) {
       var counter = this.$el.querySelector(".counter").innerHTML;
@@ -2494,6 +2496,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return x.item !== 0;
       });
       localStorage.setItem("data", JSON.stringify(this.basket));
+      this.calcolaPrezzoCarrello();
     },
     updateCart: function updateCart(id) {
       var search = this.basket.find(function (x) {
@@ -2591,6 +2594,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     axios.get('/api/restaurants').then(function (response) {
       _this5.restaurants = response.data.results;
     });
+    this.calcolaPrezzoCarrello();
   },
   updated: function updated() {
     this.loadingCart();
@@ -2614,44 +2618,41 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("header", [_c("nav", {
-    staticClass: "navbar navbar-expand-lg",
-    staticStyle: {
-      "background-color": "#fea543",
-      color: "white"
-    }
-  }, [_c("div", {
-    staticClass: "container"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "navbar-nav align-center align-items-center"
-  }, _vm._l(_vm.links, function (link, index) {
-    return _c("router-link", {
-      key: index,
-      staticClass: "header-links",
-      staticStyle: {
-        "font-size": "20px"
-      },
-      attrs: {
-        to: link.name
-      }
-    }, [_vm._v(" " + _vm._s(link.label) + " \n                    ")]);
-  }), 1)])])]), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _c("footer", [_c("Footer")], 1)]);
+  return _c("div", [_vm._m(0), _vm._v(" "), _c("main", [_c("div", [_c("router-view")], 1)]), _vm._v(" "), _c("footer", [_c("Footer")], 1)]);
 };
 
 var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("h2", {
+  return _c("header", [_c("nav", {
+    staticClass: "navbar navbar-expand-lg",
+    staticStyle: {
+      "background-color": "#2f4858",
+      color: "white"
+    }
+  }, [_c("div", {
+    staticClass: "container"
+  }, [_c("h2", {
     staticClass: "navbar-brand col-sm-3 col-md-2 mr-0",
     staticStyle: {
       "font-size": "35px"
     }
-  }, [_c("strong", [_vm._v("Deliveb"), _c("i", {
+  }, [_c("a", {
+    staticStyle: {
+      color: "white",
+      "text-decoration": "none"
+    },
+    attrs: {
+      href: "/"
+    }
+  }, [_c("strong", [_vm._v("\n                            Deliveb"), _c("i", {
     staticClass: "fa-solid fa-cookie-bite"
   }), _c("i", {
     staticClass: "fa-solid fa-cookie-bite"
-  })])]);
+  })])])]), _vm._v(" "), _c("div", {
+    staticClass: "navbar-nav align-center align-items-center"
+  })])])]);
 }];
 render._withStripped = true;
 
@@ -2674,7 +2675,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("section", {
-    staticClass: "container d-flex justify-content-center pt-5"
+    staticClass: "container d-flex justify-content-center mt-3 mb-5 pt-3 pb-3"
   }, [_c("div", {
     staticClass: "carousel"
   }, [_c("button", {
@@ -2995,7 +2996,7 @@ var render = function render() {
         }, [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
     }), _vm._v(" "), _c("router-link", {
-      staticClass: "btn btn-sm btn-primary",
+      staticClass: "btn btn-sm btn-details",
       attrs: {
         to: {
           name: "restaurant-details",
@@ -3004,7 +3005,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("View\n                        ")])], 2)])]);
+    }, [_vm._v(" Menù\n                        ")])], 2)])]);
   }), 0) : _c("div", [_c("div", {
     staticClass: "row g-2"
   }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
@@ -3053,7 +3054,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("View\n                        ")])], 2)])]);
+    }, [_vm._v(" Menù\n                        ")])], 2)])]);
   }), 0)])]);
 };
 
@@ -3186,7 +3187,7 @@ var render = function render() {
       opacity: "1",
       width: "100%",
       height: "100px",
-      fill: "#fea543",
+      fill: "#2f4858",
       transform: "rotateY(0deg)"
     },
     attrs: {
@@ -3200,16 +3201,11 @@ var render = function render() {
       d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
     }
   })])])]), _vm._v(" "), _c("div", {
-    staticStyle: {
-      "padding-bottom": "50px",
-      "background-color": "white"
-    }
-  }, [_c("Carousel")], 1), _vm._v(" "), _c("div", {
     staticClass: "container",
     staticStyle: {
       "padding-bottom": "50px"
     }
-  }, [_c("Restaurants")], 1)]);
+  }, [_c("Restaurants")], 1), _vm._v(" "), _c("div", [_c("Carousel")], 1)]);
 };
 
 var staticRenderFns = [];
@@ -3270,7 +3266,7 @@ var render = function render() {
       staticClass: "fa-solid fa-minus",
       on: {
         click: function click($event) {
-          _vm.decrement(dish.id), _vm.calcolaPrezzoCarrello();
+          return _vm.decrement(dish.id);
         }
       }
     }), _vm._v(" "), _c("span", {
@@ -3285,7 +3281,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          _vm.increment(dish.id, _vm.restaurant.slug, dish.price), _vm.calcolaPrezzoCarrello();
+          return _vm.increment(dish.id, _vm.restaurant.slug, dish.price);
         }
       }
     })])])]) : _vm._e()]) : _vm._e()]);
@@ -3316,9 +3312,11 @@ var render = function render() {
             return _vm.getAllDishesIds();
           }
         }
-      }, [_vm._v(" Quantità: " + _vm._s(item.item))])], 2) : _vm._e()]);
+      }, [_vm._v(" Quantità: " + _vm._s(item.item))]), _vm._v(" "), _c("div", [_c("h6", [_vm._v("Totale piatto: " + _vm._s(dish.price * item.item) + "€")])])], 2) : _vm._e()]);
     }), 0)]);
-  }), _vm._v(" "), _c("div", [_c("h5", [_vm._v("Prezzo totale: " + _vm._s(_vm.calcoloShow) + "€")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "toast-cart-total"
+  }, [_vm._v("Totale ordine: " + _vm._s(_vm.calcoloShow) + "€")]), _vm._v(" "), _c("div", {
     staticClass: "btn btn-lg btn-cart"
   }, [_c("a", {
     staticStyle: {
@@ -7764,7 +7762,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "ul[data-v-fe98726a] {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n}\n*[data-v-fe98726a], *[data-v-fe98726a]::after, *[data-v-fe98726a]::before {\n  box-sizing: border-box;\n}\n.carousel[data-v-fe98726a] {\n  width: 500px;\n  height: 500px;\n  position: relative;\n}\n.carousel .slide[data-v-fe98726a] {\n  position: absolute;\n  opacity: 1;\n  transition: 200ms opacity ease-in-out;\n  transition-delay: 200ms;\n}\n.carousel .slide img[data-v-fe98726a] {\n  display: block;\n  width: 500px;\n  height: 500px;\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.slide[data-active][data-v-fe98726a] {\n  opacity: 2;\n  z-index: 1;\n  transition-delay: 0ms;\n}\n.carousel-button[data-v-fe98726a] {\n  position: absolute;\n  z-index: 2;\n  background: none;\n  border: none;\n  font-size: 4rem;\n  top: 50%;\n  transform: translateY(-50%);\n  color: rgba(255, 255, 255, 0.5);\n  cursor: pointer;\n  border-radius: 0.25rem;\n  padding: 0 0.5rem;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.carousel-button[data-v-fe98726a]:hover,\n.carousel-button[data-v-fe98726a]:active {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n.carousel-button.prev[data-v-fe98726a] {\n  left: 0;\n}\n.carousel-button.next[data-v-fe98726a] {\n  right: 0;\n}", ""]);
+exports.push([module.i, "ul[data-v-fe98726a] {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n}\n*[data-v-fe98726a], *[data-v-fe98726a]::after, *[data-v-fe98726a]::before {\n  box-sizing: border-box;\n}\n.carousel[data-v-fe98726a] {\n  width: 400px;\n  height: 300px;\n  position: relative;\n}\n.carousel .slide[data-v-fe98726a] {\n  position: absolute;\n  opacity: 1;\n  transition: 200ms opacity ease-in-out;\n  transition-delay: 200ms;\n}\n.carousel .slide img[data-v-fe98726a] {\n  display: block;\n  width: 100%;\n  height: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.slide[data-active][data-v-fe98726a] {\n  opacity: 2;\n  z-index: 1;\n  transition-delay: 0ms;\n}\n.carousel-button[data-v-fe98726a] {\n  position: absolute;\n  z-index: 2;\n  background: none;\n  border: none;\n  font-size: 2rem;\n  top: 50%;\n  transform: translateY(-20%);\n  color: rgba(255, 255, 255, 0.5);\n  cursor: pointer;\n  border-radius: 0.25rem;\n  padding: 0 0.5rem;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.carousel-button[data-v-fe98726a]:hover,\n.carousel-button[data-v-fe98726a]:active {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n.carousel-button.prev[data-v-fe98726a] {\n  left: 0;\n}\n.carousel-button.next[data-v-fe98726a] {\n  right: 0;\n}", ""]);
 
 // exports
 
@@ -7802,7 +7800,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}", ""]);
 
 // exports
 
@@ -7821,7 +7819,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 450px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.ms_quantities[data-v-7720c0e8] {\n  line-height: 8;\n  font-size: 1.5rem;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 450px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.ms_quantities[data-v-7720c0e8] {\n  line-height: 8;\n  font-size: 1.5rem;\n}\nh5[data-v-7720c0e8] {\n  font-weight: bold;\n  font-size: 1.2rem;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 
@@ -55754,8 +55752,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

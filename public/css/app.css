@@ -11130,6 +11130,12 @@ input:invalid {
   color: green;
 }
 
+.toast-cart-total {
+  text-align: center;
+  font-size: 1.5rem;
+  padding-bottom: 5px;
+}
+
 .ms_filters {
   display: flex;
   justify-content: center;
@@ -11138,6 +11144,10 @@ input:invalid {
 .upper {
   display: flex;
   justify-content: space-between;
+}
+
+.wrapper {
+  padding-top: 10px;
 }
 
 @media (max-width: 991.98px) {
@@ -11157,7 +11167,8 @@ input:invalid {
 
   .wrapper {
     justify-content: center;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 }
 
