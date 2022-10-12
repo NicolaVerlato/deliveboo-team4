@@ -22,13 +22,14 @@ class StatsController extends Controller
         $user = Auth::user();
         $dishOrderArray = [];
         $restaurant = Restaurant::where('user_id', '=', $user->id)->first();
-        $orders = Order::where('restaurant_id', '=', $restaurant->id)->get();
+        $orders = Order::where('restaurant_id', '=', $restaurant->id)->orderBy('created_at', 'desc')->get();
         foreach ($orders as $key => $value) {
             $dish_order = DishOrder::where('order_id', '=', $value->id)->get();
             if(count($dish_order) > 0) {
                 $dishOrderArray[] = $dish_order;
             }
         }
+        
         $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
         $data = [
             'orders' => $orders,
