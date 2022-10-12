@@ -84,6 +84,7 @@
 </script>
 
 <style lang="scss">
+
     .navbar {
         justify-content: space-between;
 

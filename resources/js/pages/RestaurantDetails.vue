@@ -299,7 +299,9 @@
 <style lang="scss" scoped>
 
 @import '../../sass/partials/variables.scss';
-
+    .wrapper {
+        height: 100vh - 35;
+    }
     .card {
         width: 450px;
         max-width: 600px;
