@@ -13,6 +13,7 @@
                     </h2>
              
                     <div class="navbar-nav align-center align-items-center">
+                    <!-- <h3>Il codice del gusto</h3> -->
                         
                         <!-- <router-link 
                             style="font-size: 20px;"
@@ -83,7 +84,13 @@
 </script>
 
 <style lang="scss">
+    .navbar {
+        justify-content: space-between;
 
+    }
+    .navbar .container {
+        color: white;
+    }
     header {
         nav {
             .navbar-brand {

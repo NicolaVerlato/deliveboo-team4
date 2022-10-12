@@ -7730,7 +7730,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "header nav .navbar-brand {\n  font-size: 24px;\n}\nheader nav .header-links {\n  color: white;\n  margin-left: 15px;\n}\nfooter {\n  background-color: #2f4858;\n  color: white;\n}", ""]);
+exports.push([module.i, ".navbar {\n  justify-content: space-between;\n}\n.navbar .container {\n  color: white;\n}\nheader nav .navbar-brand {\n  font-size: 24px;\n}\nheader nav .header-links {\n  color: white;\n  margin-left: 15px;\n}\nfooter {\n  background-color: #2f4858;\n  color: white;\n}", ""]);
 
 // exports
 
