@@ -5,18 +5,22 @@
             <nav class="navbar navbar-expand-lg" style="background-color: #fea543; color: white;">
                 <div class="container-fluid">
                     <h2 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 35px;">
-                        <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
+                        <a style="color: white; text-decoration: none" href="/">
+                            <strong>
+                                Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i>
+                            </strong>
+                        </a>
                     </h2>
              
                     <div class="navbar-nav align-center align-items-center">
                         
-                        <router-link 
+                        <!-- <router-link 
                             style="font-size: 20px;"
                             class="header-links"
                             v-for="(link, index) in links" 
                             :key="index" 
                             :to="link.name"> {{link.label}} 
-                        </router-link>
+                        </router-link> -->
 
                         <!-- In un mondo ideale contiene la somma degli elementi del carrello, sempre aggiornato -->
                         <!-- <span 

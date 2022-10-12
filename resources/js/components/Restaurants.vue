@@ -52,11 +52,11 @@
                             <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
                             <router-link 
-                                class="btn btn-sm btn-primary"
+                                class="btn btn-sm btn-details"
                                 :to="{
                                     name: 'restaurant-details',
                                     params: {slug: restaurant.slug}
-                                }">View
+                                }"> Menù
                             </router-link>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                                 :to="{
                                     name: 'restaurant-details',
                                     params: {slug: restaurant.slug}
-                                }">View
+                                }"> Menù
                             </router-link>
                         </div>
                     </div>
@@ -164,12 +164,22 @@ import arrayPush from 'lodash/_arrayPush';
 </script>
 
 <style lang="scss">
+
+    @import '../../sass/partials/variables.scss';
+
     .btn-filter {
         cursor: pointer;
         color: white;
         border: 1px solid white;
         padding: 6px;
         border-radius: 4px;
+    }
+
+    .btn-details {
+        font-size: 16px;
+;
+        color: white;
+        background-color: $secondary-color;
     }
 </style>
 
