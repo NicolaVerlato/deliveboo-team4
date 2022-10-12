@@ -3145,12 +3145,20 @@ var render = function render() {
       key: dish.id,
       staticClass: "mb-3"
     }, [dish.is_visible == 1 ? _c("div", [_vm.restaurant.user_id == dish.restaurant_id ? _c("div", [_c("div", {
-      staticClass: "card-body d-flex justify-content-around"
-    }, [_c("div", [_c("h5", {
+      staticClass: "card-body d-flex justify-content-between"
+    }, [_c("div", [dish.cover ? _c("div", [_c("img", {
+      staticClass: "card-img-left",
+      attrs: {
+        src: "storage/" + dish.cover,
+        alt: dish.title
+      }
+    })]) : _vm._e(), _vm._v(" "), _c("h5", {
       staticClass: "card-title text-center"
-    }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
+    }, [_vm._v(" " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
       staticClass: "card-text text-center"
-    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", [_c("i", {
+    }, [_vm._v(" Prezzo: " + _vm._s(dish.price) + " €")])]), _vm._v(" "), _c("div", {
+      staticClass: "ms_quantities"
+    }, [_c("i", {
       staticClass: "fa-solid fa-minus",
       on: {
         click: function click($event) {
@@ -3189,8 +3197,8 @@ var render = function render() {
       return _c("div", {
         key: dish.id
       }, [dish.id == item.id ? _c("div", [_c("h5", {
-        staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
+        staticClass: "card-title text-left"
+      }, [_vm._v(" " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
         return _c("div", {
           key: restaurant.id
         }, [restaurant.id == dish.restaurant_id ? _c("h6", [_vm._v(_vm._s(restaurant.name))]) : _vm._e()]);
@@ -7686,7 +7694,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 500px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 450px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.ms_quantities[data-v-7720c0e8] {\n  line-height: 8;\n  font-size: 1.5rem;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 

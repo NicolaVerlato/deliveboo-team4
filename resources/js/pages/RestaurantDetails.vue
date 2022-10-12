@@ -16,10 +16,16 @@
                     <div v-for="dish in dishes" :key="dish.id" class="mb-3">
                         <div v-if="dish.is_visible == 1">
                             <div v-if="restaurant.user_id == dish.restaurant_id">
-                                <div class="card-body d-flex justify-content-around">
+                                <div class="card-body d-flex justify-content-between">
 
                                     <div>
-                                        <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                        <div v-if="dish.cover">
+                                            <img 
+                                            class="card-img-left"  
+                                            :src="'storage/' + dish.cover" 
+                                            :alt="dish.title">
+                                        </div>
+                                        <h5 class="card-title text-center"> {{dish.name}} </h5>
 
                                         <p class="card-text text-center"> Prezzo: {{dish.price}} &euro;</p>
                                     </div>
@@ -27,7 +33,7 @@
                                     <!-- <div>
                                         <a @click="sendInfo(dish.id, dish.restaurant_id, dish.price)" class="btn btn-light"> Aggiungi </a>
                                     </div> -->
-                                    <div>
+                                    <div class="ms_quantities">
                                         <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
                                         <span :id="dish.id" class="counter">0</span>
                                         <i @click="increment(dish.id, restaurant.slug, dish.price)" :id="dish.id" class="fa-solid fa-plus"></i>
@@ -69,8 +75,8 @@
                                 <div class="card-body d-flex">
 
                                     <div v-for="dish in dishes" :key="dish.id">
-                                        <div v-if="dish.id == item.id"> 
-                                            <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                        <div v-if="dish.id == item.id">                                            
+                                            <h5 class="card-title text-left"> {{dish.name}} </h5>
                                             <div v-for="restaurant in restaurants" :key="restaurant.id">
                                                 <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
                                             </div>
@@ -281,9 +287,13 @@
     @import '../../sass/partials/variables.scss';
 
     .card {
-        width: 500px;
+        width: 450px;
         max-width: 600px;
         margin: 0 auto;
+    }
+    .ms_quantities {
+        line-height: 8;
+        font-size: 1.5rem;
     }
     .cart-preview {
         // position: absolute;
