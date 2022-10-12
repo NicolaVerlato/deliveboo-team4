@@ -1,7 +1,7 @@
 <template>
 
-    <section class="mt-4">
-        <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
+    <section class="mt-4 pt-5">
+        <h2 class="text-center" style="color:white; font-size: 36px; margin-bottom: 40px;">
             Lista dei ristoranti
         </h2>
         <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">

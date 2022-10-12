@@ -1,5 +1,5 @@
 <template>
-    <section class="container d-flex justify-content-center pt-5">
+    <section class="container d-flex justify-content-center mt-3 pt-3 pb-3">
         <!--CAROUSEL-->
        <div class="carousel">
             <button @click="previousSlides" class="carousel-button prev"><i class="fa-solid fa-chevron-left"></i></button>
@@ -70,8 +70,8 @@ ul {
  }
 
 .carousel {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 300px;
     position: relative;
     .slide {
         position: absolute;
@@ -80,8 +80,8 @@ ul {
         transition-delay: 200ms;
         img {
             display: block;
-            width: 500px;
-            height: 500px;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             object-position: center;
         }
@@ -99,9 +99,9 @@ ul {
     z-index: 2;
     background: none;
     border: none;
-    font-size: 4rem;
+    font-size: 2rem;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-20%);
     color: rgba(255, 255, 255, .5);
     cursor: pointer;
     border-radius: .25rem;
