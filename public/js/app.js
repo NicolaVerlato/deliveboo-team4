@@ -2361,7 +2361,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       allDishesIds: '',
       allQuantity: '',
       counter: 0,
-      restaurants: []
+      restaurants: [],
+      calcoloShow: 0
     };
   },
   methods: {
@@ -2399,7 +2400,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.allDishesIds += id + '-';
         _this2.allQuantity += amount + '-';
       });
-      console.log(this.allDishesIds, this.allQuantity);
     },
     emptyCart: function emptyCart() {
       localStorage.clear();
@@ -2416,18 +2416,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.calcolo = this.calcolo * 23425232;
       this.getAllDishesIds();
     },
+    calcolaPrezzoCarrello: function calcolaPrezzoCarrello() {
+      this.calcoloShow = 0;
+
+      for (var i = 0; i < this.basket.length; i++) {
+        var prezzo = parseInt(this.basket[i].price);
+        var quantita = parseInt(this.basket[i].item);
+        this.calcoloShow += prezzo * quantita;
+      }
+
+      return this.calcoloShow;
+    },
     checkAmount: function checkAmount(a) {
       var search = this.basket.find(function (x) {
         return x.id === a;
       }) || [];
-      console.log(search);
     },
     increment: function increment(a, slug, price) {
       var counter = this.$el.querySelector(".counter").innerHTML;
       var search = this.basket.find(function (x) {
         return x.id === a;
-      });
-      console.log(counter); // se il carrello non è vuoto
+      }); // se il carrello non è vuoto
 
       if (this.basket.length > 0) {
         // se lo slug del ristorante attuale non corrisponde a quello nel carrello
@@ -2556,7 +2565,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       ;
-      console.log(price);
 
       if (localStorage.length > 1) {
         if (localStorage.getItem('slug') == this.restaurant.slug) {
@@ -2566,9 +2574,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             localStorage.clear();
             localStorage.setItem('slug', this.restaurant.slug);
             localStorage.setItem(value, restaurantId);
-          } else {
-            console.log('mantieni i dati');
-          }
+          } else {}
         }
       }
 
@@ -2586,6 +2592,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     axios.get('/api/restaurants').then(function (response) {
       _this5.restaurants = response.data.results;
     });
+    this.calcolaPrezzoCarrello();
   },
   updated: function updated() {
     this.loadingCart();
@@ -3257,7 +3264,7 @@ var render = function render() {
       staticClass: "fa-solid fa-minus",
       on: {
         click: function click($event) {
-          return _vm.decrement(dish.id);
+          _vm.decrement(dish.id), _vm.calcolaPrezzoCarrello();
         }
       }
     }), _vm._v(" "), _c("span", {
@@ -3272,7 +3279,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.increment(dish.id, _vm.restaurant.slug, dish.price);
+          _vm.increment(dish.id, _vm.restaurant.slug, dish.price), _vm.calcolaPrezzoCarrello();
         }
       }
     })])])]) : _vm._e()]) : _vm._e()]);
@@ -3292,8 +3299,8 @@ var render = function render() {
       return _c("div", {
         key: dish.id
       }, [dish.id == item.id ? _c("div", [_c("h5", {
-        staticClass: "card-title text-center"
-      }, [_vm._v(" Piatto: " + _vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
+        staticClass: "card-title"
+      }, [_vm._v(_vm._s(dish.name) + " ")]), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant) {
         return _c("div", {
           key: restaurant.id
         }, [restaurant.id == dish.restaurant_id ? _c("h6", [_vm._v(_vm._s(restaurant.name))]) : _vm._e()]);
@@ -3303,9 +3310,9 @@ var render = function render() {
             return _vm.getAllDishesIds();
           }
         }
-      }, [_vm._v(" Quantità: " + _vm._s(item.item))])], 2) : _vm._e()]);
+      }, [_vm._v(" Quantità: " + _vm._s(item.item))]), _vm._v(" "), _c("div", [_c("h5", [_vm._v(_vm._s(item.item * dish.price) + "€")])])], 2) : _vm._e()]);
     }), 0)]);
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", [_c("h5", [_vm._v("Prezzo totale: " + _vm._s(_vm.calcoloShow) + "€")])]), _vm._v(" "), _c("div", {
     staticClass: "btn btn-lg btn-cart"
   }, [_c("a", {
     staticStyle: {

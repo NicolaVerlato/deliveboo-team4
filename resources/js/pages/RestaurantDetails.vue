@@ -27,9 +27,9 @@
                                     <a @click="sendInfo(dish.id, dish.restaurant_id, dish.price)" class="btn btn-light"> Aggiungi </a>
                                 </div> -->
                                 <div>
-                                    <i @click="decrement(dish.id)" class="fa-solid fa-minus"></i>
+                                    <i @click="decrement(dish.id), calcolaPrezzoCarrello()" class="fa-solid fa-minus"></i>
                                     <span :id="dish.id" class="counter">0</span>
-                                    <i @click="increment(dish.id, restaurant.slug, dish.price)" :id="dish.id" class="fa-solid fa-plus"></i>
+                                    <i @click="increment(dish.id, restaurant.slug, dish.price), calcolaPrezzoCarrello()" :id="dish.id" class="fa-solid fa-plus"></i>
                                 </div>
                             </div>
                         </div>
@@ -66,17 +66,24 @@
 
                                 <div v-for="dish in dishes" :key="dish.id">
                                     <div v-if="dish.id == item.id"> 
-                                        <h5 class="card-title text-center"> Piatto: {{dish.name}} </h5>
+                                        <h5 class="card-title">{{dish.name}} </h5>
                                         <div v-for="restaurant in restaurants" :key="restaurant.id">
                                             <h6 v-if="restaurant.id == dish.restaurant_id">{{restaurant.name}}</h6>
                                         </div>
-                                        <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
                                         <div @click="getAllDishesIds()"> Quantità: {{item.item}}</div>
+                                        <div>
+                                            <h5>{{item.item * dish.price}}&euro;</h5>
+                                        </div>
+                                        <!-- <h6> Ristorante: {{restaurant.name}} </h6> -->
                                     </div>
                                 </div>
                                 
                             </div>
                         <!-- </div> -->
+                    </div>
+
+                    <div>
+                        <h5>Prezzo totale: {{calcoloShow}}&euro;</h5>
                     </div>
 
                     <div class="btn btn-lg btn-cart">
@@ -106,7 +113,8 @@
                 allDishesIds: '',
                 allQuantity: '',
                 counter: 0,
-                restaurants: []
+                restaurants: [],
+                calcoloShow: 0
             }
         },
         methods: {
@@ -127,7 +135,6 @@
                     this.allDishesIds +=  id + '-'
                     this.allQuantity += amount + '-'
                 });
-                console.log(this.allDishesIds, this.allQuantity);
             },
             emptyCart() {
                 localStorage.clear();
@@ -143,14 +150,21 @@
                     this.calcolo = this.calcolo * 23425232;
                     this.getAllDishesIds();
             },
+            calcolaPrezzoCarrello() {
+                this.calcoloShow = 0;
+                for (let i = 0; i < this.basket.length; i++) {
+                        let prezzo = parseInt(this.basket[i].price)
+                        let quantita = parseInt(this.basket[i].item)
+                        this.calcoloShow += prezzo * quantita
+                    }
+                    return this.calcoloShow;
+            },
             checkAmount(a) {
                 let search = this.basket.find((x)=>x.id === a) || [];
-                console.log(search)
             },
             increment(a, slug, price) {
                 let counter = this.$el.querySelector(".counter").innerHTML
                 let search = this.basket.find((x)=>x.id === a)
-                console.log(counter)
                 // se il carrello non è vuoto
                 if(this.basket.length > 0) {
                     // se lo slug del ristorante attuale non corrisponde a quello nel carrello
@@ -239,7 +253,6 @@
                     // localStorage.setItem('price', this.restaurant.slug);
                     localStorage.setItem(value, restaurantId);
                 };
-                console.log(price)
                 if (localStorage.length > 1) {
                     if (localStorage.getItem('slug') == this.restaurant.slug) {
                         localStorage.setItem(value, restaurantId);
@@ -249,7 +262,7 @@
                             localStorage.setItem('slug', this.restaurant.slug);
                             localStorage.setItem(value, restaurantId);
                         } else {
-                            console.log('mantieni i dati');
+                            
                         }
                     }
                 };
@@ -263,6 +276,7 @@
             .then((response) => {
                 this.restaurants = response.data.results;
             });  
+            this.calcolaPrezzoCarrello();
         },
         updated() {
             this.loadingCart()
