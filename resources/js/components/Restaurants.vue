@@ -1,10 +1,11 @@
 <template>
 
-    <section class="mt-4">
+    <section class="container mt-4">
         <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
             Lista dei ristoranti
         </h2>
-        <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
+        <div class="ms_filters text-center">
+            <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
             <input 
                 class="form-check-input" 
                 type="checkbox" 
@@ -17,10 +18,11 @@
             <label class="form-check-label" :for="'id-'+tipo.id"> {{ tipo.name }} </label>
         </div>
         <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
+        </div>
 
-        <div v-if="this.checkedRestaurants.length == 0" class="row row-cols-4">
+        <div v-if="this.checkedRestaurants.length == 0" class="ms_main_view row g-2 row-col-auto">
             <!--Single restaurant if the user doesnt select anything -->
-            <div v-for="restaurant in restaurants" :key="restaurant.id" class="mr-5">
+            <div v-for="restaurant in restaurants" :key="restaurant.id">
                     <div class="card m-3" style="width: 18rem;">
 
                         <div v-if="restaurant.cover">
@@ -40,16 +42,16 @@
                         <div class="card-body">
 
                             <h5 class="card-title"> {{restaurant.name}} </h5>
+                            <p class="card-text">Indirizzo: {{restaurant.address}}</p>
                             <div v-for="item in restauranttype" :key="item.id">
                                 <div v-if="restaurant.id == item.restaurant_id">
                                     <div v-for="singleType in types" :key="singleType.id">
-                                        <div v-if="item.type_id == singleType.id">
+                                        <div class="type_not_typo" v-if="item.type_id == singleType.id">
                                             {{singleType.name}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
                             <router-link 
                                 class="btn btn-sm btn-details"
@@ -65,7 +67,7 @@
             <!-- Restaurants if the user selects a category -->
             <div v-else>
 
-                <div class="row">
+                <div class="row g-2">
                     <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col mr-4">
                     <div class="card m-3" style="width: 18rem;">
 
@@ -86,7 +88,8 @@
                             <div class="card-body">
 
                                 <h5 class="card-title"> {{restaurant.name}} </h5>
-                                <div v-for="item in restauranttype" :key="item.id">
+                                <p class="card-text">Indirizzo: {{restaurant.address}}</p>
+                                <div class="type_not_typo" v-for="item in restauranttype" :key="item.id">
                                     <div v-if="restaurant.id == item.restaurant_id">
                                         <div v-for="singleType in types" :key="singleType.id">
                                             <div v-if="item.type_id == singleType.id">
@@ -95,7 +98,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="card-text">Indirizzo: {{restaurant.address}}</p>
 
                             <router-link 
                                 class="btn btn-sm btn-primary"
@@ -173,6 +175,9 @@ import arrayPush from 'lodash/_arrayPush';
         border: 1px solid white;
         padding: 6px;
         border-radius: 4px;
+    }
+    .row {
+        justify-content: space-evenly;
     }
 
     .btn-details {

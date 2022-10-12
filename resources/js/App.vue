@@ -3,7 +3,7 @@
     <div>
         <header>
             <nav class="navbar navbar-expand-lg" style="background-color: #fea543; color: white;">
-                <div class="container-fluid">
+                <div class="container">
                     <h2 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 35px;">
                         <a style="color: white; text-decoration: none" href="/">
                             <strong>
