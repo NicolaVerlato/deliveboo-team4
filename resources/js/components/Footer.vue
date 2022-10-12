@@ -17,20 +17,7 @@
         
         
 
-        <div class="container">
-            <div class="upper">
-                <h4 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 35px; margin-top: 30px;">
-                    <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
-                </h4>
-                <h5 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 20px; margin-top: 30px;">
-                    <a 
-                    class="header-links" 
-                    style="color: white;" 
-                    href="http://127.0.0.1:8000/login"> 
-                        Sezione ristoranti 
-                    </a>        
-                </h5>
-            </div>
+        
 
 
             <!-- Social media area -->
@@ -40,6 +27,15 @@
                 <!-- Top part of the footer - sites links and faq -->
                 <div class="top-footer">
                     <div class="container">
+
+                        <h5 class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 20px; margin-top: 30px;">
+                            <a 
+                            class="header-links" 
+                            style="color: white;" 
+                            href="http://127.0.0.1:8000/login"> 
+                                Sezione ristoranti 
+                            </a>        
+                        </h5>
 
                         <div class="faq-cols">
 
@@ -137,9 +133,13 @@
                 }
             }
         }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
         .container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             background-size: cover;
             padding-bottom: 30px;
             h3 {

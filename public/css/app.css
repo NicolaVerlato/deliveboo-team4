@@ -11175,6 +11175,11 @@ input:invalid {
     padding-top: 30px;
     padding-bottom: 30px;
   }
+
+  .top-footer .container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 1199.98px) {
