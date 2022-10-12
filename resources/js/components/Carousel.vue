@@ -1,5 +1,5 @@
 <template>
-    <section class="container d-flex justify-content-center mt-3 pt-3 pb-3">
+    <section class="container d-flex justify-content-center mt-3 mb-5 pt-3 pb-3">
         <!--CAROUSEL-->
        <div class="carousel">
             <button @click="previousSlides" class="carousel-button prev"><i class="fa-solid fa-chevron-left"></i></button>

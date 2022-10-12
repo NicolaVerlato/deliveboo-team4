@@ -21,12 +21,12 @@
             </div>
         </div>
 
-        <div>
-            <Carousel/>            
-        </div>
-
         <div class="container" style="padding-bottom: 50px;">
             <Restaurants/>            
+        </div>
+
+        <div>
+            <Carousel/>            
         </div>
     </div>
 
