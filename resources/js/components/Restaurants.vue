@@ -186,5 +186,8 @@ import arrayPush from 'lodash/_arrayPush';
         color: white;
         background-color: $secondary-color;
     }
+    .ms_main_view .col {
+        flex-grow: 0;
+    }
 </style>
 

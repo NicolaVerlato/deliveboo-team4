@@ -7800,7 +7800,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}", ""]);
 
 // exports
 
