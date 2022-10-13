@@ -2878,14 +2878,7 @@ var render = function render() {
 
   return _c("section", {
     staticClass: "container mt-4"
-  }, [_c("h2", {
-    staticClass: "text-center",
-    staticStyle: {
-      color: "white",
-      "font-size": "30px",
-      "margin-bottom": "40px"
-    }
-  }, [_vm._v("\n        Lista dei ristoranti\n    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "ms_filters text-center"
   }, [_vm._l(_vm.types, function (tipo) {
     return _c("div", {
@@ -2932,11 +2925,11 @@ var render = function render() {
         }
       }
     }), _vm._v(" "), _c("label", {
-      staticClass: "form-check-label",
+      staticClass: "form-check-label text-uppercase",
       attrs: {
         "for": "id-" + tipo.id
       }
-    }, [_vm._v(" " + _vm._s(tipo.name) + " ")])]);
+    }, [_c("b", [_vm._v(_vm._s(tipo.name))])])]);
   }), _vm._v(" "), _c("span", {
     staticClass: "btn-filter",
     on: {
@@ -2952,7 +2945,8 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "card m-3",
       staticStyle: {
-        width: "18rem"
+        width: "18rem",
+        "border-radius": "50px 15px"
       }
     }, [restaurant.cover ? _c("div", [_c("img", {
       staticClass: "card-img-top",
@@ -2983,7 +2977,7 @@ var render = function render() {
         }, [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
     }), _vm._v(" "), _c("router-link", {
-      staticClass: "btn btn-sm btn-details",
+      staticClass: "btn btn_green",
       attrs: {
         to: {
           name: "restaurant-details",
@@ -3045,7 +3039,19 @@ var render = function render() {
   }), 0)])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("h2", {
+    staticClass: "text-center text-uppercase fs-1",
+    staticStyle: {
+      color: "white",
+      "font-size": "30px",
+      "margin-bottom": "40px"
+    }
+  }, [_c("b", [_vm._v("Lista dei ristoranti")])]);
+}];
 render._withStripped = true;
 
 
@@ -7787,7 +7793,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card {\n  border-top-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}\n.ms_main_view img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  background-color: white;\n  color: #fea543;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}\n.ms_main_view img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.btn_green {\n  background-color: rgb(0, 178, 145);\n  color: white;\n}", ""]);
 
 // exports
 
