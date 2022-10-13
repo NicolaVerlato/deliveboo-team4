@@ -14,9 +14,11 @@
         <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
     </h2>
 
-    <h4>Pagamento non effettuato, riprova con altri dati</h4>
+    <h4 style="text-align: center;">Pagamento non effettuato, riprova con altri dati</h4>
 
-    <a style="color: white; text-decoration: none;" href="http://127.0.0.1:8000/"> Torna alla home </a>
+    <div style="text-align: center;">
+        <a style="color: white; text-decoration: none;" href="http://127.0.0.1:8000/"> Torna alla home </a>
+    </div>
 </body>
 
 </html>

@@ -25,13 +25,13 @@
     <input type="hidden" name="order_id" id="order_id" value="{{$order->id}}">
     <section class="mt-6 mb-3">
       <div class="card-header" id="payment-form-bg" style="font-size: 20px;">
-        <h3 class="text-center text-2xl text-gray-800">Ordine effettuato da: 
+        <h3 class="text-center text-2xl text-gray-800" style="text-align: center;">Ordine effettuato da: 
             <span>
               {{$order->customer_name}}
             </span>
         </h3>
         <label for="amount" class="flex justify-center space-x-2">
-          <h5>
+          <h5 style="text-align: center;">
             <span class="input-label text-gray-800 text-lg">Prezzo totale:</span>
             <span class="text-lg text-gray-800">{{number_format($order->order_total, 2, '.', ',')}} &euro; </span>
           </h5>

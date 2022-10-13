@@ -14,26 +14,28 @@
         <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
     </h2>
 
-    <h4>Grazie {{$nome}}, pagamento effettuato con successo</h4>
+    <h4 style="text-align: center;">Grazie {{$nome}}, pagamento effettuato con successo</h4>
 
-    <h4>Ordine spedito a "{{$indirizzo}}" dal ristorante {{$ristorante->name}}</h4>
+    <h4 style="text-align: center;">Ordine spedito a "{{$indirizzo}}" dal ristorante {{$ristorante->name}}</h4>
 
-    <h4>Riepilogo ordine</h4>
-    <ul>
+    <h4 style="text-align: center;">Riepilogo ordine</h4>
+    <ul style="text-align: center;">
         @foreach ($dish_order as $singleDishOrder)
             @if ($order->id === $singleDishOrder->order_id)
                 @foreach ($allRestaurantDishes as $singleDish)                  
                     @if ($singleDishOrder->dish_id === $singleDish->id)
                         
-                    <li>Nome piatto: {{$singleDish->name}}, quantità: {{$singleDishOrder->quantity}}</li>
+                    <li style="text-align: center;">Nome piatto: {{$singleDish->name}}, quantità: {{$singleDishOrder->quantity}}</li>
                     @endif
                 @endforeach
             @endif
         @endforeach
     </ul>
-    <h3>Prezzo {{$prezzo}}&euro;</h3>
+    <h3 style="text-align: center;">Prezzo {{$prezzo}}&euro;</h3>
 
-    <a style="color: white; text-decoration: none;" href="http://127.0.0.1:8000/"> Torna alla home </a>
+    <div style="text-align: center;">
+        <a style="color: white; text-decoration: none;" href="http://127.0.0.1:8000/"> Torna alla home </a>
+    </div>
 </body>
 
 </html>
