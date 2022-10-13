@@ -10938,6 +10938,11 @@ ul {
   padding: 0;
 }
 
+img {
+  width: 100%;
+  display: block;
+}
+
 body {
   color: #2f4858;
   min-width: 480px;

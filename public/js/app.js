@@ -7787,7 +7787,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}", ""]);
+exports.push([module.i, ".card {\n  border-top-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.btn-filter {\n  cursor: pointer;\n  color: white;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}\n.ms_main_view img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}", ""]);
 
 // exports
 

@@ -169,6 +169,11 @@ import arrayPush from 'lodash/_arrayPush';
 
     @import '../../sass/partials/variables.scss';
 
+    .card {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;  
+    }
+
     .btn-filter {
         cursor: pointer;
         color: white;
@@ -188,6 +193,10 @@ import arrayPush from 'lodash/_arrayPush';
     }
     .ms_main_view .col {
         flex-grow: 0;
+    }
+    .ms_main_view img {
+        object-fit: cover;
+        object-position: center;
     }
 </style>
 
