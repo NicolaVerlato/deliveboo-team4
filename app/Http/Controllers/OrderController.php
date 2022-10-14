@@ -7,7 +7,11 @@ use App\Order;
 use App\Dish;
 use App\DishOrder;
 use App\Restaurant;
+use App\User;
 use Illuminate\Support\Str;
+use App\Mail\SendNewMail;
+use App\Mail\SendCustomerNewMail;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -121,6 +125,7 @@ class OrderController extends Controller
             $newDishOrder->save();
         }
 
+        
 
         return redirect()->route('orders.edit', ['order' => $newOrder->id])->with( ['data' => $order_data]);
     }
@@ -206,6 +211,13 @@ class OrderController extends Controller
                 'allRestaurantDishes' => $allRestaurantDishes,
                 'dish_order' => $dish_order
             ];
+            // Invio email al ristoratore per il nuovo ordine
+            $restaurantOwner = User::findOrFail($ristorante->user_id);
+            Mail::to($restaurantOwner->email)->send(new SendNewMail($order));
+            
+            // Invio email all'acquirente per il nuovo ordine
+            Mail::to($order->customer_email)->send(new SendCustomerNewMail($order));
+
             return view('orders.success', $data);
         } else {
             return view('orders.failed');

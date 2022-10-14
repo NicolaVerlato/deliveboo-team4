@@ -19,7 +19,7 @@
     <h4 style="text-align: center;">Ordine spedito a "{{$indirizzo}}" dal ristorante {{$ristorante->name}}</h4>
 
     <h4 style="text-align: center;">Riepilogo ordine</h4>
-    <ul style="text-align: center;">
+    <ul style="text-align: center; list-style: none;">
         @foreach ($dish_order as $singleDishOrder)
             @if ($order->id === $singleDishOrder->order_id)
                 @foreach ($allRestaurantDishes as $singleDish)                  
