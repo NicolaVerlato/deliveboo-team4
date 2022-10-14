@@ -3,15 +3,18 @@
         <!--CAROUSEL-->
         <div class="grid pt-5">
             <div class="col">
-                <h3 class="big-title">Ordina i tuoi piatti preferiti, comodamente dal tuo divano!</h3>
+                <h3 class="big-title">Ordina i tuoi piatti preferiti,<br> comodamente dal tuo divano!</h3>
             </div>
             <div class="col">
                 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-                    <div class="carousel-cell">Italiano</div>
-                    <div class="carousel-cell">Giapponese</div>
-                    <div class="carousel-cell">Indiano</div>
-                    <div class="carousel-cell">Pizza</div>
-                    <div class="carousel-cell">Fast Food</div>
+                    
+                    <img class="carousel-cell" src="https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80">
+                    <img class="carousel-cell" src="https://www.ildomani.it/wp-content/uploads/2017/10/Sushi-678x381.jpg">
+                    <img class="carousel-cell" src="https://wips.plug.it/cips/buonissimo.org/cms/2019/03/hamburger-gourmet.jpg?w=713&a=c&h=407">
+                    <img class="carousel-cell" src="https://images.unsplash.com/photo-1627207644206-a2040d60ecad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80">
+                    <img class="carousel-cell" src="https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80">
+                    <img class="carousel-cell" src="https://www.ricettasprint.it/wp-content/uploads/2020/12/Ricette-dolci-con-3-ingredienti-facili-veloci-e-deliziose-ricettasprint.jpg">
+
                 </div>
             </div>
         </div>
@@ -43,7 +46,7 @@ export default {
 
 //Text
 .big-title {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
@@ -57,14 +60,15 @@ export default {
 .carousel-cell {
     width: 300px;
     height: 300px;
-    background-color: salmon;
-    border-radius: 100%;
+    background-color: $brand_color;
+    border-radius: 50%;
     line-height: 150px;
     text-align: center;
     color: white;
     font-weight: bold;
     font-size: 30px;
     margin-right: 40px;
+    object-fit: cover;
 }
 
 </style>

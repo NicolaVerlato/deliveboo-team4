@@ -2663,24 +2663,44 @@ var staticRenderFns = [function () {
     staticClass: "col"
   }, [_c("h3", {
     staticClass: "big-title"
-  }, [_vm._v("Ordina i tuoi piatti preferiti, comodamente dal tuo divano!")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Ordina i tuoi piatti preferiti,"), _c("br"), _vm._v(" comodamente dal tuo divano!")])]), _vm._v(" "), _c("div", {
     staticClass: "col"
   }, [_c("div", {
     staticClass: "main-carousel",
     attrs: {
       "data-flickity": '{ "cellAlign": "left", "contain": true }'
     }
-  }, [_c("div", {
-    staticClass: "carousel-cell"
-  }, [_vm._v("Italiano")]), _vm._v(" "), _c("div", {
-    staticClass: "carousel-cell"
-  }, [_vm._v("Giapponese")]), _vm._v(" "), _c("div", {
-    staticClass: "carousel-cell"
-  }, [_vm._v("Indiano")]), _vm._v(" "), _c("div", {
-    staticClass: "carousel-cell"
-  }, [_vm._v("Pizza")]), _vm._v(" "), _c("div", {
-    staticClass: "carousel-cell"
-  }, [_vm._v("Fast Food")])])])])]);
+  }, [_c("img", {
+    staticClass: "carousel-cell",
+    attrs: {
+      src: "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"
+    }
+  }), _vm._v(" "), _c("img", {
+    staticClass: "carousel-cell",
+    attrs: {
+      src: "https://www.ildomani.it/wp-content/uploads/2017/10/Sushi-678x381.jpg"
+    }
+  }), _vm._v(" "), _c("img", {
+    staticClass: "carousel-cell",
+    attrs: {
+      src: "https://wips.plug.it/cips/buonissimo.org/cms/2019/03/hamburger-gourmet.jpg?w=713&a=c&h=407"
+    }
+  }), _vm._v(" "), _c("img", {
+    staticClass: "carousel-cell",
+    attrs: {
+      src: "https://images.unsplash.com/photo-1627207644206-a2040d60ecad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+    }
+  }), _vm._v(" "), _c("img", {
+    staticClass: "carousel-cell",
+    attrs: {
+      src: "https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+    }
+  }), _vm._v(" "), _c("img", {
+    staticClass: "carousel-cell",
+    attrs: {
+      src: "https://www.ricettasprint.it/wp-content/uploads/2020/12/Ricette-dolci-con-3-ingredienti-facili-veloci-e-deliziose-ricettasprint.jpg"
+    }
+  })])])])]);
 }];
 render._withStripped = true;
 
@@ -2898,6 +2918,9 @@ var render = function render() {
       }
     }), _vm._v(" "), _c("label", {
       staticClass: "form-check-label text-uppercase",
+      staticStyle: {
+        "font-size": "23px"
+      },
       attrs: {
         "for": "id-" + tipo.id
       }
@@ -2909,7 +2932,7 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_vm._v(" Applica filtri ")])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
+  }, [_c("strong", [_vm._v("Applica filtri")])])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
     staticClass: "ms_main_view row g-2 row-col-auto"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -2933,11 +2956,11 @@ var render = function render() {
         alt: restaurant.title
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "card-body"
+      staticClass: "card-body text-center"
     }, [_c("h5", {
-      staticClass: "card-title"
+      staticClass: "card-title text_size20"
     }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
+      staticClass: "card-text text_size20"
     }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
         key: item.id
@@ -2945,7 +2968,7 @@ var render = function render() {
         return _c("div", {
           key: singleType.id
         }, [item.type_id == singleType.id ? _c("div", {
-          staticClass: "type_not_typo"
+          staticClass: "type_not_typo text_size20"
         }, [_vm._v("\n                                        " + _vm._s(singleType.name) + "\n                                    ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
     }), _vm._v(" "), _c("router-link", {
@@ -2958,7 +2981,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v(" Menù\n                        ")])], 2)])]);
+    }, [_c("strong", [_vm._v("Menù")])])], 2)])]);
   }), 0) : _c("div", [_c("div", {
     staticClass: "ms_main_view row d-flex justify-content-around g-2"
   }, _vm._l(_vm.checkedRestaurants[0], function (restaurant) {
@@ -2968,7 +2991,8 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "card m-3",
       staticStyle: {
-        width: "18rem"
+        width: "18rem",
+        "border-radius": "50px 15px"
       }
     }, [restaurant.cover ? _c("div", [_c("img", {
       staticClass: "card-img-top",
@@ -2983,22 +3007,22 @@ var render = function render() {
         alt: restaurant.title
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "card-body"
+      staticClass: "card-body text-center"
     }, [_c("h5", {
-      staticClass: "card-title"
+      staticClass: "card-title text_size20"
     }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
+      staticClass: "card-text text_size20"
     }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
         key: item.id,
-        staticClass: "type_not_typo"
+        staticClass: "type_not_typo text_size20"
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
         return _c("div", {
           key: singleType.id
         }, [item.type_id == singleType.id ? _c("div", [_vm._v("\n                                            " + _vm._s(singleType.name) + "\n                                        ")]) : _vm._e()]);
       }), 0) : _vm._e()]);
     }), _vm._v(" "), _c("router-link", {
-      staticClass: "btn btn-sm btn-primary",
+      staticClass: "btn btn_green",
       attrs: {
         to: {
           name: "restaurant-details",
@@ -3007,7 +3031,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v(" Menù\n                        ")])], 2)])]);
+    }, [_c("strong", [_vm._v("Menù")])])], 2)])]);
   }), 0)])]);
 };
 
@@ -3019,7 +3043,7 @@ var staticRenderFns = [function () {
     staticClass: "text-center text-uppercase fs-1",
     staticStyle: {
       color: "white",
-      "font-size": "30px",
+      "font-size": "40px",
       "margin-bottom": "40px"
     }
   }, [_c("b", [_vm._v("Lista dei ristoranti")])]);
@@ -7732,7 +7756,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".grid[data-v-fe98726a] {\n  display: flex;\n  flex-direction: column;\n  max-width: 1350px;\n  padding: 0 30px;\n  margin: 0 auto;\n}\n.grid.col[data-v-fe98726a] {\n  width: 100%;\n}\n.big-title[data-v-fe98726a] {\n  font-size: 60px;\n  font-weight: bold;\n  text-transform: uppercase;\n  text-align: center;\n}\n.main-carousel[data-v-fe98726a] {\n  padding: 20px;\n}\n.carousel-cell[data-v-fe98726a] {\n  width: 300px;\n  height: 300px;\n  background-color: salmon;\n  border-radius: 100%;\n  line-height: 150px;\n  text-align: center;\n  color: white;\n  font-weight: bold;\n  font-size: 30px;\n  margin-right: 40px;\n}", ""]);
+exports.push([module.i, ".grid[data-v-fe98726a] {\n  display: flex;\n  flex-direction: column;\n  max-width: 1350px;\n  padding: 0 30px;\n  margin: 0 auto;\n}\n.grid.col[data-v-fe98726a] {\n  width: 100%;\n}\n.big-title[data-v-fe98726a] {\n  font-size: 40px;\n  font-weight: bold;\n  text-transform: uppercase;\n  text-align: center;\n}\n.main-carousel[data-v-fe98726a] {\n  padding: 20px;\n}\n.carousel-cell[data-v-fe98726a] {\n  width: 300px;\n  height: 300px;\n  background-color: #fea543;\n  border-radius: 50%;\n  line-height: 150px;\n  text-align: center;\n  color: white;\n  font-weight: bold;\n  font-size: 30px;\n  margin-right: 40px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}", ""]);
 
 // exports
 
@@ -7770,7 +7794,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  background-color: white;\n  color: #fea543;\n  border: 1px solid white;\n  padding: 6px;\n  border-radius: 4px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n  color: white;\n  background-color: #2f4858;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}\n.ms_main_view img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.btn_green {\n  background-color: rgb(0, 178, 145);\n  color: white;\n}", ""]);
+exports.push([module.i, ".btn-filter {\n  cursor: pointer;\n  background-color: white;\n  color: #fea543;\n  border: 1px solid white;\n  padding: 10px;\n  border-radius: 10px;\n  font-size: 25px;\n}\n.row {\n  justify-content: space-evenly;\n}\n.btn-details {\n  font-size: 16px;\n}\n.ms_main_view .col {\n  flex-grow: 0;\n}\n.ms_main_view img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.btn_green {\n  background-color: rgb(0, 178, 145);\n  color: white;\n  padding: 8px;\n  font-size: 20px;\n  border-radius: 10px;\n}\n.text_size20 {\n  font-size: 20px;\n  padding-bottom: 5px;\n}", ""]);
 
 // exports
 
