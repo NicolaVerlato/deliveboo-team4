@@ -11185,6 +11185,10 @@ input:invalid {
     flex-direction: column;
     align-items: center;
   }
+
+  .grid {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 1199.98px) {

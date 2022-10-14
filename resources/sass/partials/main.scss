@@ -243,6 +243,9 @@ img {
       flex-direction: column;
       align-items: center;
     }
+    .grid {
+      flex-wrap: wrap;
+    }
   }
   @include media-breakpoint-down(lg) {
     .ms_main_view {

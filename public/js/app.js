@@ -1953,32 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Carousel',
-  props: ['visibleImage', 'index'],
-  data: function data() {
-    return {
-      slides: ['images/bigburger.png', 'images/flycouch.png', 'images/restaurant.png'],
-      currentActiveElement: 0
-    };
-  },
-  methods: {
-    nextSlides: function nextSlides() {
-      if (this.currentActiveElement > 0) {
-        // Decremento di 1 currentActiveElement                 
-        this.currentActiveElement--;
-      } else {
-        this.currentActiveElement = this.slides.length - 1;
-      }
-    },
-    previousSlides: function previousSlides() {
-      if (this.currentActiveElement < this.slides.length - 1) {
-        // Incrementa di 1 currentActiveElement                 
-        this.currentActiveElement++;
-      } else {
-        this.currentActiveElement = 0;
-      }
-    }
-  }
+  name: 'Carousel'
 });
 
 /***/ }),
@@ -2675,41 +2650,38 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("section", {
-    staticClass: "container d-flex justify-content-center mt-3 mb-5 pt-3 pb-3"
-  }, [_c("div", {
-    staticClass: "carousel"
-  }, [_c("button", {
-    staticClass: "carousel-button prev",
-    on: {
-      click: _vm.previousSlides
-    }
-  }, [_c("i", {
-    staticClass: "fa-solid fa-chevron-left"
-  })]), _vm._v(" "), _c("button", {
-    staticClass: "carousel-button next",
-    on: {
-      click: _vm.nextSlides
-    }
-  }, [_c("i", {
-    staticClass: "fa-solid fa-chevron-right"
-  })]), _vm._v(" "), _vm._l(_vm.slides, function (slide, index) {
-    return _vm.currentActiveElement === index ? _c("div", {
-      key: index,
-      attrs: {
-        index: index
-      }
-    }, [_c("div", {
-      staticClass: "slide"
-    }, [_c("img", {
-      attrs: {
-        src: slide
-      }
-    })])]) : _vm._e();
-  })], 2)]);
+  return _vm._m(0);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("section", [_c("div", {
+    staticClass: "grid pt-5"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("h3", {
+    staticClass: "big-title"
+  }, [_vm._v("Ordina i tuoi piatti preferiti, comodamente dal tuo divano!")])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "main-carousel",
+    attrs: {
+      "data-flickity": '{ "cellAlign": "left", "contain": true }'
+    }
+  }, [_c("div", {
+    staticClass: "carousel-cell"
+  }, [_vm._v("Italiano")]), _vm._v(" "), _c("div", {
+    staticClass: "carousel-cell"
+  }, [_vm._v("Giapponese")]), _vm._v(" "), _c("div", {
+    staticClass: "carousel-cell"
+  }, [_vm._v("Indiano")]), _vm._v(" "), _c("div", {
+    staticClass: "carousel-cell"
+  }, [_vm._v("Pizza")]), _vm._v(" "), _c("div", {
+    staticClass: "carousel-cell"
+  }, [_vm._v("Fast Food")])])])])]);
+}];
 render._withStripped = true;
 
 
@@ -3188,11 +3160,16 @@ var render = function render() {
       d: "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
     }
   })])])]), _vm._v(" "), _c("div", {
+    staticStyle: {
+      "padding-bottom": "50px",
+      "background-color": "white"
+    }
+  }, [_c("Carousel")], 1), _vm._v(" "), _c("div", {
     staticClass: "container",
     staticStyle: {
       "padding-bottom": "50px"
     }
-  }, [_c("Restaurants")], 1), _vm._v(" "), _c("div", [_c("Carousel")], 1)]);
+  }, [_c("Restaurants")], 1)]);
 };
 
 var staticRenderFns = [];
@@ -7749,7 +7726,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "ul[data-v-fe98726a] {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n}\n*[data-v-fe98726a], *[data-v-fe98726a]::after, *[data-v-fe98726a]::before {\n  box-sizing: border-box;\n}\n.carousel[data-v-fe98726a] {\n  width: 400px;\n  height: 300px;\n  position: relative;\n}\n.carousel .slide[data-v-fe98726a] {\n  position: absolute;\n  opacity: 1;\n  transition: 200ms opacity ease-in-out;\n  transition-delay: 200ms;\n}\n.carousel .slide img[data-v-fe98726a] {\n  display: block;\n  width: 100%;\n  height: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.slide[data-active][data-v-fe98726a] {\n  opacity: 2;\n  z-index: 1;\n  transition-delay: 0ms;\n}\n.carousel-button[data-v-fe98726a] {\n  position: absolute;\n  z-index: 2;\n  background: none;\n  border: none;\n  font-size: 2rem;\n  top: 50%;\n  transform: translateY(-20%);\n  color: rgba(255, 255, 255, 0.5);\n  cursor: pointer;\n  border-radius: 0.25rem;\n  padding: 0 0.5rem;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.carousel-button[data-v-fe98726a]:hover,\n.carousel-button[data-v-fe98726a]:active {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n.carousel-button.prev[data-v-fe98726a] {\n  left: 0;\n}\n.carousel-button.next[data-v-fe98726a] {\n  right: 0;\n}", ""]);
+exports.push([module.i, ".grid[data-v-fe98726a] {\n  display: flex;\n  flex-direction: column;\n  max-width: 1350px;\n  padding: 0 30px;\n  margin: 0 auto;\n}\n.grid.col[data-v-fe98726a] {\n  width: 100%;\n}\n.big-title[data-v-fe98726a] {\n  font-size: 60px;\n  font-weight: bold;\n  text-transform: uppercase;\n  text-align: center;\n}\n.main-carousel[data-v-fe98726a] {\n  padding: 20px;\n}\n.carousel-cell[data-v-fe98726a] {\n  width: 300px;\n  height: 300px;\n  background-color: salmon;\n  border-radius: 100%;\n  line-height: 150px;\n  text-align: center;\n  color: white;\n  font-weight: bold;\n  font-size: 30px;\n  margin-right: 40px;\n}", ""]);
 
 // exports
 
@@ -55739,8 +55716,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/deliveboo-team4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
