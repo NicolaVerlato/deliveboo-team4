@@ -1,9 +1,9 @@
 <template>
-    <section>
+    <section class="carousel-fade">
         <!--CAROUSEL-->
-        <div class="grid pt-5">
+        <div class="grid">
             <div class="col">
-                <h3 class="big-title">Ordina i tuoi piatti preferiti, comodamente dal tuo divano!</h3>
+                <h3 class="big-title">Ordina i tuoi piatti preferiti,<br> comodamente dal tuo divano!</h3>
             </div>
             <div class="col">
                 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
@@ -29,6 +29,14 @@ export default {
 @import "./resources/sass/partials/_variables.scss";
 
 //Columns
+.carousel-fade {
+    animation: fade-in 2.5s;
+}
+@keyframes fade-in {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
 .grid {
     display: flex;
     flex-direction: column;
@@ -43,7 +51,7 @@ export default {
 
 //Text
 .big-title {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
