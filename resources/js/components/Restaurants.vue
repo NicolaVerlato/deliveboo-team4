@@ -1,8 +1,8 @@
 <template>
 
     <section class="container mt-4">
-        <h2 class="text-center" style="color:white; font-size: 30px; margin-bottom: 40px;">
-            Lista dei ristoranti
+        <h2 class="text-center text-uppercase fs-1" style="color:white; font-size: 30px; margin-bottom: 40px;">
+            <b>Lista dei ristoranti</b>
         </h2>
         <div class="ms_filters text-center">
             <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
@@ -15,7 +15,7 @@
                 v-model="checkedOptions"
             >
 
-            <label class="form-check-label" :for="'id-'+tipo.id"> {{ tipo.name }} </label>
+            <label class="form-check-label text-uppercase" :for="'id-'+tipo.id"> <b>{{ tipo.name }}</b> </label>
         </div>
         <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
         </div>
@@ -23,7 +23,7 @@
         <div v-if="this.checkedRestaurants.length == 0" class="ms_main_view row g-2 row-col-auto">
             <!--Single restaurant if the user doesnt select anything -->
             <div v-for="restaurant in restaurants" :key="restaurant.id">
-                    <div class="card m-3" style="width: 18rem;">
+                    <div class="card m-3" style="width: 18rem; border-radius: 50px 15px;">
 
                         <div v-if="restaurant.cover">
                             <img 
@@ -54,7 +54,7 @@
                             </div>
 
                             <router-link 
-                                class="btn btn-sm btn-details"
+                                class="btn btn_green"
                                 :to="{
                                     name: 'restaurant-details',
                                     params: {slug: restaurant.slug}
@@ -169,14 +169,15 @@ import arrayPush from 'lodash/_arrayPush';
 
     @import '../../sass/partials/variables.scss';
 
-    .card {
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;  
-    }
+    // .card {
+    //     border-top-left-radius: 20px;
+    //     border-top-right-radius: 20px;  
+    // }
 
     .btn-filter {
         cursor: pointer;
-        color: white;
+        background-color: white;
+        color: $brand_color;
         border: 1px solid white;
         padding: 6px;
         border-radius: 4px;
@@ -197,6 +198,10 @@ import arrayPush from 'lodash/_arrayPush';
     .ms_main_view img {
         object-fit: cover;
         object-position: center;
+    }
+    .btn_green {
+    background-color: $green_details;
+    color: white;
     }
 </style>
 
