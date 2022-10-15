@@ -2381,8 +2381,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     calcolaPrice: function calcolaPrice() {
       for (var i = 0; i < this.basket.length; i++) {
-        var prezzo = parseInt(this.basket[i].price);
-        var quantita = parseInt(this.basket[i].item);
+        var prezzo = parseFloat(this.basket[i].price);
+        var quantita = parseFloat(this.basket[i].item);
         this.calcolo += prezzo * quantita;
       }
 
@@ -2395,8 +2395,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.calcoloShow = 0;
 
       for (var i = 0; i < this.basket.length; i++) {
-        var prezzo = parseInt(this.basket[i].price);
-        var quantita = parseInt(this.basket[i].item);
+        var prezzo = parseFloat(this.basket[i].price);
+        var quantita = parseFloat(this.basket[i].item);
         this.calcoloShow += prezzo * quantita;
       }
 
@@ -2668,7 +2668,7 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "main-carousel",
     attrs: {
-      "data-flickity": '{ "cellAlign": "left", "contain": true, "autoPlay": 1500, "pauseAutoPlayOnHover": true }'
+      "data-flickity": '{ "cellAlign": "left", "contain": true, "autoPlay": 2000, "pauseAutoPlayOnHover": true }'
     }
   }, [_c("img", {
     staticClass: "carousel-cell",
