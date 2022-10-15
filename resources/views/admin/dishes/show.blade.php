@@ -5,9 +5,9 @@
         <div class="card card_ms" style="width: 20rem;">
                         
             @if ($dishes->cover)
-                <img class="card-img-top img_ms" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
+                <img class="card-img img_ms" src="{{ asset('storage/' . $dishes->cover) }}" alt="{{ $dishes->title }}">
             @else
-                <img class="card-img-top" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
+                <img class="card-img" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
             @endif
             
             <div class="p-3">

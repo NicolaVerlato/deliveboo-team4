@@ -48,7 +48,7 @@
                         <div class="card-body">
 
                             <h5 class="card-title text_size20"> {{restaurant.name}} </h5>
-                            <p class="card-text text_size20">Indirizzo: {{restaurant.address}}</p>
+                            <p class="card-text text_size20">{{restaurant.address}}</p>
                             <div v-for="item in restauranttype" :key="item.id">
                                 <div v-if="restaurant.id == item.restaurant_id">
                                     <div v-for="singleType in types" :key="singleType.id">

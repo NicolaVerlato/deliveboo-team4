@@ -54,6 +54,14 @@ img {
     font-weight: 700;
     color: $secondary_color;
 }
+.restaurant-card-img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.card-img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 .card-img-top {
     border-top-left-radius: 50px;
     border-top-right-radius: 15px;
