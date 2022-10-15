@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="display: contents">
         <h2 class="ms_title">Il mio ristorante</h2>
         <div class="card card_ms brand_color" style="width: 18rem;">
             @if ($restaurant['cover'])

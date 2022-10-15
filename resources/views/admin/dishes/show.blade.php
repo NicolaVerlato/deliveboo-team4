@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="display: contents">
         <div class="card card_ms" style="width: 20rem;">
                         
             @if ($dishes->cover)

@@ -2,7 +2,7 @@
 
     <section class="container mt-4">
         <h2 class="text-center text-uppercase fs-1" style="color:white; font-size: 40px; margin-bottom: 40px;">
-            <b>Lista dei ristoranti</b>
+            <b>I migliori ristoranti della zona</b>
         </h2>
         <div class="ms_filters text-center">
             <div v-for="tipo in types" :key="tipo.id" class="form-check form-check-inline"  style="color:white;">
@@ -23,7 +23,7 @@
             </label>
 
         </div>
-        <span class="btn-filter" @click="provaFiltro()"> <strong>Applica filtri</strong> </span>
+        <span class="btn-filter" @click="provaFiltro()"> <strong>Cerca</strong> </span>
         </div>
 
         <div v-if="this.checkedRestaurants.length == 0" class="ms_main_view row g-2 row-col-auto">

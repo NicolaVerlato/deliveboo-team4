@@ -2924,7 +2924,7 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_c("strong", [_vm._v("Applica filtri")])])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
+  }, [_c("strong", [_vm._v("Cerca")])])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
     staticClass: "ms_main_view row g-2 row-col-auto"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -3038,7 +3038,7 @@ var staticRenderFns = [function () {
       "font-size": "40px",
       "margin-bottom": "40px"
     }
-  }, [_c("b", [_vm._v("Lista dei ristoranti")])]);
+  }, [_c("b", [_vm._v("I migliori ristoranti della zona")])]);
 }];
 render._withStripped = true;
 
