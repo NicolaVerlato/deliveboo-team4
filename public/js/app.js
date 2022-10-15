@@ -2956,7 +2956,7 @@ var render = function render() {
         alt: restaurant.title
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "card-body text-center"
+      staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title text_size20"
     }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
@@ -3007,7 +3007,7 @@ var render = function render() {
         alt: restaurant.title
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "card-body text-center"
+      staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title text_size20"
     }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {

@@ -45,7 +45,7 @@
                             :alt="restaurant.title">
                         </div>
 
-                        <div class="card-body text-center">
+                        <div class="card-body">
 
                             <h5 class="card-title text_size20"> {{restaurant.name}} </h5>
                             <p class="card-text text_size20">Indirizzo: {{restaurant.address}}</p>
@@ -91,7 +91,7 @@
                                 :alt="restaurant.title">
                             </div>
 
-                            <div class="card-body text-center">
+                            <div class="card-body">
 
                                 <h5 class="card-title text_size20"> {{restaurant.name}} </h5>
                                 <p class="card-text text_size20">Indirizzo: {{restaurant.address}}</p>
