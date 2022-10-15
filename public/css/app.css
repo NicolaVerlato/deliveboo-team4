@@ -9300,8 +9300,9 @@ img {
 }
 
 .card-img-top {
-  border-top-left-radius: 20px;
+  border-top-left-radius: 50px;
   border-top-right-radius: 15px;
+  border-bottom: 15px;
 }
 
 .card-img-left {

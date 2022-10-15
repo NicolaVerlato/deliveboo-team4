@@ -1,7 +1,7 @@
 <template>
 
     <section class="container mt-4">
-        <h2 class="text-center text-uppercase fs-1" style="color:white; font-size: 30px; margin-bottom: 40px;">
+        <h2 class="text-center text-uppercase fs-1" style="color:white; font-size: 40px; margin-bottom: 40px;">
             <b>Lista dei ristoranti</b>
         </h2>
         <div class="ms_filters text-center">
@@ -15,9 +15,15 @@
                 v-model="checkedOptions"
             >
 
-            <label class="form-check-label text-uppercase" :for="'id-'+tipo.id"> <b>{{ tipo.name }}</b> </label>
+            <label 
+            class="form-check-label text-uppercase"
+            style="font-size: 23px;" 
+            :for="'id-'+tipo.id"> 
+            <b>{{ tipo.name }}</b> 
+            </label>
+
         </div>
-        <span class="btn-filter" @click="provaFiltro()" > Applica filtri </span>
+        <span class="btn-filter" @click="provaFiltro()"> <strong>Applica filtri</strong> </span>
         </div>
 
         <div v-if="this.checkedRestaurants.length == 0" class="ms_main_view row g-2 row-col-auto">
@@ -41,12 +47,12 @@
 
                         <div class="card-body">
 
-                            <h5 class="card-title"> {{restaurant.name}} </h5>
-                            <p class="card-text">Indirizzo: {{restaurant.address}}</p>
+                            <h5 class="card-title text_size20"> {{restaurant.name}} </h5>
+                            <p class="card-text text_size20">Indirizzo: {{restaurant.address}}</p>
                             <div v-for="item in restauranttype" :key="item.id">
                                 <div v-if="restaurant.id == item.restaurant_id">
                                     <div v-for="singleType in types" :key="singleType.id">
-                                        <div class="type_not_typo" v-if="item.type_id == singleType.id">
+                                        <div class="type_not_typo text_size20" v-if="item.type_id == singleType.id">
                                             {{singleType.name}}
                                         </div>
                                     </div>
@@ -58,18 +64,18 @@
                                 :to="{
                                     name: 'restaurant-details',
                                     params: {slug: restaurant.slug}
-                                }"> Menù
+                                }"> <strong>Menù</strong>
                             </router-link>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Restaurants if the user selects a category -->
             <div v-else>
-
                 <div class="ms_main_view row d-flex justify-content-around g-2">
                     <div v-for="restaurant in checkedRestaurants[0]" :key="restaurant.id" class="col">
-                    <div class="card m-3" style="width: 18rem;">
+                        <div class="card m-3" style="width: 18rem; border-radius: 50px 15px;">
 
                             <div v-if="restaurant.cover">
                                 <img 
@@ -87,9 +93,9 @@
 
                             <div class="card-body">
 
-                                <h5 class="card-title"> {{restaurant.name}} </h5>
-                                <p class="card-text">Indirizzo: {{restaurant.address}}</p>
-                                <div class="type_not_typo" v-for="item in restauranttype" :key="item.id">
+                                <h5 class="card-title text_size20"> {{restaurant.name}} </h5>
+                                <p class="card-text text_size20">Indirizzo: {{restaurant.address}}</p>
+                                <div class="type_not_typo text_size20" v-for="item in restauranttype" :key="item.id">
                                     <div v-if="restaurant.id == item.restaurant_id">
                                         <div v-for="singleType in types" :key="singleType.id">
                                             <div v-if="item.type_id == singleType.id">
@@ -99,21 +105,19 @@
                                     </div>
                                 </div>
 
-                            <router-link 
-                                class="btn btn-sm btn-primary"
-                                :to="{
-                                    name: 'restaurant-details',
-                                    params: {slug: restaurant.slug}
-                                }"> Menù
-                            </router-link>
+                                <router-link 
+                                    class="btn btn_green"
+                                    :to="{
+                                        name: 'restaurant-details',
+                                        params: {slug: restaurant.slug}
+                                    }"> <strong>Menù</strong>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-
             </div>
     </section>
-
 </template>
 
 <script>
@@ -169,18 +173,14 @@ import arrayPush from 'lodash/_arrayPush';
 
     @import '../../sass/partials/variables.scss';
 
-    // .card {
-    //     border-top-left-radius: 20px;
-    //     border-top-right-radius: 20px;  
-    // }
-
     .btn-filter {
         cursor: pointer;
         background-color: white;
         color: $brand_color;
         border: 1px solid white;
-        padding: 6px;
-        border-radius: 4px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 25px;
     }
     .row {
         justify-content: space-evenly;
@@ -188,9 +188,6 @@ import arrayPush from 'lodash/_arrayPush';
 
     .btn-details {
         font-size: 16px;
-;
-        color: white;
-        background-color: $secondary-color;
     }
     .ms_main_view .col {
         flex-grow: 0;
@@ -202,6 +199,13 @@ import arrayPush from 'lodash/_arrayPush';
     .btn_green {
     background-color: $green_details;
     color: white;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 10px;
+    }
+    .text_size20 {
+        font-size: 20px;
+        padding-bottom: 5px;
     }
 </style>
 
