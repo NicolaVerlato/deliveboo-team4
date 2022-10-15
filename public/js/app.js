@@ -2668,7 +2668,7 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "main-carousel",
     attrs: {
-      "data-flickity": '{ "cellAlign": "left", "contain": true, "autoPlay": 1500, "pauseAutoPlayOnHover": true }'
+      "data-flickity": '{ "cellAlign": "left", "contain": true }'
     }
   }, [_c("img", {
     staticClass: "carousel-cell",
@@ -3231,13 +3231,17 @@ var render = function render() {
       staticClass: "mb-3"
     }, [dish.is_visible == 1 ? _c("div", [_vm.restaurant.user_id == dish.restaurant_id ? _c("div", [_c("div", {
       staticClass: "card-body d-flex justify-content-between"
-    }, [_c("div", [dish.cover ? _c("div", [_c("img", {
-      staticClass: "card-img-left",
+    }, [_c("div", [dish.cover ? _c("div", {
+      staticClass: "ms_position"
+    }, [_c("img", {
+      staticClass: "card-img-left ms_hoverimg",
       attrs: {
         src: "storage/" + dish.cover,
         alt: dish.title
       }
-    })]) : _vm._e(), _vm._v(" "), _c("h5", {
+    }), _vm._v(" "), _c("div", {
+      staticClass: "ms_hover"
+    }, [_vm._v("\n                                             " + _vm._s(dish.description) + "\n                                         ")])]) : _vm._e(), _vm._v(" "), _c("h5", {
       staticClass: "card-title text-center"
     }, [_vm._v(" " + _vm._s(dish.name) + " ")]), _vm._v(" "), _c("p", {
       staticClass: "card-text text-center"
@@ -7800,7 +7804,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-7720c0e8] {\n  width: 450px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.ms_quantities[data-v-7720c0e8] {\n  display: flex;\n  align-items: center;\n  font-size: 1.5rem;\n}\nh5[data-v-7720c0e8] {\n  font-weight: bold;\n  font-size: 1.2rem;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".ms_position[data-v-7720c0e8] {\n  position: relative;\n}\n.ms_position .ms_hover[data-v-7720c0e8] {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  color: white;\n  font-size: 20px;\n  display: none;\n}\n.ms_position[data-v-7720c0e8]:hover {\n  display: block;\n}\n.ms_position:hover img[data-v-7720c0e8] {\n  filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n  -webkit-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n  -moz-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n}\n.ms_position:hover .ms_hover[data-v-7720c0e8] {\n  display: block;\n}\n.ms_hover[data-v-7720c0e8]:hover {\n  display: block;\n}\n.ms_hover:hover img[data-v-7720c0e8] {\n  filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n  -webkit-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n  -moz-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n}\n.ms_hoverimg[data-v-7720c0e8]:hover {\n  filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n  -webkit-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n  -moz-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);\n}\n.card[data-v-7720c0e8] {\n  width: 450px;\n  max-width: 600px;\n  margin: 0 auto;\n}\n.ms_quantities[data-v-7720c0e8] {\n  display: flex;\n  align-items: center;\n  font-size: 1.5rem;\n}\nh5[data-v-7720c0e8] {\n  font-weight: bold;\n  font-size: 1.2rem;\n}\n.cart-preview .toast[data-v-7720c0e8] {\n  opacity: 1;\n  animation: fadeAbout-7720c0e8 1s;\n}\n@keyframes fadeAbout-7720c0e8 {\n0% {\n    opacity: 0;\n}\n100% {\n    opacity: 1;\n}\n}\n.cart-preview .btn[data-v-7720c0e8] {\n  display: block !important;\n}\n.cart-preview .btn-cart[data-v-7720c0e8] {\n  background-color: #fea543;\n  margin: auto;\n}\n.cart-preview .btn-cart a[data-v-7720c0e8] {\n  color: white;\n}", ""]);
 
 // exports
 
@@ -55755,8 +55759,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -19,11 +19,14 @@
                                 <div class="card-body d-flex justify-content-between">
 
                                     <div>
-                                        <div v-if="dish.cover">
+                                        <div class="ms_position" v-if="dish.cover">
                                             <img 
-                                            class="card-img-left"  
+                                            class="card-img-left ms_hoverimg"  
                                             :src="'storage/' + dish.cover" 
                                             :alt="dish.title">
+                                            <div class="ms_hover">
+                                                {{dish.description}}
+                                            </div>
                                         </div>
                                         <h5 class="card-title text-center"> {{dish.name}} </h5>
 
@@ -302,6 +305,43 @@
     // .wrapper {
     //     height: 100vh - 35;
     // }
+    .ms_position { 
+        position: relative;
+        .ms_hover {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 20px;
+            display: none;
+        }
+        
+    }
+        .ms_position:hover {
+            display: block;
+            img {
+                filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+                    -webkit-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+                    -moz-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);           
+            }
+            .ms_hover {
+                display: block;
+            }
+        }
+        .ms_hover:hover {
+            display: block;
+            img {
+                filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+                    -webkit-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+                    -moz-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);           
+            }
+        }
+        .ms_hoverimg:hover {
+            filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+                    -webkit-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+                    -moz-filter: blur(4px) brightness(51%) saturate(159%) contrast(118%);
+
+        }
     .card {
         width: 450px;
         max-width: 600px;
