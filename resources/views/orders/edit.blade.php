@@ -15,9 +15,12 @@
 
 <body style="background-color: #fea543; color: white; font-family: 'Nunito', sans-serif;">
 
-  <h2 style="margin-bottom: 45px; font-size: 35px; text-align: center;">
-    <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
-  </h2>
+  <a style="padding-top: 10px;" href="/">
+    <img 
+    src="{{url('/images/logo-header.png')}}" alt="logo"
+    style="height: 100px; object-fit: contain;display: block;margin: auto;margin-bottom: 80px; padding-top: 10px;"
+    >
+  </a>
 
   <form method="POST" id="payment-form" action="{{route('orders.update', $order->id)}}" class="mx-auto">
     @csrf
@@ -46,8 +49,8 @@
       <input id="nonce" name="payment_method_nonce" type="hidden" />
       <div style="text-align: center;">
         <button
-          style="border: 2px solid white; color: white; padding: 5px; background-color: transparent; border-radius: 5px; font-size: 20px; margin-top: 20px; cursor: pointer;"
-          type="submit"><span>Paga Ora</span>
+        style="border: 1px solid white; color: #fea543; padding: 5px; background-color: white; border-radius: 5px; font-size: 24px; margin-top: 15px;"
+        type="submit"><span>Paga Ora</span>
         </button>
       </div>
   </form>

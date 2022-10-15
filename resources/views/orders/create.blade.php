@@ -15,11 +15,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8" style="text-align: center;">
 
-                <h2 
-                style="margin-bottom: 50px; font-size: 35px; text-align: center; margin-top: 28px;">
-                    <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i>
-                    </strong>
-                </h2>
+                <a class="mx-auto" href="/">
+                    <img 
+                    src="{{url('/images/logo-header.png')}}" alt="logo"
+                    style="height: 100px; object-fit: contain; margin-bottom: 80px; margin-top: 28px;"
+                    >
+                </a>
                 
                 <h3> Inserisci i dati per la consegna </h3>
                     <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
@@ -74,7 +75,7 @@
                         </div>
     
                         <button
-                            style="border: 2px solid white; color: white; padding: 5px; background-color: transparent; border-radius: 5px; font-size: 20px;"
+                            style="border: 1px solid white; color: #fea543; padding: 5px; background-color: white; border-radius: 5px; font-size: 24px;"
                             type="submit"><span>Conferma</span>
                         </button>
                     </form>

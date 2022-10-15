@@ -10,9 +10,12 @@
 
 <body style="background-color: #fea543; color: white; font-family: 'Nunito', sans-serif;">
 
-    <h2 style="margin-bottom: 45px; font-size: 35px; text-align: center;">
-        <strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
-    </h2>
+    <a class="mx-auto" href="/">
+        <img 
+        src="{{url('/images/logo-header.png')}}" alt="logo"
+        style="height: 100px; object-fit: contain;display: block;margin: auto;margin-bottom: 80px; padding-top: 10px;"
+        >
+    </a>
 
     <h4 style="text-align: center;">Pagamento non effettuato, riprova con altri dati</h4>
 

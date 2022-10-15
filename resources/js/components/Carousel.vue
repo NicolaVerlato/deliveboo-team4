@@ -30,7 +30,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "./resources/sass/partials/_variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
 
+* {
+    font-family: 'Hammersmith One', sans-serif;
+}
 //Columns
 .carousel-fade {
     animation: fade-in 2.5s;
@@ -66,8 +70,8 @@ export default {
 }
 
 .carousel-cell {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     background-color: $brand_color;
     border-radius: 50%;
     line-height: 150px;
