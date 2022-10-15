@@ -2381,8 +2381,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     calcolaPrice: function calcolaPrice() {
       for (var i = 0; i < this.basket.length; i++) {
-        var prezzo = parseInt(this.basket[i].price);
-        var quantita = parseInt(this.basket[i].item);
+        var prezzo = parseFloat(this.basket[i].price);
+        var quantita = parseFloat(this.basket[i].item);
         this.calcolo += prezzo * quantita;
       }
 
@@ -2395,8 +2395,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.calcoloShow = 0;
 
       for (var i = 0; i < this.basket.length; i++) {
-        var prezzo = parseInt(this.basket[i].price);
-        var quantita = parseInt(this.basket[i].item);
+        var prezzo = parseFloat(this.basket[i].price);
+        var quantita = parseFloat(this.basket[i].item);
         this.calcoloShow += prezzo * quantita;
       }
 
@@ -2668,7 +2668,7 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "main-carousel",
     attrs: {
-      "data-flickity": '{ "cellAlign": "left", "contain": true }'
+      "data-flickity": '{ "cellAlign": "left", "contain": true, "autoPlay": 2000, "pauseAutoPlayOnHover": true }'
     }
   }, [_c("img", {
     staticClass: "carousel-cell",
@@ -2924,7 +2924,7 @@ var render = function render() {
         return _vm.provaFiltro();
       }
     }
-  }, [_c("strong", [_vm._v("Applica filtri")])])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
+  }, [_c("strong", [_vm._v("Cerca")])])], 2), _vm._v(" "), this.checkedRestaurants.length == 0 ? _c("div", {
     staticClass: "ms_main_view row g-2 row-col-auto"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -2953,7 +2953,7 @@ var render = function render() {
       staticClass: "card-title text_size20"
     }, [_vm._v(" " + _vm._s(restaurant.name) + " ")]), _vm._v(" "), _c("p", {
       staticClass: "card-text text_size20"
-    }, [_vm._v("Indirizzo: " + _vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
+    }, [_vm._v(_vm._s(restaurant.address))]), _vm._v(" "), _vm._l(_vm.restauranttype, function (item) {
       return _c("div", {
         key: item.id
       }, [restaurant.id == item.restaurant_id ? _c("div", _vm._l(_vm.types, function (singleType) {
@@ -3038,7 +3038,7 @@ var staticRenderFns = [function () {
       "font-size": "40px",
       "margin-bottom": "40px"
     }
-  }, [_c("b", [_vm._v("Lista dei ristoranti")])]);
+  }, [_c("b", [_vm._v("I migliori ristoranti della zona")])]);
 }];
 render._withStripped = true;
 
@@ -55759,8 +55759,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Lucio\booleann\laravel-proj\deliveboo-team4-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\edmon\classe-66\laravel-projects\deliveboo-team4-v2\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

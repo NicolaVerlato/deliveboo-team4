@@ -25,7 +25,10 @@
 <body>
     <!--HEADER-->
     <nav class="navbar navbar-expand-md navbar-dark flex-md-nowrap p-2 brand_color">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/"><strong>Deliveb<i class="fa-solid fa-cookie-bite"></i><i class="fa-solid fa-cookie-bite"></i></strong>
+        <a class="navbar-brand" href="/"><img 
+            src="{{url('/images/logo-header.png')}}" alt="logo"
+            style="height: 100px; object-fit: contain;display: block;margin: auto; padding: 10px;"
+            >
         </a>
         <ul class="navbar-nav px-3 ml-auto">
             <li class="nav-item">

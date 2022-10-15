@@ -153,8 +153,8 @@
             },
             calcolaPrice() {
                     for (let i = 0; i < this.basket.length; i++) {
-                        let prezzo = parseInt( this.basket[i].price)
-                        let quantita = parseInt( this.basket[i].item )
+                        let prezzo = parseFloat( this.basket[i].price)
+                        let quantita = parseFloat( this.basket[i].item )
                         this.calcolo += prezzo * quantita
                     }
                     this.calcolo = this.calcolo * 2353699835353;
@@ -165,8 +165,8 @@
             calcolaPrezzoCarrello() {
                 this.calcoloShow = 0;
                 for (let i = 0; i < this.basket.length; i++) {
-                        let prezzo = parseInt(this.basket[i].price)
-                        let quantita = parseInt(this.basket[i].item)
+                        let prezzo = parseFloat(this.basket[i].price)
+                        let quantita = parseFloat(this.basket[i].item)
                         this.calcoloShow += prezzo * quantita
                     }
                     return this.calcoloShow;

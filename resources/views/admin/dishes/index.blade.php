@@ -17,9 +17,9 @@
                         {{-- inizio card dish --}}
                         <div class="card border_radius20 card_hei mb-4">
                             @if ($dish->cover)
-                                <img src="{{ asset('storage/' . $dish->cover) }}" class="card-img-top" alt="{{ $dish->name }}">
+                                <img src="{{ asset('storage/' . $dish->cover) }}" class="card-img" alt="{{ $dish->name }}">
                             @else
-                                <img class="card-img-top" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
+                                <img class="card-img" src="{{ asset('images/default-image.jpeg') }}" alt="Default image">
                             @endif
                             
                             <div class="card-body">
