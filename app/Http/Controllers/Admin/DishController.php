@@ -24,7 +24,7 @@ class DishController extends Controller
         $page_data = $request->all();
         $restaurant = Restaurant::where('user_id', '=', $user->id)->get();
         // prendo i piatti dell'utente loggato comparando sempre la FK
-        $dishes = Dish::where('restaurant_id', '=', $restaurant[0]->id)->paginate(6);
+        $dishes = Dish::where('restaurant_id', '=', $restaurant[0]->id)->orderBy('name', 'asc')->paginate(6);
         // variabile per controllare se l'account ha già un ristorante
         $restaurantLink = Restaurant::where('user_id', '=', $user->id)->get();
 
