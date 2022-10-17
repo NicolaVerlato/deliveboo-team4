@@ -26,8 +26,8 @@
     <!--HEADER-->
     <nav class="navbar navbar-expand-md navbar-dark flex-md-nowrap p-2 brand_color">
         <a class="navbar-brand" href="/"><img 
-            src="{{url('/images/logo-header.png')}}" alt="logo"
-            style="height: 100px; object-fit: contain;display: block;margin: auto; padding: 10px;"
+            src="{{url('/images/logo-footer.png')}}" alt="logo"
+            style="height: 48px; object-fit: contain;display: block;margin: auto; padding: 10px;"
             >
         </a>
         <ul class="navbar-nav px-3 ml-auto">
